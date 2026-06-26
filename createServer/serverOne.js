@@ -6,6 +6,10 @@ serverOne.get('/',(req,res)=>{
     res.send("This is ServerOne")
 })
 
+
+serverOne.get('/users',(req,res)=>{
+    res.send("This users Page")
+})
 serverOne.listen(5000,()=>{
     console.log("The server running in localhost:5000")
 })
