@@ -1,9 +1,13 @@
-const express =require('express')
+const express = require("express");
 
-const app=express()
+const app = express();
 
-app.use(express.json())
+const studentRoutes = require("./routes/student.routes");
 
-app.listen(3000,()=>{
-    console.log("This server is running localhost:3000")
-})
+app.use(express.json());
+
+app.use("/students", studentRoutes);
+
+app.listen(3000, () => {
+  console.log("Server running on http://localhost:3000");
+});
