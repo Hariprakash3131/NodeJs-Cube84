@@ -13,3 +13,10 @@ console.log(a+p)
 // 12345
 // 30
 // surya10
+
+
+let city='chennai'
+city='Goa'
+console.log(city)
+
+//Goa
