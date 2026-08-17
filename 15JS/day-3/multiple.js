@@ -8,5 +8,5 @@ for(let i=1;i<=num;i++){
 let mul=12
 
 for (let j=1;j<=10;j++){
-    console.log(`${j} X ${mul} = ${j*mul}`)
+    console.log(`${j}  X ${mul} = ${j*mul}`)
 }
