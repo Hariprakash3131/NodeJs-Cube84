@@ -39,8 +39,8 @@ function App() {
         +
       </button>
 
-      <button
-        onClick={() => dispatch({ type: "decrement" })}
+      <button 
+        onClick={()  => dispatch({ type: "decrement" })}
         style={{ margin: "0 10px" }}
       >
         -
@@ -53,4 +53,4 @@ function App() {
   );
 }
 
-export default App;``
+export default App;
