@@ -26,7 +26,7 @@ const heroContent = {
   },
 
   section2: {
-    sideLeft: ["MyCreativeHunch", "Solutions."],
+    sideLeft: ["Hari Prakash", "Solutions."],
     sideRight: ["Passion.", "Creativity."],
   },
 
@@ -34,7 +34,7 @@ const heroContent = {
      carousel builds itself from this array. `teaser: true` cards are
      decorative edge slices and never become the active project. */
   works: {
-    brand: "MyCreativeHunch Studio",
+    brand: "Hari Prakash",
     projects: [
       { key: "tourtripx",  name: "TourtripX",  img: "assets/work-tourtripx.jpg",  w: 498, h: 405,
         cat: "SaaS · Travel", year: "2024", accent: "#4da3ff",
@@ -52,7 +52,7 @@ const heroContent = {
      All copy is editable here; the 3D and the scroll journey never
      touch these strings. */
   bigRobot: {
-    labels: { left: "Computer Science Student", right: "Software · Creative Technology" },
+    labels: { left: "Computer Applications Student", right: "Software · Creative Technology" },
     eyebrow: "( 05 · The Mind )",
     titleLines: ["I build software that", "looks as good as it works."],
     description: "I like understanding what’s underneath the interface — then finding a better way to build it.",
@@ -86,9 +86,9 @@ const heroContent = {
     skills: {
       title: "I Work With",
       groups: [
-        { name: "Languages", items: ["JavaScript", "Python", "Java", "C / C++"] },
+        { name: "Languages", items: ["JavaScript", "Python","Node Js"] },
         { name: "Web", items: ["HTML", "CSS", "React", "Next.js", "Responsive Design"] },
-        { name: "Tools", items: ["Git", "GitHub", "Figma", "VS Code"] },
+        { name: "Tools", items: ["Git", "GitHub",  "VS Code"] },
       ],
     },
     mindset: {
