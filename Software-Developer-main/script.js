@@ -148,7 +148,7 @@
   const startSequence = () => {
     docEl.classList.add("is-ready");
     const delay = reduceMotion.matches ? 0 : SETTLE_AT_MS;
-    window.setTimeout(() => {
+    window.setTimeout(() => { 
       docEl.classList.add("is-settled");
       enableInteractions();
     }, delay);
