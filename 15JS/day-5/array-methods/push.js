@@ -5,4 +5,4 @@ arr.push('Guva')
 console.log(arr)
 
 
-//Push : Adds one or more elements add in end of the Array
+//Push(elements) : Adds one or more elements add in end of the Array
