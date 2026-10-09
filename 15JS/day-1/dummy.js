@@ -18,3 +18,33 @@ const n=100000
 
 // n=199999  //Error
 console.log(n)
+
+
+
+const student = {
+    name: "Hari",
+    age: 22,
+    city: "Tirunelveli",
+    course: "BCA"
+};
+
+console.log(student);
+
+
+
+
+const arr = [1000, 45, 3, 78, 20];
+
+let largest = arr[0];
+
+for (let i = 1; i < arr.length; i++) {
+
+    if (arr[i] > largest) {
+
+        largest = arr[i];
+
+    }
+
+}
+
+console.log(largest);
