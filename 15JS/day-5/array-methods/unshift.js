@@ -12,4 +12,4 @@ const arr1=[2,3,4,5,6]
 
 arr1.unshift(1,10000)
 
-console.log(arr1)
+console.log(arr1)     
