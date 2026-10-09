@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PitchPro Cricket Turf Booking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/UI/styles.css" />
+  </head>
+  <body class="bg-[#f7f8f3] text-slate-950">
+    <main class="min-h-screen">
+      <section class="relative overflow-hidden bg-slate-950 text-white">
+        <div class="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=1800&q=80"
+            alt="Cricket ground under stadium lights"
+            class="h-full w-full object-cover opacity-45"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-slate-950/20"></div>
+        </div>
+
+        <nav class="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
+          <a href="#" class="flex items-center gap-3 font-bold">
+            <span class="grid h-10 w-10 place-items-center rounded bg-lime-400 text-slate-950">PP</span>
+            <span>PitchPro Turf</span>
+          </a>
+          <div class="hidden items-center gap-6 text-sm text-slate-200 md:flex">
+            <a href="#slots" class="hover:text-lime-300">Slots</a>
+            <a href="#booking" class="hover:text-lime-300">Book</a>
+            <a href="#amenities" class="hover:text-lime-300">Amenities</a>
+          </div>
+          <a href="#booking" class="rounded bg-lime-400 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-lime-300">Reserve</a>
+        </nav>
+
+        <div class="relative z-10 mx-auto grid min-h-[78vh] max-w-7xl items-center gap-10 px-5 pb-12 pt-8 sm:px-8 lg:grid-cols-[1.05fr_0.95fr]">
+          <div class="max-w-2xl">
+            <p class="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-lime-300">Box cricket and practice nets</p>
+            <h1 class="text-4xl font-black leading-tight sm:text-6xl">Book premium cricket turf by the hour.</h1>
+            <p class="mt-5 max-w-xl text-base leading-7 text-slate-200 sm:text-lg">
+              Choose your date, compare live time slots, add coaching or lighting, and confirm your game without calls or waiting.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="#booking" class="rounded bg-lime-400 px-5 py-3 font-bold text-slate-950 shadow-lg shadow-lime-400/20 hover:bg-lime-300">Start booking</a>
+              <a href="#slots" class="rounded border border-white/25 px-5 py-3 font-bold text-white hover:bg-white/10">View timings</a>
+            </div>
+          </div>
+
+          <aside class="booking-glass rounded-lg border border-white/15 p-5 shadow-2xl">
+            <div class="grid gap-4 sm:grid-cols-3">
+              <div>
+                <p class="text-sm text-slate-300">Today</p>
+                <p class="text-2xl font-black">18</p>
+                <p class="text-xs text-lime-200">open slots</p>
+              </div>
+              <div>
+                <p class="text-sm text-slate-300">From</p>
+                <p class="text-2xl font-black">Rs. 900</p>
+                <p class="text-xs text-lime-200">per hour</p>
+              </div>
+              <div>
+                <p class="text-sm text-slate-300">Rating</p>
+                <p class="text-2xl font-black">4.8</p>
+                <p class="text-xs text-lime-200">players love it</p>
+              </div>
+            </div>
+            <div class="mt-5 rounded bg-white/10 p-4">
+              <p class="text-sm text-slate-200">Next available</p>
+              <p class="mt-1 text-xl font-bold">Tonight, 8:00 PM - 9:00 PM</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="slots" class="mx-auto max-w-7xl px-5 py-12 sm:px-8">
+        <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-emerald-700">Available timings</p>
+            <h2 class="mt-2 text-3xl font-black">Pick a match window</h2>
+          </div>
+          <div class="flex rounded-lg border border-slate-200 bg-white p-1 shadow-sm">
+            <button class="slot-filter active" data-filter="all">All</button>
+            <button class="slot-filter" data-filter="morning">Morning</button>
+            <button class="slot-filter" data-filter="evening">Evening</button>
+            <button class="slot-filter" data-filter="night">Night</button>
+          </div>
+        </div>
+
+        <div id="slotGrid" class="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"></div>
+      </section>
+
+      <section id="booking" class="bg-white py-12">
+        <div class="mx-auto grid max-w-7xl gap-8 px-5 sm:px-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-emerald-700">Booking form</p>
+            <h2 class="mt-2 text-3xl font-black">Reserve your cricket turf</h2>
+            <p class="mt-4 max-w-xl leading-7 text-slate-600">
+              Fill in your match details and the booking summary updates instantly. Weekend peak slots include lighting by default.
+            </p>
+
+            <div id="amenities" class="mt-8 grid gap-3 sm:grid-cols-2">
+              <div class="amenity">Floodlights</div>
+              <div class="amenity">Practice nets</div>
+              <div class="amenity">Changing room</div>
+              <div class="amenity">Drinking water</div>
+            </div>
+          </div>
+
+          <form id="bookingForm" class="rounded-lg border border-slate-200 bg-[#fbfcf8] p-5 shadow-sm sm:p-7">
+            <div class="grid gap-5 sm:grid-cols-2">
+              <label class="field">
+                <span>Full name</span>
+                <input type="text" id="name" placeholder="Your name" required />
+              </label>
+              <label class="field">
+                <span>Phone number</span>
+                <input type="tel" id="phone" placeholder="98765 43210" pattern="[0-9 ]{10,13}" required />
+              </label>
+              <label class="field">
+                <span>Booking date</span>
+                <input type="date" id="date" required />
+              </label>
+              <label class="field">
+                <span>Time slot</span>
+                <select id="time" required></select>
+              </label>
+              <label class="field">
+                <span>Duration</span>
+                <select id="duration">
+                  <option value="1">1 hour</option>
+                  <option value="2">2 hours</option>
+                  <option value="3">3 hours</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Players</span>
+                <input type="number" id="players" min="2" max="22" value="10" required />
+              </label>
+            </div>
+
+            <div class="mt-5">
+              <p class="mb-3 text-sm font-bold text-slate-700">Add-ons</p>
+              <div class="grid gap-3 sm:grid-cols-3">
+                <label class="addon"><input type="checkbox" value="300" data-label="Coach" /> Coach</label>
+                <label class="addon"><input type="checkbox" value="150" data-label="Extra bats" /> Extra bats</label>
+                <label class="addon"><input type="checkbox" value="250" data-label="Refreshments" /> Refreshments</label>
+              </div>
+            </div>
+
+            <div class="mt-6 rounded-lg bg-slate-950 p-5 text-white">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p class="text-sm text-slate-300">Estimated total</p>
+                  <p id="total" class="mt-1 text-3xl font-black">Rs. 900</p>
+                </div>
+                <p id="summarySlot" class="rounded bg-lime-400 px-3 py-2 text-sm font-bold text-slate-950">Select slot</p>
+              </div>
+              <p id="summary" class="mt-4 text-sm leading-6 text-slate-300">Your selected date, time, and extras will appear here.</p>
+            </div>
+
+            <button type="submit" class="mt-5 w-full rounded bg-emerald-600 px-5 py-3 font-bold text-white hover:bg-emerald-500">
+              Confirm booking
+            </button>
+            <p id="confirmation" class="mt-4 hidden rounded border border-emerald-200 bg-emerald-50 p-3 text-sm font-semibold text-emerald-800"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
