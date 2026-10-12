@@ -1,4 +1,4 @@
-// Find : Returns the first matching element
+// Find : Returns the  first matching element
 
 const user=[
     {id:1,name:'Thiyagu'},
@@ -11,4 +11,4 @@ const user=[
 const findId=user.find(us => us.id===3)
 
 // const findId=user.find(us => us.id===2)
-console.log(findId)
+console.log(findId) 
