@@ -12,3 +12,7 @@ const findId=user.find(us => us.id===3)
 
 // const findId=user.find(us => us.id===2)
 console.log(findId) 
+
+const find=user.find(f=> f.id===2)
+
+console.log(find)
