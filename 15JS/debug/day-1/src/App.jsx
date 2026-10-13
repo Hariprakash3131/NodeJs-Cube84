@@ -5,9 +5,7 @@ function Counter() {
   const [count, setCount] = useState(0);
 
   function increment() {
-  
-   const inCrement=count+1
-   setCount(inCrement)
+      setCount(count+1)
 
   }
 
