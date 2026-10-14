@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nightshift: music after dark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind via CDN: great for prototypes. For production, build it with the Tailwind CLI. -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { display: ['"Bricolage Grotesque"', 'sans-serif'], sans: ['"DM Sans"', 'sans-serif'] },
+        colors: { ink: '#0E0B16', panel: '#16131F', line: '#2A2640', mute: '#A9A3BC' }
+      }
+    }
+  }
+</script>
+
+<style>
+  /* The album currently playing sets these two colors for the whole page. */
+  @property --a { syntax: '<color>'; inherits: true; initial-value: #FF4D6D; }
+  @property --b { syntax: '<color>'; inherits: true; initial-value: #7C3AED; }
+  :root { --a: #FF4D6D; --b: #7C3AED; }
+  @media (prefers-reduced-motion: no-preference) {
+    :root { transition: --a .7s ease, --b .7s ease; }
+  }
+  .glow { background: radial-gradient(55% 55% at 82% 12%, color-mix(in srgb, var(--b) 38%, transparent), transparent 70%),
+                      radial-gradient(40% 45% at 4% 30%, color-mix(in srgb, var(--a) 26%, transparent), transparent 70%); }
+  .bar { background: #3A3550; }
+  .bar.on { background: linear-gradient(180deg, var(--a), var(--b)); }
+  :focus-visible { outline: 2px solid var(--a); outline-offset: 3px; }
+</style>
+</head>
+
+<body class="bg-ink text-zinc-100 font-sans antialiased">
+
+<!-- NAV -->
+<header class="relative z-20">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+    <a href="#top" class="flex items-center gap-2.5 font-display text-2xl font-extrabold">
+      <span class="h-7 w-7 rounded-full" style="background:conic-gradient(var(--a),var(--b),#22D3EE,var(--a))"></span>
+      Nightshift
+    </a>
+    <nav class="hidden items-center gap-1 md:flex" aria-label="Main">
+      <a class="rounded-full px-4 py-3 text-zinc-300 hover:text-white" href="#playlists">Playlists</a>
+      <a class="rounded-full px-4 py-3 text-zinc-300 hover:text-white" href="#artist">Artists</a>
+      <a class="rounded-full px-4 py-3 text-zinc-300 hover:text-white" href="#premium">Premium</a>
+      <a class="ml-2 rounded-full border border-line px-5 py-3 font-bold hover:bg-white/5" href="#">Log in</a>
+    </nav>
+    <button id="menuBtn" class="flex h-11 w-11 items-center justify-center rounded-full border border-line md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <nav id="mobileNav" class="hidden border-t border-line px-6 pb-4 md:hidden" aria-label="Mobile">
+    <a class="block py-3" href="#playlists">Playlists</a>
+    <a class="block py-3" href="#artist">Artists</a>
+    <a class="block py-3" href="#premium">Premium</a>
+    <a class="block py-3 font-bold" href="#">Log in</a>
+  </nav>
+</header>
+
+<!-- HERO + PLAYER PREVIEW -->
+<section id="top" class="glow relative -mt-[76px] pt-[76px]">
+  <div class="mx-auto flex max-w-6xl flex-col items-center gap-14 px-6 pb-24 pt-16 lg:flex-row">
+    <div class="flex-1">
+      <h1 class="font-display text-5xl font-extrabold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
+        Music that glows<br class="hidden sm:block"> after dark.
+      </h1>
+      <p class="mt-6 max-w-lg text-lg text-zinc-300">Playlists tuned to your mood, artists worth obsessing over, and sound clear enough to feel. Pick a playlist on the right and watch the page take on its colors.</p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="#playlists" class="inline-flex min-h-[50px] items-center rounded-full bg-[var(--a)] px-7 font-bold text-ink hover:brightness-110">Start listening free</a>
+        <a href="#premium" class="inline-flex min-h-[50px] items-center rounded-full border border-line px-7 font-bold hover:bg-white/5">See Premium</a>
+      </div>
+    </div>
+
+    <!-- Player -->
+    <div class="w-full max-w-md" id="player" aria-label="Audio player preview">
+      <div class="rounded-[28px] border border-line bg-panel/90 p-5 shadow-2xl" style="box-shadow:0 30px 90px color-mix(in srgb,var(--b) 35%,transparent)">
+        <div id="cover" role="img" aria-label="Album art" class="aspect-square w-full rounded-2xl"></div>
+        <div class="mt-5 flex items-start justify-between gap-3 px-1">
+          <div class="min-w-0">
+            <div id="track" class="truncate font-display text-2xl font-bold"></div>
+            <div id="artistName" class="truncate text-mute"></div>
+          </div>
+          <span class="rounded-lg bg-line px-2.5 py-1 text-sm font-bold text-[var(--a)]">Lossless</span>
+        </div>
+
+        <div class="relative mt-4 h-14 focus-within:outline focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-[var(--a)]">
+          <div id="bars" class="flex h-full items-center gap-[3px]" aria-hidden="true"></div>
+          <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Seek" class="absolute inset-0 h-full w-full cursor-pointer opacity-0">
+        </div>
+        <div class="mt-1 flex justify-between px-0.5 text-sm tabular-nums text-mute"><span id="tcur">0:00</span><span id="ttot">0:00</span></div>
+
+        <div class="mt-2 flex items-center justify-between px-2">
+          <button id="prev" class="flex h-11 w-11 items-center justify-center rounded-full hover:bg-white/10" aria-label="Previous playlist">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 5v14L8 12zM5 5h2.5v14H5z"/></svg>
+          </button>
+          <button id="play" class="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--a)] text-ink hover:brightness-110" aria-label="Play">
+            <svg id="icPlay" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>
+            <svg id="icPause" class="hidden" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+          </button>
+          <button id="next" class="flex h-11 w-11 items-center justify-center rounded-full hover:bg-white/10" aria-label="Next playlist">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5v14l10-7zM16.5 5H19v14h-2.5z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAYLISTS -->
+<section id="playlists" class="mx-auto max-w-6xl px-6 py-20">
+  <h2 class="max-w-2xl font-display text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">Pick a mood. We'll handle the rest.</h2>
+  <p class="mt-4 max-w-xl text-lg text-zinc-300">Every playlist takes its colors from the music inside it. Select one to hear a preview in the player.</p>
+  <div id="grid" class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+</section>
+
+<!-- ARTIST SPOTLIGHT -->
+<section id="artist" class="mx-auto max-w-6xl px-6 pb-20">
+  <div class="flex flex-col items-center gap-12 rounded-[32px] border border-line bg-gradient-to-br from-[#1C1631] to-panel p-6 sm:p-10 lg:flex-row">
+    <div id="artistArt" role="img" aria-label="Artist artwork" class="aspect-square w-full max-w-md flex-1 rounded-3xl"></div>
+    <div class="flex-1">
+      <p class="text-cyan-300">Artist spotlight</p>
+      <h2 class="mt-1 font-display text-5xl font-extrabold tracking-tight sm:text-6xl">Mara Vale</h2>
+      <p class="mt-4 max-w-md text-lg text-zinc-300">Dream-pop vocals over late-night synths. Replace this with two sentences about her sound and story.</p>
+      <ul id="releases" class="mt-6 divide-y divide-line border-y border-line"></ul>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <button id="playLatest" class="min-h-[50px] rounded-full bg-[var(--a)] px-7 font-bold text-ink hover:brightness-110">Play latest</button>
+        <button id="follow" aria-pressed="false" class="min-h-[50px] rounded-full border border-line px-7 font-bold hover:bg-white/5 aria-pressed:border-[var(--a)] aria-pressed:text-[var(--a)]">Follow</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIUM CTA -->
+<section id="premium" class="mx-auto max-w-6xl px-6 pb-24">
+  <div class="rounded-[34px] p-[2px]" style="background:linear-gradient(120deg,var(--a),var(--b),#22D3EE)">
+    <div class="flex flex-col items-center justify-between gap-10 rounded-[32px] bg-[#100D19] p-8 sm:p-14 lg:flex-row">
+      <div class="flex-1">
+        <h2 class="font-display text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">Hear every detail. Skip nothing.</h2>
+        <ul id="perks" class="mt-6 grid gap-3 text-lg"></ul>
+      </div>
+      <div class="w-full max-w-sm rounded-3xl bg-panel p-8 text-center">
+        <div class="font-display text-5xl font-extrabold">[PRICE]<span class="text-lg font-medium text-mute"> / month</span></div>
+        <p class="mb-6 mt-2 text-mute">[TRIAL OFFER]. Cancel anytime.</p>
+        <a href="#" class="flex min-h-[54px] items-center justify-center rounded-full bg-[var(--a)] text-lg font-extrabold text-ink hover:brightness-110">Start free trial</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="mx-auto flex max-w-6xl flex-wrap justify-between gap-3 px-6 pb-12 text-sm text-mute">
+  <span>Nightshift. Music after dark.</span>
+  <span>[Privacy · Terms · Contact]</span>
+</footer>
+
+<script>
+/* ---------- Data ---------- */
+const LISTS = [
+  { t: 'Neon Commute',      d: 'Synth-lit drives home',        k: 1, a: '#FF4D6D', b: '#7C3AED', c: '#0E0B16', track: 'Afterglow Drive',  artist: 'Mara Vale',   len: 216 },
+  { t: 'Late Night Static', d: 'Lo-fi haze for after midnight', k: 3, a: '#22D3EE', b: '#4338CA', c: '#0E0B16', track: 'Static Bloom',     artist: 'Okafor Lane', len: 187 },
+  { t: 'Golden Hour Drift', d: 'Warm guitars, slow sunsets',    k: 4, a: '#FFD166', b: '#FF6B35', c: '#7A1F5C', track: 'Tidewater',        artist: 'Mara Vale',   len: 242 },
+  { t: 'Deep Focus Bloom',  d: 'Ambient textures to work to',   k: 0, a: '#2DD4BF', b: '#A3E635', c: '#0F2A3D', track: 'Glasshouse Hours', artist: 'Ines Calder', len: 301 },
+  { t: 'Velvet Rain',       d: 'Moody soul and slow R&B',       k: 2, a: '#F472B6', b: '#6D28D9', c: '#1E1038', track: 'Slow Weather',     artist: 'Dune & June', len: 203 },
+  { t: 'Sunday Cassette',   d: 'Indie favorites, tape-warm',    k: 5, a: '#FDBA74', b: '#E11D48', c: '#3B0F2E', track: 'Porchlight',       artist: 'The Hollows', len: 229 }
+];
+const PERKS = ['Ad-free listening', 'Lossless audio quality', 'Offline downloads', 'Unlimited skips'];
+const RELEASES = [['Afterglow Drive', 'Single', 0], ['Tidewater', 'EP', 2], ['Glasshouse Hours', 'Album', 3]];
+const BARS = 48;
+
+/* ---------- Helpers ---------- */
+const $ = id => document.getElementById(id);
+const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+const art = ({ k, a, b, c }) => [
+  `radial-gradient(circle at 28% 28%,${a},transparent 55%),radial-gradient(circle at 78% 72%,${b},transparent 52%),${c}`,
+  `conic-gradient(from 200deg,${a},${b},${c},${a})`,
+  `radial-gradient(circle at 50% 118%,${a} 0 38%,transparent 39%),linear-gradient(160deg,${b},${c})`,
+  `radial-gradient(circle at 50% 50%,${c} 0 18%,transparent 19%),repeating-linear-gradient(90deg,${a} 0 14px,${b} 14px 28px)`,
+  `radial-gradient(circle at 50% 42%,${a} 0 24%,transparent 25%),linear-gradient(180deg,${b},${c})`,
+  `repeating-radial-gradient(circle at 50% 50%,${a} 0 9px,${c} 9px 18px),${b}`
+][k];
+
+/* ---------- Render static pieces ---------- */
+$('bars').innerHTML = Array.from({ length: BARS }, (_, i) =>
+  `<span class="bar flex-1 rounded-[3px]" style="height:${Math.round(20 + 70 * Math.abs(Math.sin(i * .55) * Math.cos(i * .21)))}%"></span>`).join('');
+const bars = [...document.querySelectorAll('.bar')];
+
+$('grid').innerHTML = LISTS.map((l, i) => `
+  <button data-i="${i}" aria-pressed="false" class="card group rounded-3xl border border-line bg-panel p-3.5 text-left transition-colors hover:border-white/25 aria-pressed:border-[var(--a)]">
+    <div class="aspect-square w-full rounded-2xl" style="background:${art(l)}"></div>
+    <div class="mx-1 mt-4 font-display text-xl font-bold">${l.t}</div>
+    <div class="mx-1 mb-1 text-mute">${l.d}</div>
+  </button>`).join('');
+
+$('releases').innerHTML = RELEASES.map(([t, y, i]) => `
+  <li><button data-i="${i}" class="flex w-full items-center gap-4 py-3 text-left hover:bg-white/5">
+    <span class="h-12 w-12 flex-none rounded-lg" style="background:${art(LISTS[i])}"></span>
+    <span class="flex-1 font-bold">${t}</span><span class="text-sm text-mute">${y}</span>
+  </button></li>`).join('');
+
+$('perks').innerHTML = PERKS.map(p => `
+  <li class="flex items-center gap-3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--a)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>${p}</li>`).join('');
+
+$('artistArt').style.background = art({ k: 2, a: '#FFD166', b: '#FF4D6D', c: '#3B0F6E' });
+
+/* ---------- Player ---------- */
+let cur = 0, t = 0, playing = false;
+
+function paint() {
+  const l = LISTS[cur];
+  $('tcur').textContent = fmt(t);
+  $('ttot').textContent = fmt(l.len);
+  $('seek').value = Math.round((t / l.len) * 1000);
+  const on = Math.floor((t / l.len) * BARS);
+  bars.forEach((b, i) => b.classList.toggle('on', i < on));
+}
+
+function load(i, autoplay = false) {
+  cur = (i + LISTS.length) % LISTS.length;
+  t = 0;
+  const l = LISTS[cur];
+  $('cover').style.background = art(l);
+  $('track').textContent = l.track;
+  $('artistName').textContent = l.artist;
+  document.documentElement.style.setProperty('--a', l.a);
+  document.documentElement.style.setProperty('--b', l.b);
+  document.querySelectorAll('.card').forEach(c => c.setAttribute('aria-pressed', String(+c.dataset.i === cur)));
+  setPlaying(autoplay);
+  paint();
+}
+
+function setPlaying(p) {
+  playing = p;
+  $('icPlay').classList.toggle('hidden', p);
+  $('icPause').classList.toggle('hidden', !p);
+  $('play').setAttribute('aria-label', p ? 'Pause' : 'Play');
+}
+
+setInterval(() => {
+  if (!playing) return;
+  t += 0.25;
+  if (t >= LISTS[cur].len) return load(cur + 1, true);
+  paint();
+}, 250);
+
+$('play').onclick = () => setPlaying(!playing);
+$('prev').onclick = () => load(cur - 1, playing);
+$('next').onclick = () => load(cur + 1, playing);
+$('seek').oninput = e => { t = (e.target.value / 1000) * LISTS[cur].len; paint(); };
+
+/* Choosing a playlist or release loads it and scrolls the player into view */
+const pick = e => {
+  const el = e.target.closest('[data-i]');
+  if (!el) return;
+  load(+el.dataset.i, true);
+  $('top').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+};
+$('grid').onclick = pick;
+$('releases').onclick = pick;
+$('playLatest').onclick = () => { load(0, true); $('top').scrollIntoView({ behavior: 'smooth' }); };
+
+/* ---------- Small UI bits ---------- */
+$('follow').onclick = e => {
+  const on = e.currentTarget.getAttribute('aria-pressed') === 'true';
+  e.currentTarget.setAttribute('aria-pressed', String(!on));
+  e.currentTarget.textContent = on ? 'Follow' : 'Following';
+};
+$('menuBtn').onclick = e => {
+  const open = $('mobileNav').classList.toggle('hidden') === false;
+  e.currentTarget.setAttribute('aria-expanded', String(open));
+};
+
+load(0);
+</script>
+</body>
+</html>
