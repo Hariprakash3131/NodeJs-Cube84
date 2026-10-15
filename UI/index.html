@@ -268,7 +268,7 @@ $('playLatest').onclick = () => { load(0, true); $('top').scrollIntoView({ behav
 $('follow').onclick = e => {
   const on = e.currentTarget.getAttribute('aria-pressed') === 'true';
   e.currentTarget.setAttribute('aria-pressed', String(!on));
-  e.currentTarget.textContent = on ? 'Follow' : 'Following';
+  e.currentTarget.textContent = on ? 'Follow' :  'Following';
 };
 $('menuBtn').onclick = e => {
   const open = $('mobileNav').classList.toggle('hidden') === false;
