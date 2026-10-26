@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Aura Mobile — Next-Gen Mobile E-Commerce Experience</title>
+  <meta name="description" content="Discover premium electronics, authentic sneakers, designer streetwear, and luxury accessories with lightning-fast delivery and frictionless mobile checkout.">
+  <meta name="theme-color" content="#111827">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ======================================================================
+       DESKTOP PREVIEW TOOLBAR
+       Allows testing mobile responsiveness across realistic phone viewports
+       ====================================================================== -->
+  <div class="desktop-controls-bar" id="desktopControls">
+    <span>📱 Mobile View:</span>
+    <button class="device-btn active" id="btnIphone" onclick="setDevicePreview('iphone')">iPhone 15 Pro</button>
+    <button class="device-btn" id="btnPixel" onclick="setDevicePreview('pixel')">Pixel 8</button>
+    <button class="device-btn" id="btnFluid" onclick="setDevicePreview('fluid')">Full View</button>
+  </div>
+
+  <!-- ======================================================================
+       APPLICATION WRAPPER
+       ====================================================================== -->
+  <div class="app-wrapper">
+    <div class="mobile-device-container" id="mobileDeviceContainer">
+
+      <!-- Dynamic Confetti Canvas for Order Celebrations -->
+      <canvas id="confettiCanvas" style="position: absolute; inset: 0; pointer-events: none; z-index: 100;"></canvas>
+
+      <!-- Toast Notifications Container -->
+      <div class="toast-container" id="toastContainer"></div>
+
+      <!-- ================================================================
+           MOBILE STATUS BAR & DYNAMIC ISLAND
+           ================================================================ -->
+      <div class="mobile-status-bar" id="mobileStatusBar">
+        <span class="status-time" id="statusClock">9:41</span>
+        
+        <div class="dynamic-island">
+          <div class="dynamic-island-cam"></div>
+          <div class="dynamic-island-sensor"></div>
+        </div>
+
+        <div class="status-icons">
+          <!-- Signal Icon -->
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z" opacity="0.2"/>
+            <rect x="2" y="16" width="3" height="5" rx="1"/>
+            <rect x="7" y="12" width="3" height="9" rx="1"/>
+            <rect x="12" y="8" width="3" height="13" rx="1"/>
+            <rect x="17" y="4" width="3" height="17" rx="1"/>
+          </svg>
+          <!-- Wifi Icon -->
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 18c.83 0 1.5-.67 1.5-1.5S12.83 15 12 15s-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm6.71-6.71C17.06 9.64 14.65 8.5 12 8.5s-5.06 1.14-6.71 2.79l1.42 1.42C7.94 11.48 9.85 10.5 12 10.5s4.06.98 5.29 2.21l1.42-1.42zM21.54 8.46C19.11 6.03 15.73 4.5 12 4.5S4.89 6.03 2.46 8.46l1.41 1.41C5.9 7.84 8.79 6.5 12 6.5s6.1 1.34 8.12 3.37l1.42-1.41z"/>
+          </svg>
+          <!-- Battery Icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="2" y="7" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <rect x="4" y="9" width="10" height="6" rx="1"/>
+            <path d="M20 11v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           APP HEADER & SEARCH BAR
+           ================================================================ -->
+      <header class="app-header">
+        <div class="header-top">
+          <div class="brand-wrapper">
+            <div class="brand-logo-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                <polyline points="2 17 12 22 22 17"/>
+                <polyline points="2 12 12 17 22 12"/>
+              </svg>
+            </div>
+            <span class="brand-name">AURA</span>
+          </div>
+
+          <div class="header-actions">
+            <!-- Dark / Light Mode Toggle Button -->
+            <button class="icon-btn" id="themeToggleBtn" title="Toggle Theme" aria-label="Toggle Theme">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            </button>
+
+            <!-- Notifications Button -->
+            <button class="icon-btn" id="notificationsBtn" title="Notifications" aria-label="Notifications" onclick="showToast('You have 2 flash discount vouchers ready to claim!', '🔔')">
+              <span class="badge-dot"></span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              </svg>
+            </button>
+
+            <!-- Cart Trigger Icon -->
+            <button class="icon-btn" id="headerCartBtn" title="Shopping Cart" aria-label="Shopping Cart" onclick="openCartSheet()">
+              <span class="badge-count" id="cartHeaderBadge" style="display: none;">0</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
+                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Location Dropdown Strip -->
+        <div class="location-strip" onclick="showToast('Delivering to 5th Avenue, New York, NY 10001', '📍')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span>Deliver to: <strong>5th Ave, NY 10001</strong></span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search sneakers, phones, audio..." autocomplete="off">
+          <button id="searchClearBtn" class="search-clear-btn" title="Clear Search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- ================================================================
+           MAIN SCROLLABLE CONTENT
+           ================================================================ -->
+      <main class="app-main" id="appMain">
+
+        <!-- TAB 1: HOME & CATALOG -->
+        <div id="homeTabContent">
+          <!-- Hidden Primary Heading for SEO Hierarchy -->
+          <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">
+            Aura Mobile Commerce — Premium Smartphone, Sneaker, and Streetwear Store
+          </h1>
+
+          <!-- Highlight Stories Carousel -->
+          <section class="stories-section" id="storiesContainer" aria-label="Popular Categories Stories">
+            <!-- Dynamically populated -->
+          </section>
+
+          <!-- Hero Promo Banner Slider -->
+          <section class="hero-slider-section" aria-label="Promotional Deals">
+            <div class="hero-banner-card">
+              <div>
+                <span class="hero-badge">🔥 Limited Drop</span>
+                <h2 class="hero-title">Summer Tech & Style Wave</h2>
+                <p class="hero-subtitle">Up to 40% off top tier essentials with code <strong>SAVE20</strong></p>
+              </div>
+              <button class="hero-btn" onclick="filterByCategory('tech')">
+                <span>Shop Collection</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+              <img class="hero-illustration" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&auto=format&fit=crop&q=80" alt="Audio showcase" />
+            </div>
+          </section>
+
+          <!-- Flash Deal Countdown Bar -->
+          <div class="flash-deal-strip">
+            <div class="flash-title-group">
+              <svg class="flash-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+              <div>
+                <div class="flash-heading">Flash Deals Today</div>
+                <div class="flash-subtext">Extra 20% applied at cart</div>
+              </div>
+            </div>
+
+            <div class="countdown-box" id="flashTimer">
+              <span class="timer-cell" id="timerH">04</span>
+              <span class="timer-colon">:</span>
+              <span class="timer-cell" id="timerM">28</span>
+              <span class="timer-colon">:</span>
+              <span class="timer-cell" id="timerS">45</span>
+            </div>
+          </div>
+
+          <!-- Category Chips Filter Row -->
+          <nav class="category-chips-row" id="categoryChips" aria-label="Filter by Product Category">
+            <!-- Dynamically rendered -->
+          </nav>
+
+          <!-- Sort and Results Meta Row -->
+          <div class="filter-sort-row">
+            <div>Showing <span id="resultsCount" class="results-count">8 items</span></div>
+            <div class="sort-select-wrapper">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/>
+                <line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
+                <line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
+              </svg>
+              <select id="sortSelect" class="sort-select" aria-label="Sort products">
+                <option value="popular">Popular First</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Product Grid Section -->
+          <section class="products-grid" id="productsGrid" aria-label="Products Catalog">
+            <!-- Dynamically populated product cards -->
+          </section>
+        </div>
+
+        <!-- TAB 2: WISHLIST VIEW -->
+        <div id="wishlistView" class="subpage-container">
+          <div class="section-header" style="padding: 0 0 14px 0;">
+            <h2 class="section-title">Saved Wishlist (❤️)</h2>
+          </div>
+          <div id="wishlistItemsContainer">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- TAB 3: PROFILE / ACCOUNT VIEW -->
+        <div id="profileView" class="subpage-container">
+          <div class="profile-card">
+            <img class="profile-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="User Profile" />
+            <div>
+              <h3 style="font-size: 16px; font-weight: 800; color: var(--text-primary);">Alex Morgan</h3>
+              <p style="font-size: 12px; color: var(--text-secondary);">alex.morgan@example.com</p>
+              <span style="display: inline-block; margin-top: 4px; font-size: 10px; font-weight: 700; background: var(--accent-primary-light); color: var(--accent-primary); padding: 2px 8px; border-radius: 9999px;">
+                ⭐ Gold Tier VIP
+              </span>
+            </div>
+          </div>
+
+          <div class="profile-menu-list">
+            <div class="profile-menu-item" onclick="showToast('You have 1 order arriving tomorrow by 6 PM!', '📦')">
+              <span>My Orders & Tracking</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+            <div class="profile-menu-item" onclick="showToast('Default delivery address: 5th Ave, NY 10001', '🏠')">
+              <span>Saved Shipping Addresses</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+            <div class="profile-menu-item" onclick="showToast('Apple Pay & Visa •••• 4242 linked', '💳')">
+              <span>Payment Methods</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+            <div class="profile-menu-item" onclick="showToast('Active coupons: SAVE20, FREESHIP', '🎁')">
+              <span>Coupons & Rewards</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+
+          <div class="profile-menu-list">
+            <div class="profile-menu-item" onclick="document.getElementById('themeToggleBtn').click()">
+              <span>Dark Mode</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/></svg>
+            </div>
+            <div class="profile-menu-item" onclick="showToast('Customer support chat open 24/7', '💬')">
+              <span>24/7 Help & Support</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- ================================================================
+           MOBILE BOTTOM NAVIGATION BAR
+           ================================================================ -->
+      <nav class="bottom-nav-bar" aria-label="Mobile Navigation">
+        <button class="nav-tab-btn active" data-tab="home" id="tabHomeBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span class="nav-tab-label">Home</span>
+        </button>
+
+        <button class="nav-tab-btn" data-tab="explore" id="tabExploreBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+          </svg>
+          <span class="nav-tab-label">Explore</span>
+        </button>
+
+        <button class="nav-tab-btn" data-tab="wishlist" id="tabWishlistBtn">
+          <span class="nav-badge" id="wishlistNavBadge" style="display: none;">0</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <span class="nav-tab-label">Saved</span>
+        </button>
+
+        <button class="nav-tab-btn" data-tab="cart" id="tabCartBtn">
+          <span class="nav-badge" id="cartNavBadge" style="display: none;">0</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
+            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+          </svg>
+          <span class="nav-tab-label">Bag</span>
+        </button>
+
+        <button class="nav-tab-btn" data-tab="profile" id="tabProfileBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          <span class="nav-tab-label">Profile</span>
+        </button>
+      </nav>
+
+      <!-- ================================================================
+           BOTTOM SHEET BACKDROP
+           ================================================================ -->
+      <div class="sheet-backdrop" id="sheetBackdrop"></div>
+
+      <!-- ================================================================
+           BOTTOM SHEET 1: PRODUCT DETAILS
+           ================================================================ -->
+      <div class="bottom-sheet" id="productDetailSheet">
+        <div class="sheet-handle-bar"></div>
+        <div class="sheet-header">
+          <span class="sheet-title">Product Details</span>
+          <button class="sheet-close-btn" onclick="closeBottomSheet('productDetailSheet')" aria-label="Close">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div class="sheet-body">
+          <div class="detail-img-box">
+            <img id="detailImage" class="detail-img" src="" alt="Product Detail Preview" />
+          </div>
+
+          <div class="detail-brand-badge" id="detailCategory">Category</div>
+          <h2 class="detail-title" id="detailTitle">Product Title</h2>
+
+          <div class="detail-meta-row">
+            <div class="detail-rating-pill">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#92400e"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span id="detailRating">4.9</span>
+            </div>
+            <span id="detailReviews" style="color: var(--text-secondary);">(2.4k reviews)</span>
+            <div class="detail-stock-status">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+              <span>In Stock</span>
+            </div>
+          </div>
+
+          <div class="detail-price-box">
+            <span class="detail-price" id="detailPrice">$0</span>
+            <span class="detail-old-price" id="detailOldPrice">$0</span>
+            <span class="detail-discount-tag" id="detailDiscount">0% OFF</span>
+          </div>
+
+          <p class="detail-description" id="detailDescription">Product description.</p>
+
+          <!-- Color Swatches -->
+          <div class="option-group-label">
+            <span>Color Variant</span>
+            <span id="selectedColorLabel" style="font-weight: 500; color: var(--text-secondary);">Default</span>
+          </div>
+          <div class="color-swatches-row" id="detailColorSwatches"></div>
+
+          <!-- Size / Storage Selection -->
+          <div class="option-group-label">
+            <span>Select Option / Size</span>
+          </div>
+          <div class="size-chips-row" id="detailSizeChips"></div>
+
+          <!-- Feature Highlights -->
+          <div class="feature-guarantee-grid" id="detailFeatures"></div>
+        </div>
+
+        <div class="sheet-footer">
+          <div class="detail-action-buttons">
+            <button class="btn-secondary" onclick="addCurrentDetailToCart()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+              <span>Add to Bag</span>
+            </button>
+            <button class="btn-primary" onclick="buyNowCurrentDetail()">
+              <span>Buy Now</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           BOTTOM SHEET 2: SHOPPING CART
+           ================================================================ -->
+      <div class="bottom-sheet" id="cartSheet">
+        <div class="sheet-handle-bar"></div>
+        <div class="sheet-header">
+          <span class="sheet-title">My Shopping Bag</span>
+          <button class="sheet-close-btn" onclick="closeBottomSheet('cartSheet')" aria-label="Close">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div class="sheet-body">
+          <!-- Items List -->
+          <div class="cart-items-list" id="cartItemsList">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Coupon Code Input -->
+          <div class="promo-code-box">
+            <input type="text" id="promoInput" class="promo-input" placeholder="Try promo code: SAVE20" />
+            <button class="promo-apply-btn" id="applyPromoBtn">Apply</button>
+          </div>
+
+          <!-- Order Summary Details -->
+          <div class="order-summary-box">
+            <div class="summary-line">
+              <span>Subtotal</span>
+              <span id="summarySubtotal">$0.00</span>
+            </div>
+            <div class="summary-line">
+              <span>Promo Discount</span>
+              <span id="summaryDiscount" style="color: var(--success);">-$0.00</span>
+            </div>
+            <div class="summary-line">
+              <span>Estimated Shipping</span>
+              <span id="summaryShipping">FREE</span>
+            </div>
+            <div class="summary-line">
+              <span>Estimated Tax (8%)</span>
+              <span id="summaryTax">$0.00</span>
+            </div>
+            <div class="summary-line total">
+              <span>Total Amount</span>
+              <span id="summaryTotal">$0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sheet-footer">
+          <button class="btn-primary" id="cartCheckoutBtn" style="width: 100%;" onclick="openCheckout()">
+            <span>Proceed to Checkout</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           BOTTOM SHEET 3: CHECKOUT FLOW
+           ================================================================ -->
+      <div class="bottom-sheet" id="checkoutSheet">
+        <div class="sheet-handle-bar"></div>
+        <div class="sheet-header">
+          <span class="sheet-title">Fast Mobile Checkout</span>
+          <button class="sheet-close-btn" onclick="closeBottomSheet('checkoutSheet')" aria-label="Close">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div class="sheet-body">
+          <div class="checkout-steps-indicator">
+            <div class="step-node active">1</div>
+            <div class="step-node active">2</div>
+            <div class="step-node">3</div>
+          </div>
+
+          <form id="checkoutForm">
+            <div class="form-group">
+              <label class="form-label" for="shipName">Recipient Full Name</label>
+              <input type="text" id="shipName" class="form-input" value="Alex Morgan" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="shipAddress">Street Address</label>
+              <input type="text" id="shipAddress" class="form-input" value="742 Evergreen Terrace, Apt 4B" required />
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+              <div class="form-group" style="flex: 2;">
+                <label class="form-label" for="shipCity">City</label>
+                <input type="text" id="shipCity" class="form-input" value="New York" required />
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label class="form-label" for="shipZip">ZIP Code</label>
+                <input type="text" id="shipZip" class="form-input" value="10001" required />
+              </div>
+            </div>
+
+            <div class="option-group-label" style="margin-top: 10px;">
+              <span>Payment Option</span>
+            </div>
+
+            <div class="payment-methods-grid">
+              <label class="payment-option-card selected" onclick="selectPaymentMethod(this)">
+                <input type="radio" name="paymentMethod" class="payment-radio" checked />
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                  <line x1="1" y1="10" x2="23" y2="10"/>
+                </svg>
+                <div style="flex: 1;">
+                  <strong style="font-size: 13px; display: block;">Apple Pay / Google Pay</strong>
+                  <span style="font-size: 11px; color: var(--text-secondary);">1-Tap instant biometrics</span>
+                </div>
+              </label>
+
+              <label class="payment-option-card" onclick="selectPaymentMethod(this)">
+                <input type="radio" name="paymentMethod" class="payment-radio" />
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
+                </svg>
+                <div style="flex: 1;">
+                  <strong style="font-size: 13px; display: block;">Credit or Debit Card</strong>
+                  <span style="font-size: 11px; color: var(--text-secondary);">Visa ending in 4242</span>
+                </div>
+              </label>
+
+              <label class="payment-option-card" onclick="selectPaymentMethod(this)">
+                <input type="radio" name="paymentMethod" class="payment-radio" />
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+                <div style="flex: 1;">
+                  <strong style="font-size: 13px; display: block;">Cash on Delivery</strong>
+                  <span style="font-size: 11px; color: var(--text-secondary);">Pay upon doorstep delivery</span>
+                </div>
+              </label>
+            </div>
+
+            <div class="sheet-footer" style="padding-left: 0; padding-right: 0;">
+              <button type="submit" class="btn-primary" id="placeOrderBtn" style="width: 100%;">
+                <span>Confirm Order & Pay (<span id="checkoutAmount">$0.00</span>)</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           BOTTOM SHEET 4: ORDER SUCCESS CELEBRATION
+           ================================================================ -->
+      <div class="bottom-sheet" id="orderSuccessSheet">
+        <div class="sheet-handle-bar"></div>
+        <div class="sheet-body">
+          <div class="success-screen">
+            <div class="success-circle-icon">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+
+            <h2 class="success-title">Order Confirmed! 🎉</h2>
+            <p style="font-size: 13px; color: var(--text-secondary); max-width: 280px; margin: 0 auto;">
+              Thank you for your order! We have sent a confirmation email with live tracking details.
+            </p>
+
+            <div class="order-receipt-card">
+              <div class="receipt-row">
+                <span style="color: var(--text-secondary);">Order Reference</span>
+                <strong id="receiptOrderId" style="color: var(--accent-primary);">ORD-982341</strong>
+              </div>
+              <div class="receipt-row">
+                <span style="color: var(--text-secondary);">Total Paid</span>
+                <strong id="receiptAmount">$0.00</strong>
+              </div>
+              <div class="receipt-row">
+                <span style="color: var(--text-secondary);">Items Included</span>
+                <strong id="receiptItemCount">1 item</strong>
+              </div>
+              <div class="receipt-row" style="margin-bottom: 0;">
+                <span style="color: var(--text-secondary);">Estimated Delivery</span>
+                <strong style="color: var(--success);">Tomorrow by 6:00 PM</strong>
+              </div>
+            </div>
+
+            <button class="btn-primary" style="width: 100%;" onclick="closeBottomSheet('orderSuccessSheet'); switchTab('home')">
+              <span>Continue Shopping</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JavaScript Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Bag & Checkout — KICKVAULT</title>
+  <meta name="description" content="Review your selected sneakers, apply promo codes, and complete fast, encrypted checkout.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff1f0',
+              100: '#ffe1de',
+              200: '#ffc7c2',
+              500: '#ff3e24',
+              600: '#e02e17',
+              700: '#bb210d',
+              900: '#5a0d03',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-red-500 selection:text-white min-h-screen flex flex-col justify-between">
+
+  <!-- Announcement Bar -->
+  <div class="bg-slate-900 text-white text-xs py-2.5 px-4 text-center font-medium flex items-center justify-center gap-2 border-b border-slate-800">
+    <span class="inline-block px-2 py-0.5 rounded-full bg-red-500 text-white font-bold text-[10px] uppercase tracking-wider animate-pulse">Coupon</span>
+    <span>Use code <strong class="text-red-400 font-bold tracking-wider">SNEAKER20</strong> for 20% off all sneakers</span>
+    <span class="hidden md:inline text-slate-500">|</span>
+    <span class="hidden md:inline text-slate-300">Free Express Delivery on orders over $150</span>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-2.5 shrink-0 group">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-slate-900 via-red-600 to-red-500 flex items-center justify-center text-white shadow-lg shadow-red-500/25 group-hover:scale-105 transition duration-300">
+          <svg class="w-6 h-6 transform -rotate-12 group-hover:rotate-0 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M21.5 13.5c-.3-1.1-.9-2.1-1.7-2.9l-2.6-2.5c-.6-.6-1.5-.9-2.3-.9H12c-.6 0-1.2.2-1.6.6L4.2 13.9c-.8.8-1.2 1.8-1.2 2.9v1.7c0 .8.7 1.5 1.5 1.5h15c.8 0 1.5-.7 1.5-1.5v-3.5c0-.4.2-.7.5-1zM6 17c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm12 0H8.5c-.3 0-.5-.2-.5-.5s.2-.5.5-.5H18c.6 0 1 .4 1 1s-.4 1-1 1z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="font-heading font-black text-2xl tracking-tighter text-slate-900 block leading-none">KICK<span class="text-red-500">VAULT</span></span>
+          <span class="text-[10px] tracking-widest font-bold uppercase text-slate-400 block mt-0.5">EST. 2026</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="text-sm font-semibold text-slate-600 hover:text-red-500 transition">Home</a>
+        <a href="index.html#shop" class="text-sm font-semibold text-slate-600 hover:text-red-500 transition">Shop Kicks</a>
+        <a href="index.html#categories" class="text-sm font-semibold text-slate-600 hover:text-red-500 transition">Categories</a>
+        <a href="about.html" class="text-sm font-semibold text-slate-600 hover:text-red-500 transition">About Us</a>
+        <a href="cart.html" class="text-sm font-bold text-red-500 border-b-2 border-red-500 pb-1">Bag & Checkout</a>
+      </nav>
+
+      <!-- Action Icons -->
+      <div class="flex items-center gap-3">
+        <!-- Cart Bag Button -->
+        <a href="cart.html" class="relative p-2.5 rounded-full bg-red-50 text-red-500 transition" title="Shopping Cart">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+          <span class="cart-badge-count hidden absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center border-2 border-white">0</span>
+        </a>
+
+        <!-- User Authentication State -->
+        <div class="nav-auth-container hidden sm:block"></div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-xl hover:bg-slate-100 text-slate-700 focus:outline-none" aria-label="Open navigation menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div id="mobile-drawer-backdrop" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  <aside id="mobile-drawer" class="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white z-50 transform translate-x-full shadow-2xl flex flex-col justify-between p-6 overflow-y-auto">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-slate-100">
+        <a href="index.html" class="flex items-center gap-2">
+          <div class="w-9 h-9 rounded-xl bg-red-500 flex items-center justify-center text-white font-black text-lg">K</div>
+          <span class="font-heading font-black text-xl text-slate-900 tracking-tight">KICK<span class="text-red-500">VAULT</span></span>
+        </a>
+        <button id="mobile-close-btn" class="p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-800" aria-label="Close menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <nav class="flex flex-col space-y-1 mt-6">
+        <a href="index.html" class="py-3 px-4 rounded-xl text-slate-700 font-semibold hover:bg-slate-50 flex items-center justify-between">
+          <span>Home</span>
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+        <a href="index.html#shop" class="py-3 px-4 rounded-xl text-slate-700 font-semibold hover:bg-slate-50 flex items-center justify-between">
+          <span>Shop Kicks</span>
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+        <a href="about.html" class="py-3 px-4 rounded-xl text-slate-700 font-semibold hover:bg-slate-50 flex items-center justify-between">
+          <span>About Us</span>
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+        <a href="cart.html" class="py-3 px-4 rounded-xl text-slate-900 font-bold bg-red-50 text-red-600 flex items-center justify-between">
+          <span class="flex items-center gap-2">
+            Shopping Bag
+            <span class="cart-badge-count hidden px-2 py-0.5 rounded-full bg-red-500 text-white text-[11px] font-bold">0</span>
+          </span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+      </nav>
+    </div>
+
+    <div class="pt-6 border-t border-slate-100">
+      <div id="mobile-auth-container"></div>
+      <p class="text-xs text-slate-400 text-center mt-6">© 2026 KickVault Inc. All rights reserved.</p>
+    </div>
+  </aside>
+
+  <!-- Main Cart Section -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+    
+    <!-- Title & Breadcrumb -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-8 border-b border-slate-200">
+      <div>
+        <nav class="flex items-center gap-2 text-xs text-slate-400 mb-1">
+          <a href="index.html" class="hover:text-red-500 transition">Home</a>
+          <span>/</span>
+          <span class="text-slate-800 font-semibold">Shopping Bag</span>
+        </nav>
+        <h1 class="font-heading font-black text-3xl sm:text-4xl text-slate-900">YOUR SNEAKER BAG</h1>
+      </div>
+      <div class="mt-4 sm:mt-0">
+        <button id="clear-cart-btn" onclick="confirmClearCart()" class="text-xs font-semibold text-rose-500 hover:text-rose-700 flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-rose-50 transition cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+          Clear Bag
+        </button>
+      </div>
+    </div>
+
+    <!-- Free Shipping Progress Bar Banner -->
+    <div id="shipping-progress-banner" class="mb-8 p-4 bg-white rounded-2xl border border-slate-200/80 shadow-sm flex flex-col gap-2">
+      <!-- Injected by renderCartPage() -->
+    </div>
+
+    <!-- Content: Empty State OR Grid -->
+    <div id="cart-content-container">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- Cross-Sell Section: Recommended Kicks -->
+    <section class="mt-20 pt-12 border-t border-slate-200">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-red-500">You May Also Like</span>
+          <h2 class="font-heading font-black text-2xl text-slate-900">HOT COMPLEMENTS</h2>
+        </div>
+        <a href="index.html#shop" class="text-xs font-bold text-red-500 hover:underline flex items-center gap-1">
+          View All &rarr;
+        </a>
+      </div>
+      <div id="cart-recommendations-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+  </main>
+
+  <!-- Checkout Multi-Step Modal -->
+  <div id="checkout-modal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-y-auto p-6 sm:p-8 relative shadow-2xl border border-slate-100">
+      
+      <!-- Close button -->
+      <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center cursor-pointer transition">
+        &times;
+      </button>
+
+      <!-- Modal Header -->
+      <div class="mb-6 pb-4 border-b border-slate-100">
+        <span class="text-xs font-bold uppercase tracking-wider text-red-500">256-Bit SSL Encrypted</span>
+        <h3 class="font-heading font-black text-2xl text-slate-900 mt-0.5">SECURE CHECKOUT</h3>
+      </div>
+
+      <!-- Checkout Form -->
+      <form id="checkout-form" onsubmit="processCheckoutOrder(event)">
+        
+        <!-- Step 1: Shipping Address -->
+        <div class="mb-6">
+          <h4 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-slate-900 text-white text-xs flex items-center justify-center font-bold">1</span>
+            Shipping Address
+          </h4>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Full Name</label>
+              <input type="text" id="ship-name" required placeholder="Alex Mercer" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Email for Tracking</label>
+              <input type="email" id="ship-email" required placeholder="alex@example.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500" />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Street Address</label>
+              <input type="text" required placeholder="742 Evergreen Terrace, Apt 4B" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">City</label>
+              <input type="text" required placeholder="New York" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Postal Code</label>
+              <input type="text" required placeholder="10001" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Payment Options -->
+        <div class="mb-6">
+          <h4 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-slate-900 text-white text-xs flex items-center justify-center font-bold">2</span>
+            Payment Method
+          </h4>
+
+          <div class="grid grid-cols-3 gap-3 mb-4">
+            <label class="border-2 border-red-500 bg-red-50/40 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer transition">
+              <input type="radio" name="payment_method" value="card" checked class="hidden" />
+              <span class="text-xs font-bold text-slate-900">Credit Card</span>
+              <span class="text-[10px] text-slate-500">Visa / MC / Amex</span>
+            </label>
+            <label class="border border-slate-200 hover:border-slate-300 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer transition">
+              <input type="radio" name="payment_method" value="applepay" class="hidden" />
+              <span class="text-xs font-bold text-slate-900">Apple Pay</span>
+              <span class="text-[10px] text-slate-500">1-Touch Pay</span>
+            </label>
+            <label class="border border-slate-200 hover:border-slate-300 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer transition">
+              <input type="radio" name="payment_method" value="paypal" class="hidden" />
+              <span class="text-xs font-bold text-slate-900">PayPal</span>
+              <span class="text-[10px] text-slate-500">Buyer Protected</span>
+            </label>
+          </div>
+
+          <!-- Simulated Credit Card Input Fields -->
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Card Number</label>
+              <input type="text" maxlength="19" placeholder="4242 •••• •••• 4242" value="4242 8492 0192 4242" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-red-500" />
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-600 mb-1">Exp Date</label>
+                <input type="text" maxlength="5" placeholder="MM/YY" value="08/28" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-red-500" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-600 mb-1">CVC Code</label>
+                <input type="text" maxlength="4" placeholder="123" value="842" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-red-500" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total summary line -->
+        <div class="flex items-center justify-between py-4 border-t border-slate-200 text-sm font-bold">
+          <span class="text-slate-700">Total Charge:</span>
+          <span id="modal-checkout-total" class="text-2xl font-black text-slate-900 font-heading">$0.00</span>
+        </div>
+
+        <button type="submit" id="pay-submit-btn" class="w-full py-4 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-bold text-base shadow-xl shadow-red-500/30 flex items-center justify-center gap-2 transition cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          <span id="pay-btn-text">Authorize & Place Order</span>
+        </button>
+
+      </form>
+
+      <!-- Confirmation Screen State (Initially Hidden) -->
+      <div id="order-success-screen" class="hidden text-center py-6">
+        <div class="w-20 h-20 mx-auto mb-4 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-4xl animate-bounce">
+          ✓
+        </div>
+        <span class="text-xs font-bold uppercase tracking-widest text-emerald-600">Order Confirmed!</span>
+        <h3 class="font-heading font-black text-3xl text-slate-900 mt-1 mb-2">THANK YOU FOR YOUR ORDER!</h3>
+        <p class="text-slate-500 text-sm max-w-md mx-auto mb-6">
+          Order <strong class="text-slate-900" id="order-number-display">#KV-89210</strong> has been confirmed. A verification receipt with live GPS tracking has been sent to your email.
+        </p>
+
+        <div class="bg-slate-50 p-4 rounded-2xl max-w-md mx-auto text-left text-xs space-y-2 mb-6 border border-slate-200">
+          <div class="flex justify-between">
+            <span class="text-slate-500">Estimated Delivery:</span>
+            <span class="font-bold text-slate-900" id="delivery-date-display">Thursday, Nov 2nd</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">Shipping Courier:</span>
+            <span class="font-bold text-slate-900">FedEx Carbon-Neutral Express</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">Payment Status:</span>
+            <span class="font-bold text-emerald-600">Paid & Verified</span>
+          </div>
+        </div>
+
+        <button onclick="finishOrderAndRedirect()" class="px-8 py-3.5 rounded-2xl bg-slate-900 hover:bg-red-500 text-white font-bold text-sm shadow-lg transition cursor-pointer">
+          Continue Shopping Kicks
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-900">
+        <div class="lg:col-span-2 space-y-4">
+          <a href="index.html" class="flex items-center gap-2">
+            <div class="w-10 h-10 rounded-xl bg-red-500 flex items-center justify-center text-white font-black text-xl">K</div>
+            <span class="font-heading font-black text-2xl text-white tracking-tight">KICK<span class="text-red-500">VAULT</span></span>
+          </a>
+          <p class="text-sm text-slate-400 max-w-sm leading-relaxed">
+            The global authority on authentic sneaker drops, rare streetwear grails, and elite running performance shoes.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Quick Links</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="index.html" class="hover:text-red-400 transition">Home</a></li>
+            <li><a href="index.html#shop" class="hover:text-red-400 transition">All Sneakers</a></li>
+            <li><a href="about.html" class="hover:text-red-400 transition">About Our Brand</a></li>
+            <li><a href="cart.html" class="hover:text-red-400 transition">Cart & Checkout</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Customer Care</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="#" onclick="showToast('Order tracker demo initialized.', 'info'); return false;" class="hover:text-red-400 transition">Order Tracking</a></li>
+            <li><a href="#" onclick="showToast('Authenticity certification verified.', 'info'); return false;" class="hover:text-red-400 transition">Authenticity Guarantee</a></li>
+            <li><a href="#" onclick="showToast('Free 30-day return policy applies.', 'info'); return false;" class="hover:text-red-400 transition">Returns & Exchanges</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Account</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="login.html" class="hover:text-red-400 transition">Member Sign In</a></li>
+            <li><a href="signup.html" class="hover:text-red-400 transition">Create Account</a></li>
+            <li><a href="cart.html" class="hover:text-red-400 transition">Shopping Bag</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+        <p>© 2026 KICKVAULT Global Footwear Inc. All rights reserved.</p>
+        <div class="flex items-center gap-3">
+          <span class="px-2.5 py-1 rounded bg-slate-900 text-slate-300 font-bold border border-slate-800">VISA</span>
+          <span class="px-2.5 py-1 rounded bg-slate-900 text-slate-300 font-bold border border-slate-800">MasterCard</span>
+          <span class="px-2.5 py-1 rounded bg-slate-900 text-slate-300 font-bold border border-slate-800">Apple Pay</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+
+  <!-- Cart Page Interactive Controller -->
+  <script>
+    function renderCartPage() {
+      const container = document.getElementById('cart-content-container');
+      const progressBanner = document.getElementById('shipping-progress-banner');
+      const clearBtn = document.getElementById('clear-cart-btn');
+      if (!container) return;
+
+      const cart = getCart();
+      const totals = getCartTotals();
+      const appliedPromo = getAppliedPromo();
+
+      // Free shipping progress bar
+      if (progressBanner) {
+        if (totals.amountUntilFreeShipping <= 0 || totals.shipping === 0) {
+          progressBanner.innerHTML = `
+            <div class="flex items-center gap-2 text-emerald-600 font-bold text-xs">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Congratulations! You've unlocked <strong>FREE Express Shipping</strong>!</span>
+            </div>
+            <div class="w-full bg-emerald-100 rounded-full h-2 overflow-hidden">
+              <div class="bg-emerald-500 h-full rounded-full w-full"></div>
+            </div>
+          `;
+        } else {
+          const percent = Math.min(100, Math.round(((totals.freeShippingThreshold - totals.amountUntilFreeShipping) / totals.freeShippingThreshold) * 100));
+          progressBanner.innerHTML = `
+            <div class="flex items-center justify-between text-xs text-slate-700 font-semibold">
+              <span>Add <strong class="text-red-500">$${totals.amountUntilFreeShipping}</strong> more to qualify for <strong>FREE Express Delivery</strong></span>
+              <span class="text-slate-400 font-medium">${percent}%</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+              <div class="bg-red-500 h-full rounded-full transition-all duration-300" style="width: ${percent}%"></div>
+            </div>
+          `;
+        }
+      }
+
+      // If cart is empty
+      if (cart.length === 0) {
+        if (clearBtn) clearBtn.classList.add('hidden');
+        if (progressBanner) progressBanner.classList.add('hidden');
+
+        container.innerHTML = `
+          <div class="py-20 text-center bg-white rounded-3xl border border-slate-200/80 p-8 shadow-sm">
+            <div class="w-24 h-24 mx-auto mb-5 bg-red-50 rounded-full flex items-center justify-center text-4xl shadow-inner">
+              👟
+            </div>
+            <h2 class="text-2xl font-black text-slate-900 font-heading mb-2">YOUR SHOPPING BAG IS EMPTY</h2>
+            <p class="text-slate-500 text-sm max-w-md mx-auto mb-8">
+              Looks like you haven't laced up any kicks yet. Explore our vault for the freshest sneaker drops of the season.
+            </p>
+            <a href="index.html#shop" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-bold text-sm shadow-xl shadow-red-500/25 transition">
+              <span>Start Exploring Kicks</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+        `;
+        return;
+      }
+
+      if (clearBtn) clearBtn.classList.remove('hidden');
+      if (progressBanner) progressBanner.classList.remove('hidden');
+
+      // Grid: Left is items, right is summary
+      container.innerHTML = `
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Left: Cart Items List (8 cols) -->
+          <div class="lg:col-span-8 space-y-4">
+            ${cart.map((item, index) => `
+              <div class="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200/80 shadow-sm flex flex-col sm:flex-row items-center gap-4 sm:gap-6 transition hover:shadow-md">
+                
+                <!-- Product Image -->
+                <div class="w-28 h-28 sm:w-32 sm:h-32 bg-slate-50 rounded-2xl p-2 shrink-0 flex items-center justify-center border border-slate-100">
+                  <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain drop-shadow" />
+                </div>
+
+                <!-- Info -->
+                <div class="flex-1 w-full text-center sm:text-left">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-red-500 uppercase tracking-wider">${item.brand}</span>
+                    <button onclick="removeFromCart(${index}); renderCartPage();" class="text-slate-400 hover:text-rose-600 transition p-1" title="Remove item">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    </button>
+                  </div>
+
+                  <h3 class="text-base sm:text-lg font-bold text-slate-900 leading-snug mt-0.5">${item.name}</h3>
+                  
+                  <div class="flex items-center justify-center sm:justify-start gap-2 text-xs text-slate-500 my-2">
+                    <span class="bg-slate-100 px-2 py-0.5 rounded font-medium">Size: <strong>US ${item.size}</strong></span>
+                    <span class="bg-slate-100 px-2 py-0.5 rounded font-medium">Color: <strong>${item.color}</strong></span>
+                  </div>
+
+                  <!-- Price & Stepper -->
+                  <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+                    <div class="flex items-baseline gap-2">
+                      <span class="text-lg font-black text-slate-900">$${item.price}</span>
+                      ${item.originalPrice ? `<span class="text-xs text-slate-400 line-through">$${item.originalPrice}</span>` : ''}
+                    </div>
+
+                    <!-- Quantity Stepper -->
+                    <div class="flex items-center border border-slate-200 rounded-xl bg-slate-50 p-0.5">
+                      <button onclick="updateCartQuantity(${index}, ${item.quantity - 1}); renderCartPage();" class="w-7 h-7 rounded-lg bg-white text-slate-700 font-bold flex items-center justify-center hover:bg-slate-200 transition cursor-pointer text-xs leading-none">-</button>
+                      <span class="w-8 text-center text-xs font-bold text-slate-800">${item.quantity}</span>
+                      <button onclick="updateCartQuantity(${index}, ${item.quantity + 1}); renderCartPage();" class="w-7 h-7 rounded-lg bg-white text-slate-700 font-bold flex items-center justify-center hover:bg-slate-200 transition cursor-pointer text-xs leading-none">+</button>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- Right: Sticky Order Summary (4 cols) -->
+          <div class="lg:col-span-4 sticky top-28 space-y-6">
+            
+            <!-- Summary Card -->
+            <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm space-y-5">
+              <h3 class="font-heading font-black text-xl text-slate-900 pb-3 border-b border-slate-100">ORDER SUMMARY</h3>
+
+              <!-- Promo Code Input -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1.5">Have a Promo Code?</label>
+                ${appliedPromo ? `
+                  <div class="flex items-center justify-between bg-emerald-50 border border-emerald-200 text-emerald-700 p-2.5 rounded-xl text-xs font-bold">
+                    <span class="flex items-center gap-1.5">
+                      ✓ Code <strong>${appliedPromo}</strong> applied
+                    </span>
+                    <button onclick="removePromoCode(); renderCartPage();" class="text-rose-500 hover:text-rose-700 text-xs font-bold underline cursor-pointer">Remove</button>
+                  </div>
+                ` : `
+                  <div class="flex gap-2">
+                    <input type="text" id="cart-promo-input" placeholder="e.g. SNEAKER20" class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs uppercase font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-red-500" />
+                    <button onclick="handleApplyPromo()" class="px-4 py-2 bg-slate-900 hover:bg-red-500 text-white rounded-xl text-xs font-bold transition cursor-pointer">
+                      Apply
+                    </button>
+                  </div>
+                  <p class="text-[11px] text-slate-400 mt-1">Hint: Try <strong>SNEAKER20</strong> for 20% off!</p>
+                `}
+              </div>
+
+              <!-- Cost breakdown -->
+              <div class="space-y-2.5 text-xs text-slate-600 pt-2 border-t border-slate-100">
+                <div class="flex justify-between">
+                  <span>Subtotal (${totals.itemCount} items)</span>
+                  <span class="font-bold text-slate-800">$${totals.subtotal}</span>
+                </div>
+
+                ${totals.discount > 0 ? `
+                  <div class="flex justify-between text-emerald-600 font-bold">
+                    <span>Promo Discount</span>
+                    <span>-$${totals.discount}</span>
+                  </div>
+                ` : ''}
+
+                <div class="flex justify-between">
+                  <span>Estimated Shipping</span>
+                  <span>${totals.shipping === 0 ? '<strong class="text-emerald-600 font-bold">FREE</strong>' : `$${totals.shipping}`}</span>
+                </div>
+
+                <div class="flex justify-between">
+                  <span>Estimated Tax (8%)</span>
+                  <span class="font-semibold text-slate-700">$${totals.tax}</span>
+                </div>
+
+                <div class="flex justify-between text-base font-black text-slate-900 pt-3 border-t border-slate-100 font-heading">
+                  <span>Total Due</span>
+                  <span class="text-2xl text-red-500">$${totals.total}</span>
+                </div>
+              </div>
+
+              <!-- Checkout CTA -->
+              <button onclick="openCheckoutModal()" class="w-full py-4 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-bold text-sm shadow-xl shadow-red-500/25 active:scale-98 transition flex items-center justify-center gap-2 cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                <span>Proceed to Checkout</span>
+              </button>
+
+              <div class="flex items-center justify-center gap-2 text-[11px] text-slate-400">
+                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                <span>Authentic Deadstock Guarantee & Easy Returns</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      `;
+    }
+
+    function confirmClearCart() {
+      if (confirm("Are you sure you want to empty your entire sneaker bag?")) {
+        clearCart();
+        renderCartPage();
+      }
+    }
+
+    function handleApplyPromo() {
+      const input = document.getElementById('cart-promo-input');
+      if (input) {
+        applyPromoCode(input.value);
+        renderCartPage();
+      }
+    }
+
+    // Recommendations render
+    function renderRecommendations() {
+      const recGrid = document.getElementById('cart-recommendations-grid');
+      if (!recGrid) return;
+
+      const randomKicks = PRODUCTS.slice(0, 4);
+      recGrid.innerHTML = randomKicks.map(shoe => `
+        <div class="bg-white rounded-3xl p-4 border border-slate-200/80 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+          <div class="h-36 flex items-center justify-center bg-slate-50 rounded-2xl p-2 mb-3">
+            <img src="${shoe.image}" alt="${shoe.name}" class="h-full object-contain drop-shadow" />
+          </div>
+          <div>
+            <p class="text-[10px] font-bold text-red-500 uppercase">${shoe.brand}</p>
+            <h4 class="font-bold text-slate-900 text-sm truncate">${shoe.name}</h4>
+            <div class="flex items-center justify-between mt-3">
+              <span class="font-black text-slate-900 text-sm">$${shoe.price}</span>
+              <button onclick="addToCart(${shoe.id}, ${shoe.sizes[0]}, '${shoe.colors[0].name}', 1); renderCartPage();" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-red-500 text-white text-xs font-bold transition cursor-pointer">
+                + Add
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Checkout Modal functions
+    function openCheckoutModal() {
+      const cart = getCart();
+      if (cart.length === 0) {
+        showToast("Your cart is empty!", "error");
+        return;
+      }
+
+      const modal = document.getElementById('checkout-modal');
+      const totalDisplay = document.getElementById('modal-checkout-total');
+      const totals = getCartTotals();
+
+      if (totalDisplay) {
+        totalDisplay.textContent = `$${totals.total}`;
+      }
+
+      // Pre-fill user details if logged in
+      const user = getCurrentUser();
+      if (user) {
+        const nameInput = document.getElementById('ship-name');
+        const emailInput = document.getElementById('ship-email');
+        if (nameInput) nameInput.value = user.name;
+        if (emailInput) emailInput.value = user.email;
+      }
+
+      // Reset modal view
+      document.getElementById('checkout-form').classList.remove('hidden');
+      document.getElementById('order-success-screen').classList.add('hidden');
+
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCheckoutModal() {
+      const modal = document.getElementById('checkout-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function processCheckoutOrder(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('pay-submit-btn');
+      const btnText = document.getElementById('pay-btn-text');
+
+      submitBtn.disabled = true;
+      btnText.textContent = "Processing Payment Verification...";
+
+      setTimeout(() => {
+        // Generate random order number
+        const orderNum = "KV-" + Math.floor(10000 + Math.random() * 90000);
+        document.getElementById('order-number-display').textContent = `#${orderNum}`;
+
+        // Set simulated delivery date 3 days ahead
+        const date = new Date();
+        date.setDate(date.getDate() + 3);
+        const dateString = date.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+        document.getElementById('delivery-date-display').textContent = dateString;
+
+        // Clear cart
+        saveCart([]);
+
+        // Toggle views
+        document.getElementById('checkout-form').classList.add('hidden');
+        document.getElementById('order-success-screen').classList.remove('hidden');
+
+        submitBtn.disabled = false;
+        btnText.textContent = "Authorize & Place Order";
+
+        showToast("Payment authorized! Order confirmed.", "success");
+      }, 1500);
+    }
+
+    function finishOrderAndRedirect() {
+      closeCheckoutModal();
+      window.location.href = "index.html";
+    }
+
+    // Init Cart Page
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCartPage();
+      renderRecommendations();
+
+      // Mobile Menu Toggle
+      const toggleBtn = document.getElementById('mobile-menu-btn');
+      const closeBtn = document.getElementById('mobile-close-btn');
+      const drawer = document.getElementById('mobile-drawer');
+      const backdrop = document.getElementById('mobile-drawer-backdrop');
+
+      if (toggleBtn && drawer && backdrop) {
+        toggleBtn.addEventListener('click', () => {
+          drawer.classList.remove('translate-x-full');
+          backdrop.classList.remove('opacity-0', 'pointer-events-none');
+          backdrop.classList.add('opacity-100');
+          document.body.style.overflow = 'hidden';
+        });
+
+        function close() {
+          drawer.classList.add('translate-x-full');
+          backdrop.classList.remove('opacity-100');
+          backdrop.classList.add('opacity-0', 'pointer-events-none');
+          document.body.style.overflow = '';
+        }
+
+        if (closeBtn) closeBtn.addEventListener('click', close);
+        backdrop.addEventListener('click', close);
+      }
+    });
+
+    window.addEventListener('cart-updated', () => {
+      renderCartPage();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create VIP Account — KICKVAULT</title>
+  <meta name="description" content="Join the KickVault sneakerhead community for exclusive access, 15% discount on your first order, and shock drops.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff1f0',
+              100: '#ffe1de',
+              200: '#ffc7c2',
+              500: '#ff3e24',
+              600: '#e02e17',
+              700: '#bb210d',
+              900: '#5a0d03',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-900 text-slate-800 antialiased min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8">
+
+  <div class="max-w-5xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 border border-slate-100 min-h-[660px]">
+    
+    <!-- Left Benefits Visual Showcase (5 cols) -->
+    <div class="lg:col-span-5 bg-gradient-to-br from-slate-950 via-slate-900 to-red-950 p-8 sm:p-12 text-white flex flex-col justify-between relative overflow-hidden">
+      <div class="absolute -top-20 -left-20 w-72 h-72 bg-red-600/25 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Top Brand -->
+      <div class="relative z-10">
+        <a href="index.html" class="flex items-center gap-2 group">
+          <div class="w-10 h-10 rounded-xl bg-red-500 flex items-center justify-center text-white font-black text-xl group-hover:scale-105 transition">K</div>
+          <span class="font-heading font-black text-2xl text-white tracking-tight">KICK<span class="text-red-500">VAULT</span></span>
+        </a>
+      </div>
+
+      <!-- Perks List -->
+      <div class="relative z-10 my-6">
+        <span class="inline-block px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs font-bold uppercase tracking-wider mb-3">
+          Member Privileges
+        </span>
+        <h3 class="font-heading font-black text-2xl sm:text-3xl text-white mb-4 leading-tight">JOIN OVER 500K SNEAKERHEADS</h3>
+
+        <div class="space-y-3.5 text-xs text-slate-300">
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center shrink-0">✓</span>
+            <span><strong>Instant 15% Off</strong> your first order</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 rounded-full bg-red-500/20 text-red-400 font-bold flex items-center justify-center shrink-0">✓</span>
+            <span><strong>15-Min Shock Drop Headstart</strong> on limited releases</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center shrink-0">✓</span>
+            <span><strong>Reserved Size Lock</strong> for seamless 1-click checkout</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 font-bold flex items-center justify-center shrink-0">✓</span>
+            <span><strong>Free Express Delivery</strong> perks & birthday surprises</span>
+          </div>
+        </div>
+
+        <!-- Sneaker Graphic -->
+        <div class="mt-8 flex justify-center">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80" alt="Nike Sneaker" class="w-48 h-auto object-contain drop-shadow-[0_20px_20px_rgba(0,0,0,0.8)] transform -rotate-6 hover:rotate-0 transition duration-500" />
+        </div>
+      </div>
+
+      <!-- Return Link -->
+      <div class="relative z-10 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+        <a href="index.html" class="hover:text-white transition flex items-center gap-1">
+          &larr; Return to Home
+        </a>
+        <span>Deadstock Certified</span>
+      </div>
+    </div>
+
+    <!-- Right Sign Up Form (7 cols) -->
+    <div class="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-between">
+      
+      <div>
+        <div class="mb-6">
+          <span class="text-red-500 font-bold text-xs uppercase tracking-widest">New Member Registration</span>
+          <h2 class="font-heading font-black text-3xl sm:text-4xl text-slate-900 mt-1">CREATE VIP ACCOUNT</h2>
+          <p class="text-slate-500 text-sm mt-1">Unlock your personalized vault in less than 60 seconds.</p>
+        </div>
+
+        <form id="signup-form" onsubmit="handleSignupSubmit(event)" class="space-y-4">
+          
+          <!-- Name & Size row -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
+              <input type="text" id="signup-name" required placeholder="Alex Morgan" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:bg-white transition" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Primary Shoe Size (US)</label>
+              <select id="signup-size" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-2.5 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer">
+                <option value="US 7.0">US 7.0 (M) / 8.5 (W)</option>
+                <option value="US 7.5">US 7.5 (M) / 9.0 (W)</option>
+                <option value="US 8.0">US 8.0 (M) / 9.5 (W)</option>
+                <option value="US 8.5">US 8.5 (M) / 10.0 (W)</option>
+                <option value="US 9.0">US 9.0 (M) / 10.5 (W)</option>
+                <option value="US 9.5" selected>US 9.5 (M) / 11.0 (W)</option>
+                <option value="US 10.0">US 10.0 (M) / 11.5 (W)</option>
+                <option value="US 10.5">US 10.5 (M) / 12.0 (W)</option>
+                <option value="US 11.0">US 11.0 (M) / 12.5 (W)</option>
+                <option value="US 12.0">US 12.0 (M) / 13.5 (W)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Email Address</label>
+            <input type="email" id="signup-email" required placeholder="alex.morgan@domain.com" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:bg-white transition" />
+          </div>
+
+          <!-- Password with Strength Meter -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Password</label>
+            <div class="relative">
+              <input type="password" id="signup-password" required placeholder="At least 6 characters" oninput="checkPasswordStrength(this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-2.5 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:bg-white transition" />
+              <button type="button" onclick="togglePasswordVisibility('signup-password')" class="absolute right-3.5 top-3 text-slate-400 hover:text-slate-600 cursor-pointer" aria-label="Toggle password">
+                👁️
+              </button>
+            </div>
+
+            <!-- Password strength bars -->
+            <div class="mt-2 flex items-center gap-1.5">
+              <div id="bar-1" class="h-1 flex-1 rounded-full bg-slate-200 transition-all"></div>
+              <div id="bar-2" class="h-1 flex-1 rounded-full bg-slate-200 transition-all"></div>
+              <div id="bar-3" class="h-1 flex-1 rounded-full bg-slate-200 transition-all"></div>
+              <div id="bar-4" class="h-1 flex-1 rounded-full bg-slate-200 transition-all"></div>
+              <span id="strength-label" class="text-[10px] font-bold text-slate-400 ml-1">Strength</span>
+            </div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Confirm Password</label>
+            <input type="password" id="signup-confirm-password" required placeholder="Re-enter password" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:bg-white transition" />
+          </div>
+
+          <!-- Terms checkbox -->
+          <div class="pt-1">
+            <label class="flex items-start gap-2.5 cursor-pointer text-xs text-slate-600">
+              <input type="checkbox" required checked class="mt-0.5 rounded border-slate-300 text-red-500 focus:ring-red-500" />
+              <span>I agree to the <a href="#" onclick="showToast('Terms and conditions verified.', 'info'); return false;" class="text-red-500 hover:underline font-semibold">Terms of Service</a> & <a href="#" onclick="showToast('Privacy policy adheres to global standards.', 'info'); return false;" class="text-red-500 hover:underline font-semibold">Privacy Policy</a></span>
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="w-full py-3.5 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-bold text-sm shadow-xl shadow-red-500/25 active:scale-98 transition flex items-center justify-center gap-2 cursor-pointer mt-2">
+            <span>Create Free VIP Account</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </button>
+
+        </form>
+      </div>
+
+      <!-- Footer Link -->
+      <div class="pt-6 border-t border-slate-100 text-center text-xs text-slate-500 mt-4">
+        Already registered with KickVault? 
+        <a href="login.html" class="text-red-500 font-bold hover:underline ml-1">Member Sign In &rarr;</a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    function togglePasswordVisibility(id) {
+      const field = document.getElementById(id);
+      if (field) {
+        field.type = field.type === 'password' ? 'text' : 'password';
+      }
+    }
+
+    function checkPasswordStrength(val) {
+      const bars = [document.getElementById('bar-1'), document.getElementById('bar-2'), document.getElementById('bar-3'), document.getElementById('bar-4')];
+      const label = document.getElementById('strength-label');
+
+      let score = 0;
+      if (val.length >= 6) score++;
+      if (val.length >= 9) score++;
+      if (/[A-Z]/.test(val) && /[0-9]/.test(val)) score++;
+      if (/[^A-Za-z0-9]/.test(val)) score++;
+
+      bars.forEach(b => {
+        b.className = 'h-1 flex-1 rounded-full bg-slate-200 transition-all';
+      });
+
+      if (score === 0) {
+        label.textContent = 'Too Short';
+        label.className = 'text-[10px] font-bold text-slate-400 ml-1';
+      } else if (score === 1) {
+        bars[0].className = 'h-1 flex-1 rounded-full bg-rose-500';
+        label.textContent = 'Weak';
+        label.className = 'text-[10px] font-bold text-rose-500 ml-1';
+      } else if (score === 2) {
+        bars[0].className = 'h-1 flex-1 rounded-full bg-amber-500';
+        bars[1].className = 'h-1 flex-1 rounded-full bg-amber-500';
+        label.textContent = 'Fair';
+        label.className = 'text-[10px] font-bold text-amber-500 ml-1';
+      } else if (score === 3) {
+        bars[0].className = 'h-1 flex-1 rounded-full bg-blue-500';
+        bars[1].className = 'h-1 flex-1 rounded-full bg-blue-500';
+        bars[2].className = 'h-1 flex-1 rounded-full bg-blue-500';
+        label.textContent = 'Strong';
+        label.className = 'text-[10px] font-bold text-blue-500 ml-1';
+      } else {
+        bars.forEach(b => b.className = 'h-1 flex-1 rounded-full bg-emerald-500');
+        label.textContent = 'Super';
+        label.className = 'text-[10px] font-bold text-emerald-500 ml-1';
+      }
+    }
+
+    function handleSignupSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('signup-name').value;
+      const email = document.getElementById('signup-email').value;
+      const size = document.getElementById('signup-size').value;
+      const pass = document.getElementById('signup-password').value;
+      const confirmPass = document.getElementById('signup-confirm-password').value;
+
+      if (pass !== confirmPass) {
+        showToast("Passwords do not match! Please check again.", "error");
+        return;
+      }
+
+      signupUser(name, email, pass, size);
+    }
+  </script>
+</body>
+</html>
