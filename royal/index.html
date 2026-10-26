@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Royal Sports Academy — Train With The Best | Champions In The Making</title>
+  <meta name="description" content="Royal Sports Academy is an elite sports training academy in India offering Olympic-grade coaching in Karate, Silambam, Yoga, Speed Skating, Artistic Gymnastics, and Judo. Train with certified masters.">
+  <meta name="keywords" content="sports academy, karate classes, silambam training, yoga academy, speed skating, gymnastics coaching, judo dojo, champions">
+  
+  <!-- Favicon / Crest Icon -->
+  <link rel="icon" type="image/jpeg" href="assets/images/crest-logo.jpg">
+
+  <!-- Google Fonts: Barlow Condensed (Display), Teko, & Plus Jakarta Sans (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Teko:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Ambient Grid Overlay & Radial Glows -->
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <div class="ambient-glow glow-top-right" aria-hidden="true"></div>
+  <div class="ambient-glow glow-mid-left" aria-hidden="true"></div>
+  <div class="ambient-glow glow-bottom-right" aria-hidden="true"></div>
+
+  <!-- Interactive Particles / Embers Canvas -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- ===================================================================
+       1. HEADER / NAVBAR
+       =================================================================== -->
+  <header class="navbar" id="mainNavbar">
+    <div class="container nav-container">
+      <!-- Left: Academy Crest Logo + Typography -->
+      <a href="#hero" class="logo-brand" id="navLogo">
+        <img src="assets/images/crest-logo.jpg" alt="Royal Sports Academy Crest Logo" class="logo-crest-img">
+        <div class="logo-text-wrapper">
+          <div class="logo-title">ROYAL <span>SPORTS</span> ACADEMY</div>
+          <div class="logo-subtitle">Excellence • Discipline • Glory</div>
+        </div>
+      </a>
+
+      <!-- Right: Navigation Links -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link active" id="navHome">Home</a></li>
+          <li><a href="#disciplines" class="nav-link" id="navDisciplines">Disciplines</a></li>
+          <li><a href="#achievements" class="nav-link" id="navAchievements">Achievements</a></li>
+          <li><a href="#trainers" class="nav-link" id="navTrainers">Trainers</a></li>
+          <li><a href="#students" class="nav-link" id="navStudents">Students</a></li>
+          <li><a href="#events" class="nav-link" id="navEvents">Events</a></li>
+          <li><a href="#gallery" class="nav-link" id="navGallery">Gallery</a></li>
+        </ul>
+      </nav>
+
+      <!-- CTA Button & Mobile Toggle -->
+      <div class="nav-actions">
+        <a href="#enroll" class="btn btn-primary btn-sm" id="navCtaEnroll">
+          <i class="fa-solid fa-bolt"></i> Enroll Now
+        </a>
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <div class="logo-title" style="font-size: 1.25rem;">ROYAL <span>SPORTS</span></div>
+      <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close Navigation Menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="#hero" class="mobile-nav-link">Home</a></li>
+      <li><a href="#disciplines" class="mobile-nav-link">Our Disciplines</a></li>
+      <li><a href="#achievements" class="mobile-nav-link">Achievements</a></li>
+      <li><a href="#trainers" class="mobile-nav-link">Trainers</a></li>
+      <li><a href="#students" class="mobile-nav-link">Students</a></li>
+      <li><a href="#events" class="mobile-nav-link">Events</a></li>
+      <li><a href="#gallery" class="mobile-nav-link">Gallery</a></li>
+      <li><a href="#enroll" class="mobile-nav-link text-orange">Register Now</a></li>
+    </ul>
+    <div style="margin-top: auto; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08);">
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">Call Admissions:</p>
+      <a href="tel:+919876543210" style="color: var(--accent-cyan); text-decoration: none; font-weight: 700; font-size: 1.1rem;">
+        <i class="fa-solid fa-phone" style="margin-right: 6px;"></i> +91 98765 43210
+      </a>
+    </div>
+  </div>
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <!-- ===================================================================
+       2. HERO SECTION
+       =================================================================== -->
+  <section class="hero-section" id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Hero Text Content -->
+        <div class="hero-content">
+          <div class="hero-announcement">
+            <i class="fa-solid fa-bolt badge-icon"></i>
+            <span>Admissions Open 2026–2027 • Free Trial Class Available</span>
+          </div>
+
+          <h1 class="hero-title">
+            <span class="gradient-gold-orange">TRAIN WITH</span><br>
+            <span class="gradient-gold-orange">THE BEST</span>
+          </h1>
+
+          <div class="hero-subtitle">
+            FOR THE NEXT GENERATION OF CHAMPIONS
+          </div>
+
+          <p class="hero-description">
+            Unleash your ultimate athletic potential at Royal Sports Academy. Guided by certified Olympian coaches and national masters in international dojos, speed tracks, and performance arenas designed to sculpt true champions.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#enroll" class="btn btn-primary" id="heroRegisterBtn">
+              <i class="fa-solid fa-fire"></i> Register Now
+            </a>
+            <a href="#disciplines" class="btn btn-secondary" id="heroExploreBtn">
+              <i class="fa-solid fa-compass"></i> Explore Disciplines
+            </a>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="hero-trust-badges">
+            <div class="trust-item">
+              <div class="trust-icon">
+                <i class="fa-solid fa-medal"></i>
+              </div>
+              <div class="trust-info">
+                <h4>Olympic Caliber</h4>
+                <p>Affiliated Federations</p>
+              </div>
+            </div>
+
+            <div class="trust-item">
+              <div class="trust-icon">
+                <i class="fa-solid fa-user-shield"></i>
+              </div>
+              <div class="trust-info">
+                <h4>Black Belt Masters</h4>
+                <p>15+ Yrs Proven Pedigree</p>
+              </div>
+            </div>
+
+            <div class="trust-item">
+              <div class="trust-icon">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div class="trust-info">
+                <h4>4.9 / 5 Rating</h4>
+                <p>Parent & Athlete Choice</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual Composition with High-Energy Image & Floating Badge -->
+        <div class="hero-visual-wrapper">
+          <div class="hero-image-frame">
+            <img src="assets/images/hero-sports.jpg" alt="Dynamic athletic martial artist and runner with fire trail and cyan aura" class="hero-image">
+            <div class="hero-visual-glow"></div>
+          </div>
+
+          <!-- Floating Stats Badge -->
+          <div class="hero-floating-card">
+            <div class="floating-card-icon">
+              <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div class="floating-card-text">
+              <h5>50+ State Gold</h5>
+              <p>Top Ranked Academy 2026</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       3. CARD CAROUSEL (PROGRAMS / OUR DISCIPLINES)
+       =================================================================== -->
+  <section class="programs-section" id="disciplines">
+    <div class="container">
+      <div class="section-header-row">
+        <div>
+          <div class="section-tag amber">
+            <i class="fa-solid fa-trophy"></i> Elite Athletic Disciplines
+          </div>
+          <h2 class="section-title gradient-gold-orange">OUR DISCIPLINES</h2>
+          <p class="section-subtitle">
+            Comprehensive Olympic and traditional combat disciplines structured for grassroots kids, youth competitors, and senior athletes.
+          </p>
+        </div>
+
+        <!-- Carousel Navigation Controls -->
+        <div class="carousel-nav-controls">
+          <button class="carousel-arrow-btn" id="carouselPrevBtn" aria-label="Previous Programs">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button class="carousel-arrow-btn" id="carouselNextBtn" aria-label="Next Programs">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="discipline-filters">
+        <button class="filter-tab active" data-filter="all">All Disciplines (6)</button>
+        <button class="filter-tab" data-filter="martial">Martial Arts</button>
+        <button class="filter-tab" data-filter="speed">Track & Skating</button>
+        <button class="filter-tab" data-filter="wellness">Flexibility & Core</button>
+      </div>
+
+      <!-- Horizontal Scroll / Card Carousel Track -->
+      <div class="carousel-track-wrapper">
+        <div class="carousel-track" id="programsCarouselTrack">
+          
+          <!-- Card 1: Karate -->
+          <div class="discipline-card featured" data-category="martial">
+            <div class="card-image-box">
+              <img src="assets/images/discipline-karate.jpg" alt="Karate Martial Artist High Kick" class="card-img">
+              <div class="card-gradient-overlay"></div>
+              <span class="card-badge badge-amber">Olympic Sport</span>
+            </div>
+            <div class="card-body">
+              <div class="card-age-tag">Ages 5+ • Belt Certification</div>
+              <h3 class="card-title">KARATE</h3>
+              <p class="card-desc">Shotokan Karate, Kata mastery, and high-intensity Kumite point-sparring drills.</p>
+              <ul class="card-features-list">
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> WKF Certified Belt Syllabus</li>
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> Self-Defense & Striking Speed</li>
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> State & National Selections</li>
+              </ul>
+              <div class="card-footer">
+                <button class="card-detail-btn open-discipline-modal" data-id="karate" id="btnDetailKarate">
+                  Explore Discipline <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Silambam -->
+          <div class="discipline-card" data-category="martial">
+            <div class="card-image-box">
+              <img src="assets/images/discipline-silambam.jpg" alt="Silambam Martial Artist Bamboo Staff Combat" class="card-img">
+              <div class="card-gradient-overlay"></div>
+              <span class="card-badge badge-cyan">Ancient Heritage</span>
+            </div>
+            <div class="card-body">
+              <div class="card-age-tag">Ages 6+ • Weapons Art</div>
+              <h3 class="card-title">SILAMBAM</h3>
+              <p class="card-desc">Ancient Indian staff combat weapon art emphasizing lightning wrist spins and 360° agility.</p>
+              <ul class="card-features-list">
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> Traditional Bamboo Staff Combat</li>
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> Footwork & Perimeter Reflexes</li>
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> National Champion Mentorship</li>
+              </ul>
+              <div class="card-footer">
+                <button class="card-detail-btn open-discipline-modal" data-id="silambam" id="btnDetailSilambam">
+                  Explore Discipline <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Yoga -->
+          <div class="discipline-card" data-category="wellness">
+            <div class="card-image-box">
+              <img src="assets/images/discipline-yoga.jpg" alt="Yoga Master Arm Balance Pose" class="card-img">
+              <div class="card-gradient-overlay"></div>
+              <span class="card-badge badge-cyan">Mind & Body</span>
+            </div>
+            <div class="card-body">
+              <div class="card-age-tag">All Ages • Mobility & Mental</div>
+              <h3 class="card-title">YOGA</h3>
+              <p class="card-desc">Dynamic Power Yoga, advanced Asanas, Pranayama breath control, and core stabilization.</p>
+              <ul class="card-features-list">
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> Deep Joint Flexibility & Mobility</li>
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> Athletic Breathwork & Focus</li>
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> Posture Correction & Strength</li>
+              </ul>
+              <div class="card-footer">
+                <button class="card-detail-btn open-discipline-modal" data-id="yoga" id="btnDetailYoga">
+                  Explore Discipline <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Skating -->
+          <div class="discipline-card featured" data-category="speed">
+            <div class="card-image-box">
+              <img src="assets/images/discipline-skating.jpg" alt="Speed Roller Skater Crouched Turn" class="card-img">
+              <div class="card-gradient-overlay"></div>
+              <span class="card-badge badge-amber">Speed & Agility</span>
+            </div>
+            <div class="card-body">
+              <div class="card-age-tag">Ages 4+ • Indoor Rink Track</div>
+              <h3 class="card-title">SKATING</h3>
+              <p class="card-desc">Speed inline and quad roller skating drills focused on aerodynamics, balance, and sprints.</p>
+              <ul class="card-features-list">
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> High-Speed Track Cornering</li>
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> Slalom Agility & Balance Drills</li>
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> Roller Federation Trials</li>
+              </ul>
+              <div class="card-footer">
+                <button class="card-detail-btn open-discipline-modal" data-id="skating" id="btnDetailSkating">
+                  Explore Discipline <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: Gymnastics -->
+          <div class="discipline-card" data-category="wellness">
+            <div class="card-image-box">
+              <img src="assets/images/discipline-gymnastics.jpg" alt="Artistic Gymnast Mid Air Split Leap" class="card-img">
+              <div class="card-gradient-overlay"></div>
+              <span class="card-badge badge-cyan">Artistic Precision</span>
+            </div>
+            <div class="card-body">
+              <div class="card-age-tag">Ages 4+ • Olympic Apparatus</div>
+              <h3 class="card-title">GYMNASTICS</h3>
+              <p class="card-desc">Floor acrobatics, balance beam, vault, and aerial spatial awareness under padded protection.</p>
+              <ul class="card-features-list">
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> Sprung Floor & Foam Landing Pits</li>
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> Flips, Handsprings & Cartwheels</li>
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> Full Body Isometric Strength</li>
+              </ul>
+              <div class="card-footer">
+                <button class="card-detail-btn open-discipline-modal" data-id="gymnastics" id="btnDetailGymnastics">
+                  Explore Discipline <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6: Judo -->
+          <div class="discipline-card" data-category="martial">
+            <div class="card-image-box">
+              <img src="assets/images/discipline-judo.jpg" alt="Judo Athlete Executing Shoulder Throw" class="card-img">
+              <div class="card-gradient-overlay"></div>
+              <span class="card-badge badge-cyan">Olympic Grappling</span>
+            </div>
+            <div class="card-body">
+              <div class="card-age-tag">Ages 7+ • The Gentle Way</div>
+              <h3 class="card-title">JUDO</h3>
+              <p class="card-desc">Olympic grappling, Kuzushi momentum redirects, high throws, and safe break-falling techniques.</p>
+              <ul class="card-features-list">
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> Ukemi: Zero-Impact Safe Falling</li>
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> Nage-Waza Dynamic Throws</li>
+                <li class="card-feature-item"><i class="fa-solid fa-check"></i> Ground Grappling & Pins</li>
+              </ul>
+              <div class="card-footer">
+                <button class="card-detail-btn open-discipline-modal" data-id="judo" id="btnDetailJudo">
+                  Explore Discipline <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       4. MISSION, VISION & ACHIEVEMENTS
+       =================================================================== -->
+  <section class="mission-section" id="achievements">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 3.5rem;">
+        <div class="section-tag">
+          <i class="fa-solid fa-star"></i> Proven Track Record
+        </div>
+        <h2 class="section-title gradient-gold-orange">MISSION, VISION & ACHIEVEMENTS</h2>
+        <p class="section-subtitle mx-auto">
+          Inspiring future athletes to achieve greatness through unyielding discipline, Olympic methodology, and unmatched character development.
+        </p>
+      </div>
+
+      <!-- 3 Stat Counter Boxes enclosed in cyan-glowing border pill boxes -->
+      <div class="stats-pills-grid">
+        <!-- Stat 1 -->
+        <div class="stat-pill-box">
+          <div class="stat-pill-icon">
+            <i class="fa-solid fa-medal"></i>
+          </div>
+          <div class="stat-pill-content">
+            <div class="stat-number" data-target="50">0+</div>
+            <div class="stat-label">Gold Medals</div>
+          </div>
+        </div>
+
+        <!-- Stat 2 -->
+        <div class="stat-pill-box">
+          <div class="stat-pill-icon">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+          </div>
+          <div class="stat-pill-content">
+            <div class="stat-number" data-target="15">0+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+        </div>
+
+        <!-- Stat 3 -->
+        <div class="stat-pill-box">
+          <div class="stat-pill-icon">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div class="stat-pill-content">
+            <div class="stat-number" data-target="1000">0+</div>
+            <div class="stat-label">Students Trained</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mission & Vision Cards -->
+      <div class="mission-vision-grid">
+        <div class="mv-card mission">
+          <div class="mv-icon"><i class="fa-solid fa-bullseye"></i></div>
+          <h3 class="mv-title">OUR MISSION</h3>
+          <p class="mv-text">
+            To provide world-class, accessible sports and martial arts training that instills physical fitness, mental resilience, and champion-level self-defense in students of all ages. We nurture disciplined athletes capable of winning on international podiums and in everyday life.
+          </p>
+        </div>
+
+        <div class="mv-card vision">
+          <div class="mv-icon"><i class="fa-solid fa-eye"></i></div>
+          <h3 class="mv-title">OUR VISION</h3>
+          <p class="mv-text">
+            To be recognized as India's premier multi-discipline athletic proving ground, bridging traditional Indian heritage martial arts with cutting-edge Olympic combat sports science to cultivate global champions for generations to come.
+          </p>
+        </div>
+      </div>
+
+      <!-- Features Grid 2x2: "Why We Are The Best" with Cyan Glowing Icons -->
+      <div class="features-section-box">
+        <div class="text-center">
+          <div class="section-tag amber">
+            <i class="fa-solid fa-shield-halved"></i> The Royal Standard
+          </div>
+          <h3 class="display-font" style="font-size: 2.5rem; color: #ffffff;">WHY WE ARE THE BEST</h3>
+          <p class="section-subtitle mx-auto">Engineered to produce podium finishes and unbreakable discipline.</p>
+        </div>
+
+        <div class="features-grid-2x2">
+          <!-- Feature 1 -->
+          <div class="feature-box">
+            <div class="feature-icon-cyan-glow">
+              <i class="fa-solid fa-user-ninja"></i>
+            </div>
+            <div class="feature-content">
+              <h4>Certified Coaches</h4>
+              <p>Train directly under Asian and National champions with certified Black Belt 6th Dan credentials and official federation referee status.</p>
+            </div>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="feature-box">
+            <div class="feature-icon-cyan-glow">
+              <i class="fa-solid fa-building-columns"></i>
+            </div>
+            <div class="feature-content">
+              <h4>Modern Facilities</h4>
+              <p>International standard Olympic tatami mats, anti-skid wooden skating rinks, safety foam apparatus, and biometric athlete progress trackers.</p>
+            </div>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="feature-box">
+            <div class="feature-icon-cyan-glow">
+              <i class="fa-solid fa-crosshairs"></i>
+            </div>
+            <div class="feature-content">
+              <h4>Personal Attention</h4>
+              <p>Strict 1:8 coach-to-student batch ratios ensure customized drills, technique refinement, biomechanics correction, and nutritional guidance.</p>
+            </div>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="feature-box">
+            <div class="feature-icon-cyan-glow">
+              <i class="fa-solid fa-handshake-angle"></i>
+            </div>
+            <div class="feature-content">
+              <h4>Partnership Coaching</h4>
+              <p>Direct affiliation with National Sports Federations, providing fast-track eligibility for District, State, and National Championship tournaments.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       5. TRAINERS & ENROLLMENT SECTION
+       =================================================================== -->
+  <section class="trainers-enroll-section" id="trainers">
+    <div class="container">
+      <div class="trainers-enroll-grid">
+        
+        <!-- Left Side: 2 Trainer Profile Cards with Silver/Cyan Metallic Glowing Border -->
+        <div class="trainers-col">
+          <div class="trainers-col-header">
+            <div class="section-tag">
+              <i class="fa-solid fa-crown"></i> Elite Coaching Staff
+            </div>
+            <h2 class="section-title gradient-gold-orange">MEET OUR MASTERS</h2>
+            <p class="section-subtitle">
+              Learn from battle-tested champions who have spent decades perfecting the crafts of combat, speed, and mind-body harmony.
+            </p>
+          </div>
+
+          <div class="trainers-cards-list">
+            <!-- Trainer 1: Sensei Rajesh -->
+            <div class="trainer-profile-card">
+              <div class="trainer-photo-wrap">
+                <img src="assets/images/trainer-rajesh.jpg" alt="Sensei Rajesh Karate Master" class="trainer-photo">
+              </div>
+              <div class="trainer-details">
+                <span class="trainer-belt-badge">
+                  <i class="fa-solid fa-certificate"></i> 6th Dan Black Belt
+                </span>
+                <h3 class="trainer-name">SENSEI RAJESH</h3>
+                <div class="trainer-title">Head Coach — Karate & Olympic Kumite</div>
+                <p class="trainer-bio">
+                  Over 18 years producing state and national champions. Renowned for explosive counter-striking drills and disciplined youth character coaching.
+                </p>
+                <div class="trainer-stats-row">
+                  <div class="t-stat">
+                    <span class="t-stat-val">18+</span>
+                    <span class="t-stat-lbl">Years Coaching</span>
+                  </div>
+                  <div class="t-stat">
+                    <span class="t-stat-val">34</span>
+                    <span class="t-stat-lbl">National Medals</span>
+                  </div>
+                  <div class="t-stat">
+                    <span class="t-stat-val">WKF</span>
+                    <span class="t-stat-lbl">Certified Ref</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trainer 2: Coach Priya -->
+            <div class="trainer-profile-card">
+              <div class="trainer-photo-wrap">
+                <img src="assets/images/trainer-priya.jpg" alt="Coach Priya Silambam Master" class="trainer-photo">
+              </div>
+              <div class="trainer-details">
+                <span class="trainer-belt-badge">
+                  <i class="fa-solid fa-award"></i> National Gold Medalist
+                </span>
+                <h3 class="trainer-name">COACH PRIYA</h3>
+                <div class="trainer-title">Chief Master — Silambam & Martial Arts</div>
+                <p class="trainer-bio">
+                  Represented India internationally in ancient weaponry and Silambam. Specializes in speed rotations, weapon control, and youth flexibility empowerment.
+                </p>
+                <div class="trainer-stats-row">
+                  <div class="t-stat">
+                    <span class="t-stat-val">10+</span>
+                    <span class="t-stat-lbl">Years Coaching</span>
+                  </div>
+                  <div class="t-stat">
+                    <span class="t-stat-val">16</span>
+                    <span class="t-stat-lbl">Gold Medals</span>
+                  </div>
+                  <div class="t-stat">
+                    <span class="t-stat-val">Govt</span>
+                    <span class="t-stat-lbl">Recognized</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: "ENROLL WITH US" Form Card with Neon Amber Border -->
+        <div class="enroll-card-wrapper" id="enroll">
+          <div class="enroll-card">
+            <div class="enroll-header">
+              <div class="section-tag amber" style="margin-bottom: 0.5rem;">
+                <i class="fa-solid fa-bolt"></i> Join The Elite
+              </div>
+              <h3 class="gradient-gold-orange">ENROLL WITH US</h3>
+              <p>Secure your child's spot or book a complimentary assessment.</p>
+            </div>
+
+            <form class="enroll-form" id="enrollForm">
+              <!-- Row 1: Parent Name & Student Name -->
+              <div class="form-group-row">
+                <div class="form-group">
+                  <label for="parentName" class="form-label">Parent / Guardian Name *</label>
+                  <input type="text" id="parentName" class="form-input" placeholder="e.g. Suresh Kumar" required>
+                </div>
+                <div class="form-group">
+                  <label for="studentName" class="form-label">Student Name *</label>
+                  <input type="text" id="studentName" class="form-input" placeholder="e.g. Aarav Kumar" required>
+                </div>
+              </div>
+
+              <!-- Row 2: Phone & Email -->
+              <div class="form-group-row">
+                <div class="form-group">
+                  <label for="phoneNumber" class="form-label">Phone Number *</label>
+                  <input type="tel" id="phoneNumber" class="form-input" placeholder="+91 98765 43210" required>
+                </div>
+                <div class="form-group">
+                  <label for="studentAge" class="form-label">Student Age *</label>
+                  <input type="number" id="studentAge" class="form-input" placeholder="e.g. 9" min="4" max="65" required>
+                </div>
+              </div>
+
+              <!-- Row 3: Discipline & Shift -->
+              <div class="form-group-row">
+                <div class="form-group">
+                  <label for="disciplineSelect" class="form-label">Preferred Discipline *</label>
+                  <select id="disciplineSelect" class="form-select" required>
+                    <option value="" disabled selected>Select Discipline</option>
+                    <option value="karate">Shotokan Karate</option>
+                    <option value="silambam">Traditional Silambam</option>
+                    <option value="yoga">Power & Ashtanga Yoga</option>
+                    <option value="skating">Speed Roller Skating</option>
+                    <option value="gymnastics">Artistic Gymnastics</option>
+                    <option value="judo">Olympic Judo Grappling</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="batchShift" class="form-label">Preferred Timing</label>
+                  <select id="batchShift" class="form-select">
+                    <option value="morning">Morning Batch (6:00 AM – 7:30 AM)</option>
+                    <option value="evening" selected>Evening Batch (5:00 PM – 7:00 PM)</option>
+                    <option value="weekend">Weekend Special (Sat & Sun)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Message / Goals -->
+              <div class="form-group">
+                <label for="notes" class="form-label">Prior Experience or Goals (Optional)</label>
+                <textarea id="notes" class="form-textarea" placeholder="Describe any past martial arts/sports experience or specific fitness goals..."></textarea>
+              </div>
+
+              <!-- Vibrant Cyan Glow Submit Button -->
+              <button type="submit" class="btn btn-cyan btn-enroll-submit" id="submitEnrollBtn">
+                <i class="fa-solid fa-paper-plane"></i> Submit Application
+              </button>
+
+              <p style="font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 0.5rem;">
+                🔒 Zero spam guarantee. We will schedule a personalized dojo walkthrough.
+              </p>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       EVENTS & UPCOMING CHAMPIONSHIPS
+       =================================================================== -->
+  <section class="gallery-events-section" id="events">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 3.5rem;">
+        <div class="section-tag amber">
+          <i class="fa-solid fa-calendar-check"></i> Tournament Calendar
+        </div>
+        <h2 class="section-title gradient-gold-orange">UPCOMING ACADEMY EVENTS</h2>
+        <p class="section-subtitle mx-auto">
+          Test your skills on the competitive stage and advance through authentic belt grading examinations.
+        </p>
+      </div>
+
+      <div class="events-cards-grid">
+        <!-- Event 1 -->
+        <div class="event-banner-card">
+          <div>
+            <div class="event-header">
+              <span class="event-date-badge">Nov 18, 2026 • Grand Dojo</span>
+              <span style="color: var(--accent-cyan); font-weight: 700; font-size: 0.85rem;">All Disciplines</span>
+            </div>
+            <h3 class="event-title">ROYAL SUMMER GRAND CHAMPIONSHIP</h3>
+            <p class="event-desc">
+              State-level inter-academy tournament featuring Kata, Kumite point sparring, Silambam speed rotation duels, and speed roller skate sprints. Cash prizes and trophies awarded.
+            </p>
+          </div>
+          <div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase;">
+              Championship Countdown:
+            </div>
+            <div class="countdown-box">
+              <div class="countdown-unit">
+                <div class="unit-val" id="champDays">24</div>
+                <div class="unit-label">Days</div>
+              </div>
+              <div class="countdown-unit">
+                <div class="unit-val" id="champHours">14</div>
+                <div class="unit-label">Hours</div>
+              </div>
+              <div class="countdown-unit">
+                <div class="unit-val" id="champMins">32</div>
+                <div class="unit-label">Mins</div>
+              </div>
+              <div class="countdown-unit">
+                <div class="unit-val" id="champSecs">48</div>
+                <div class="unit-label">Secs</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="event-banner-card" style="border-color: rgba(0, 229, 255, 0.4);">
+          <div>
+            <div class="event-header">
+              <span class="event-date-badge" style="background: rgba(0,229,255,0.15); border-color: var(--accent-cyan); color: var(--accent-cyan);">
+                Nov 05, 2026 • Main Arena
+              </span>
+              <span style="color: var(--accent-orange-bright); font-weight: 700; font-size: 0.85rem;">Karate & Judo</span>
+            </div>
+            <h3 class="event-title">ANNUAL BELT GRADING CEREMONY</h3>
+            <p class="event-desc">
+              Official WKF and Federation technical board evaluation for Yellow, Green, Brown, and 1st–3rd Dan Black Belts. Supervised by Senior Grandmasters.
+            </p>
+          </div>
+          <div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase;">
+              Grading Countdown:
+            </div>
+            <div class="countdown-box">
+              <div class="countdown-unit">
+                <div class="unit-val" id="gradeDays">11</div>
+                <div class="unit-label">Days</div>
+              </div>
+              <div class="countdown-unit">
+                <div class="unit-val" id="gradeHours">08</div>
+                <div class="unit-label">Hours</div>
+              </div>
+              <div class="countdown-unit">
+                <div class="unit-val" id="gradeMins">19</div>
+                <div class="unit-label">Mins</div>
+              </div>
+              <div class="countdown-unit">
+                <div class="unit-val" id="gradeSecs">15</div>
+                <div class="unit-label">Secs</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       STUDENT WALL OF FAME & TESTIMONIALS
+       =================================================================== -->
+  <section class="gallery-events-section" id="students" style="padding-top: 0;">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 3.5rem;">
+        <div class="section-tag">
+          <i class="fa-solid fa-graduation-cap"></i> Student Success
+        </div>
+        <h2 class="section-title gradient-gold-orange">CHAMPIONS HALL OF FAME</h2>
+        <p class="section-subtitle mx-auto">Hear what our young champions and proud parents have to say about their Royal Sports Academy transformation.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+        <!-- Testimonial 1 -->
+        <div class="glass-card" style="padding: 2rem; border-color: rgba(0, 229, 255, 0.3);">
+          <div style="display: flex; gap: 4px; color: #ffb300; margin-bottom: 1rem;">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; font-style: italic;">
+            "My 8-year-old son joined Sensei Rajesh's Karate batch shy and hesitant. In 14 months, he won Silver at the South India Open and his focus in school has skyrocketed!"
+          </p>
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(0,229,255,0.2); border: 2px solid var(--accent-cyan); display: flex; align-items: center; justify-content: center; color: var(--accent-cyan); font-weight: 800;">
+              AK
+            </div>
+            <div>
+              <h4 style="font-size: 1.1rem; color: #ffffff;">Ananya Krishnan</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Parent of Arjun (Karate Junior Team)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="glass-card" style="padding: 2rem; border-color: rgba(255, 122, 0, 0.35);">
+          <div style="display: flex; gap: 4px; color: #ffb300; margin-bottom: 1rem;">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; font-style: italic;">
+            "Coach Priya's Silambam training is extraordinary. The stamina, wrist speed, and discipline taught here is unmatched anywhere in the state. Proud to be part of the Royal family."
+          </p>
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(255,109,0,0.2); border: 2px solid var(--accent-orange-bright); display: flex; align-items: center; justify-content: center; color: var(--accent-orange-bright); font-weight: 800;">
+              RM
+            </div>
+            <div>
+              <h4 style="font-size: 1.1rem; color: #ffffff;">Rohan Mohan</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">State Silambam Gold Medalist (Age 15)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="glass-card" style="padding: 2rem; border-color: rgba(0, 229, 255, 0.3);">
+          <div style="display: flex; gap: 4px; color: #ffb300; margin-bottom: 1rem;">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; font-style: italic;">
+            "The indoor wooden skating arena and video biomechanics analysis took my daughter from beginner to district record holder within 10 months. Top tier coaching staff!"
+          </p>
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(0,229,255,0.2); border: 2px solid var(--accent-cyan); display: flex; align-items: center; justify-content: center; color: var(--accent-cyan); font-weight: 800;">
+              NV
+            </div>
+            <div>
+              <h4 style="font-size: 1.1rem; color: #ffffff;">Naveen Varma</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Parent of Diya (Speed Roller Team)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       GALLERY SHOWCASE
+       =================================================================== -->
+  <section class="gallery-events-section" id="gallery" style="padding-top: 0;">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 3.5rem;">
+        <div class="section-tag amber">
+          <i class="fa-solid fa-camera"></i> Live Action
+        </div>
+        <h2 class="section-title gradient-gold-orange">ACADEMY PHOTO GALLERY</h2>
+        <p class="section-subtitle mx-auto">Glimpses into intense sparring sessions, podium ceremonies, and morning dojo drills.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        <div class="glass-card" style="height: 220px; overflow: hidden; border-color: rgba(0,229,255,0.3);">
+          <img src="assets/images/discipline-karate.jpg" alt="Karate Action" style="width:100%; height:100%; object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+        <div class="glass-card" style="height: 220px; overflow: hidden; border-color: rgba(255,109,0,0.35);">
+          <img src="assets/images/discipline-silambam.jpg" alt="Silambam Demonstration" style="width:100%; height:100%; object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+        <div class="glass-card" style="height: 220px; overflow: hidden; border-color: rgba(0,229,255,0.3);">
+          <img src="assets/images/discipline-skating.jpg" alt="Skating Sprints" style="width:100%; height:100%; object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+        <div class="glass-card" style="height: 220px; overflow: hidden; border-color: rgba(255,109,0,0.35);">
+          <img src="assets/images/discipline-gymnastics.jpg" alt="Gymnastics Leap" style="width:100%; height:100%; object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       6. FOOTER
+       =================================================================== -->
+  <footer class="footer">
+    <div class="footer-grid-overlay" aria-hidden="true"></div>
+    <div class="container">
+      <div class="footer-top">
+        <!-- Col 1: Brand & Bio -->
+        <div class="footer-brand">
+          <a href="#hero" class="logo-brand" style="margin-bottom: 1rem;">
+            <img src="assets/images/crest-logo.jpg" alt="Royal Sports Academy Crest Logo" class="logo-crest-img">
+            <div class="logo-text-wrapper">
+              <div class="logo-title">ROYAL <span>SPORTS</span></div>
+              <div class="logo-subtitle">Academy Of Champions</div>
+            </div>
+          </a>
+          <p>
+            Dedicated to molding youth into national champions through world-class training in Karate, Silambam, Skating, Yoga, Gymnastics, and Judo.
+          </p>
+          <div class="footer-social-inline">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div>
+          <h4 class="footer-col-title">QUICK LINKS</h4>
+          <ul class="footer-links-list">
+            <li><a href="#hero" class="footer-link"><i class="fa-solid fa-angle-right"></i> Home Overview</a></li>
+            <li><a href="#disciplines" class="footer-link"><i class="fa-solid fa-angle-right"></i> Disciplines & Batches</a></li>
+            <li><a href="#achievements" class="footer-link"><i class="fa-solid fa-angle-right"></i> Medals & Achievements</a></li>
+            <li><a href="#trainers" class="footer-link"><i class="fa-solid fa-angle-right"></i> Certified Masters</a></li>
+            <li><a href="#events" class="footer-link"><i class="fa-solid fa-angle-right"></i> Tournament Schedule</a></li>
+            <li><a href="#enroll" class="footer-link"><i class="fa-solid fa-angle-right"></i> Register Student</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Disciplines -->
+        <div>
+          <h4 class="footer-col-title">DISCIPLINES</h4>
+          <ul class="footer-links-list">
+            <li><a href="#disciplines" class="footer-link"><i class="fa-solid fa-angle-right"></i> Shotokan Karate</a></li>
+            <li><a href="#disciplines" class="footer-link"><i class="fa-solid fa-angle-right"></i> Traditional Silambam</a></li>
+            <li><a href="#disciplines" class="footer-link"><i class="fa-solid fa-angle-right"></i> Power & Ashtanga Yoga</a></li>
+            <li><a href="#disciplines" class="footer-link"><i class="fa-solid fa-angle-right"></i> Speed Roller Skating</a></li>
+            <li><a href="#disciplines" class="footer-link"><i class="fa-solid fa-angle-right"></i> Artistic Gymnastics</a></li>
+            <li><a href="#disciplines" class="footer-link"><i class="fa-solid fa-angle-right"></i> Olympic Judo Combat</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact & Newsletter -->
+        <div>
+          <h4 class="footer-col-title">CONTACT & LOCATION</h4>
+          <ul class="footer-contact-list">
+            <li class="contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Royal Sports Arena, Olympic Complex Road, Sports City, Tamil Nadu, India.</span>
+            </li>
+            <li class="contact-item">
+              <i class="fa-solid fa-phone"></i>
+              <span>+91 98765 43210 / +91 98401 23456</span>
+            </li>
+            <li class="contact-item">
+              <i class="fa-solid fa-envelope"></i>
+              <span>admissions@royalsportsacademy.com</span>
+            </li>
+            <li class="contact-item">
+              <i class="fa-solid fa-clock"></i>
+              <span>Mon – Sat: 5:30 AM – 8:30 PM | Sun: 6:00 AM – 1:00 PM</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom">
+        <div>
+          © 2026 <strong>Royal Sports Academy</strong>. All Rights Reserved. Affiliated with National Sports Bodies.
+        </div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
+          <a href="#" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
+          <a href="#" style="color: var(--text-muted); text-decoration: none;">Dojo Code of Conduct</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================
+       FLOATING QUICK-ACTION SOCIAL BAR (RIGHT EDGE)
+       =================================================================== -->
+  <aside class="floating-social-bar" aria-label="Quick Action Links">
+    <a href="https://wa.me/919876543210?text=Hi%20Royal%20Sports%20Academy,%20I%20would%20like%20to%20enroll%20for%20a%20free%20trial%20class!" target="_blank" rel="noopener noreferrer" class="social-action-btn whatsapp" aria-label="Chat on WhatsApp" id="quickWhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+      <span class="tooltip">WhatsApp Admissions</span>
+    </a>
+    <a href="tel:+919876543210" class="social-action-btn phone" aria-label="Call Admissions Now" id="quickPhone">
+      <i class="fa-solid fa-phone"></i>
+      <span class="tooltip">Call Us Directly</span>
+    </a>
+    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-action-btn facebook" aria-label="Facebook Page" id="quickFacebook">
+      <i class="fa-brands fa-facebook-f"></i>
+      <span class="tooltip">Facebook Updates</span>
+    </a>
+    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-action-btn instagram" aria-label="Instagram Profile" id="quickInstagram">
+      <i class="fa-brands fa-instagram"></i>
+      <span class="tooltip">Instagram Reels</span>
+    </a>
+  </aside>
+
+  <!-- ===================================================================
+       DISCIPLINE DETAIL MODAL
+       =================================================================== -->
+  <div class="modal-overlay" id="disciplineModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div style="display: flex; gap: 1.5rem; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap;">
+        <img id="modalImg" src="assets/images/discipline-karate.jpg" alt="Discipline" style="width: 110px; height: 110px; border-radius: var(--radius-lg); object-fit: cover; border: 2px solid var(--accent-cyan); box-shadow: var(--glow-cyan);">
+        <div>
+          <span id="modalBadge" class="section-tag amber" style="margin-bottom: 0.35rem; display: inline-block;">Olympic Discipline</span>
+          <h3 id="modalTitle" class="display-font" style="font-size: 2rem; color: #ffffff;">Discipline Title</h3>
+          <p id="modalAge" style="color: var(--accent-cyan); font-size: 0.85rem; font-weight: 700;">Ages 5+</p>
+        </div>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.04); border-radius: var(--radius-md); padding: 0.75rem 1rem; margin-bottom: 1.25rem;">
+        <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Lead Instructor:</span>
+        <div id="modalLead" style="font-weight: 700; color: #ffffff; font-size: 0.95rem;">Sensei Rajesh (6th Dan)</div>
+      </div>
+
+      <p id="modalDesc" style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.25rem;">
+        Detailed curriculum and philosophy description...
+      </p>
+
+      <h4 style="font-size: 1.15rem; color: #ffffff; margin-bottom: 0.75rem;">SYLLABUS & KEY MILESTONES:</h4>
+      <ul id="modalList" style="list-style: none; margin-bottom: 1.5rem; padding-left: 0;">
+        <!-- Injected via JS -->
+      </ul>
+
+      <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1rem; margin-bottom: 1.5rem;">
+        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.25rem;">Batch Timings:</div>
+        <div id="modalTiming" style="color: var(--accent-cyan); font-weight: 600; font-size: 0.9rem;">Mon / Wed / Fri: 6:00 AM - 7:30 AM</div>
+      </div>
+
+      <button class="btn btn-primary" id="modalEnrollBtn" style="width: 100%;">
+        <i class="fa-solid fa-bolt"></i> Enroll In This Discipline
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Back to Top Button -->
+  <a href="#hero" class="back-to-top" aria-label="Back to Top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </a>
+
+  <!-- JavaScript Modules -->
+  <script src="js/particles.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
