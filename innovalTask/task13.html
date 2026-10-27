@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Institute</title>
+</head>
+<body>
+
+    <header>
+        <h1>ABC Training Institute</h1>
+        <p>Learn Web Development and Programming Skills</p>
+    </header>
+
+    
+    <nav>
+        <ul>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#timetable">Timetable</a></li>
+            <li><a href="#enquiry">Enquiry</a></li>
+        </ul>
+    </nav>
+
+  
+    <main>
+
+        
+        <section id="courses">
+            <h2>Available Courses</h2>
+
+            <ul>
+                <li>HTML & CSS</li>
+                <li>JavaScript</li>
+                <li>React JS</li>
+                <li>Python</li>
+                <li>Full Stack Development</li>
+            </ul>
+
+            <h3>Admission Steps</h3>
+
+            <ol>
+                <li>Fill out the enquiry form.</li>
+                <li>Select your preferred course.</li>
+                <li>Complete the registration process.</li>
+                <li>Pay the course fee.</li>
+                <li>Start attending classes.</li>
+            </ol>
+        </section>
+
+        
+        <section id="timetable">
+            <h2>Weekly Batch Schedule</h2>
+
+            <table border="1" cellpadding="8" cellspacing="0">
+                <caption>Weekly Batch Timetable</caption>
+
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Morning</th>
+                        <th>Afternoon</th>
+                        <th>Evening</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Monday</td>
+                        <td>HTML</td>
+                        <td>CSS</td>
+                        <td>JavaScript</td>
+                    </tr>
+
+                    <tr>
+                        <td>Tuesday</td>
+                        <td>Python</td>
+                        <td>React JS</td>
+                        <td>Project</td>
+                    </tr>
+
+                    <tr>
+                        <td>Wednesday</td>
+                        <td>Bootstrap</td>
+                        <td>Node.js</td>
+                        <td>MongoDB</td>
+                    </tr>
+
+                    <tr>
+                        <td>Thursday</td>
+                        <td>HTML Lab</td>
+                        <td>React Lab</td>
+                        <td>Interview Prep</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+     
+        <section id="enquiry">
+            <h2>Course Enquiry Form</h2>
+
+            <form>
+
+                <div>
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <br>
+
+                <div>
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <br>
+
+                <div>
+                    <label for="course">Select Course:</label><br>
+                    <select id="course" name="course">
+                        <option>HTML & CSS</option>
+                        <option>JavaScript</option>
+                        <option>React JS</option>
+                        <option>Python</option>
+                        <option>Full Stack Development</option>
+                    </select>
+                </div>
+
+                <br>
+
+                <div>
+                    <label>Preferred Batch:</label><br>
+
+                    <input type="radio" id="morning" name="batch">
+                    <label for="morning">Morning</label>
+
+                    <input type="radio" id="afternoon" name="batch">
+                    <label for="afternoon">Afternoon</label>
+
+                    <input type="radio" id="evening" name="batch">
+                    <label for="evening">Evening</label>
+                </div>
+
+                <br>
+
+                <div>
+                    <label for="message">Message:</label><br>
+                    <textarea id="message" name="message" rows="5" cols="40"></textarea>
+                </div>
+
+                <br>
+
+                <button type="submit">Submit</button>
+
+            </form>
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p> All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
