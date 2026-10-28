@@ -10,7 +10,9 @@ function App() {
     console.log("Filtering Employees...");
 
     return employees.filter((emp) =>
-      emp.name.toLowerCase().includes(search.toLowerCase())
+      emp.department.toLowerCase().includes(search.toLowerCase()) ||
+       emp.name.toLowerCase().includes(search.toLowerCase()) ||
+       emp.salary.toString().includes(search)
     );
   }, [search]);
 
