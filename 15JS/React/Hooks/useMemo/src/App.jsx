@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import employees from "./employees";
 import EmployeeList from "./EmployeeList";
 
@@ -6,15 +6,23 @@ function App() {
   const [search, setSearch] = useState("");
   const [theme, setTheme] = useState(false);
 
-  console.log("Filtering Employees...");
+  const filteredEmployees = useMemo(() => {
+    console.log("Filtering Employees...");
 
-  const filteredEmployees = employees.filter((emp) =>
-    emp.name.toLowerCase().includes(search.toLowerCase())
-  );
+    return employees.filter((emp) =>
+      emp.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [search]);
 
   return (
-    <div>
-
+    <div
+      style={{
+        background: theme ? "#333" : "#fff",
+        color: theme ? "#fff" : "#000",
+        minHeight: "100vh",
+        padding: "20px",
+      }}
+    >
       <button onClick={() => setTheme(!theme)}>
         Toggle Theme
       </button>
@@ -29,7 +37,6 @@ function App() {
       />
 
       <EmployeeList employees={filteredEmployees} />
-
     </div>
   );
 }
