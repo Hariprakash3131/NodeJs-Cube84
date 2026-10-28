@@ -7,7 +7,7 @@ function App() {
   const [theme, setTheme] = useState(false);
 
   const filteredEmployees = useMemo(() => {
-    console.log("Filtering Employees...");
+    console.log("Filtering Employees.. .");
 
     return employees.filter((emp) =>
       emp.department.toLowerCase().includes(search.toLowerCase()) ||
