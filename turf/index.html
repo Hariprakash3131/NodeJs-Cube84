@@ -1,0 +1,3678 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Turf Arena | Premier Sports Turf Booking in Bengaluru</title>
+  <meta name="description" content="Book premier FIFA-grade 5v5 & 7v7 football turfs, cricket nets, and badminton courts with real-time slot booking, floodlights, and instant match confirmation.">
+  <meta name="keywords" content="sports turf, turf booking, football ground, cricket nets, badminton court, Bengaluru turf">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       CSS VARIABLES & THEMES
+       ========================================================================== */
+    :root {
+      /* Brand Color Palette */
+      --primary-deep: #0B6E4F;
+      --primary-emerald: #0FA968;
+      --accent-lime: #C6FF3D;
+      --accent-lime-hover: #b4f028;
+      --accent-lime-glow: rgba(198, 255, 61, 0.35);
+      --accent-orange: #FF8A3D;
+      
+      /* Dark Theme (Default) */
+      --bg-base: #080D0A;
+      --bg-surface: #0E1611;
+      --bg-card: rgba(18, 29, 23, 0.75);
+      --bg-card-hover: rgba(26, 42, 33, 0.85);
+      --bg-input: rgba(10, 18, 13, 0.8);
+      --border-subtle: rgba(198, 255, 61, 0.12);
+      --border-focus: var(--accent-lime);
+      --text-main: #F2F7F4;
+      --text-muted: #8EA898;
+      --text-dim: #5B7465;
+      --slot-avail-bg: rgba(20, 36, 27, 0.6);
+      --slot-booked-bg: rgba(25, 25, 25, 0.4);
+      --slot-booked-text: #45524A;
+      --glass-blur: blur(16px);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(198, 255, 61, 0.08);
+      --hero-overlay: radial-gradient(circle at 50% 20%, rgba(15, 169, 104, 0.18) 0%, rgba(8, 13, 10, 0.95) 75%);
+      --header-bg: rgba(8, 13, 10, 0.85);
+      --badge-bg: rgba(198, 255, 61, 0.12);
+      --badge-text: #C6FF3D;
+    }
+
+    [data-theme="light"] {
+      --bg-base: #F4F8F5;
+      --bg-surface: #E8F1EC;
+      --bg-card: rgba(255, 255, 255, 0.88);
+      --bg-card-hover: rgba(255, 255, 255, 0.98);
+      --bg-input: #FFFFFF;
+      --border-subtle: rgba(11, 110, 79, 0.16);
+      --border-focus: #0B6E4F;
+      --text-main: #0B1C13;
+      --text-muted: #415A4D;
+      --text-dim: #7C988B;
+      --slot-avail-bg: #EAF4EE;
+      --slot-booked-bg: #E0E7E2;
+      --slot-booked-text: #96A89E;
+      --glass-blur: blur(14px);
+      --shadow-sm: 0 4px 14px rgba(11, 110, 79, 0.08);
+      --shadow-lg: 0 16px 40px rgba(11, 110, 79, 0.12), 0 0 0 1px rgba(11, 110, 79, 0.08);
+      --hero-overlay: radial-gradient(circle at 50% 20%, rgba(198, 255, 61, 0.25) 0%, rgba(244, 248, 245, 0.96) 80%);
+      --header-bg: rgba(244, 248, 245, 0.88);
+      --badge-bg: rgba(11, 110, 79, 0.12);
+      --badge-text: #0B6E4F;
+    }
+
+    /* ==========================================================================
+       RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background-color 0.35s ease, color 0.35s ease;
+      position: relative;
+    }
+
+    h1, h2, h3, h4, h5, h6, .brand-font {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      outline: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* Accessibility Focus Ring */
+    :focus-visible {
+      outline: 2px solid var(--accent-lime);
+      outline-offset: 3px;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--header-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--primary-deep), var(--accent-lime));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 18px var(--accent-lime-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-badge::after {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transform: rotate(45deg);
+      animation: logoGleam 6s infinite ease-in-out;
+    }
+
+    @keyframes logoGleam {
+      0%, 80% { transform: translateX(-150%) rotate(45deg); }
+      100% { transform: translateX(150%) rotate(45deg); }
+    }
+
+    .logo-badge svg {
+      width: 24px;
+      height: 24px;
+      fill: #080D0A;
+      z-index: 1;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(90deg, var(--text-main) 60%, var(--accent-lime) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .logo-subtitle {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 1.5rem;
+      margin-right: 1rem;
+    }
+
+    @media (min-width: 820px) {
+      .nav-links {
+        display: flex;
+      }
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+      position: relative;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--text-main);
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-lime);
+      border-radius: 2px;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--accent-lime);
+      transform: translateY(-2px);
+    }
+
+    .theme-toggle-btn svg {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.4s ease;
+    }
+
+    /* Header CTA */
+    .btn-header-bookings {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 0.6rem 1.1rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.25s ease;
+    }
+
+    .btn-header-bookings:hover {
+      border-color: var(--accent-lime);
+      color: var(--accent-lime);
+      transform: translateY(-2px);
+    }
+
+    .bookings-count-pill {
+      background: var(--primary-deep);
+      color: var(--accent-lime);
+      font-size: 0.72rem;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       HERO SECTION WITH ANIMATED PARTICLES & ICONS
+       ========================================================================== */
+    .hero-section {
+      position: relative;
+      padding: 5rem 0 4.5rem;
+      overflow: hidden;
+      background: var(--hero-overlay);
+    }
+
+    .hero-bg-shapes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    /* Floating Sports Icons in Hero */
+    .floating-sport-icon {
+      position: absolute;
+      opacity: 0.18;
+      filter: drop-shadow(0 0 12px var(--accent-lime-glow));
+      animation: floatMotion 8s infinite ease-in-out;
+      will-change: transform;
+    }
+
+    .floating-sport-icon.icon-1 { top: 15%; left: 8%; width: 56px; animation-duration: 9s; }
+    .floating-sport-icon.icon-2 { top: 65%; left: 12%; width: 44px; animation-duration: 11s; animation-delay: -3s; }
+    .floating-sport-icon.icon-3 { top: 20%; right: 10%; width: 62px; animation-duration: 10s; animation-delay: -1.5s; }
+    .floating-sport-icon.icon-4 { top: 70%; right: 14%; width: 48px; animation-duration: 8.5s; animation-delay: -4s; }
+
+    @keyframes floatMotion {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-22px) rotate(12deg);
+      }
+    }
+
+    .hero-glow-orb {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(15, 169, 104, 0.22) 0%, transparent 70%);
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      filter: blur(50px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .hero-badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border-subtle);
+      animation: pulseGlow 3s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 rgba(198, 255, 61, 0); }
+      100% { box-shadow: 0 0 16px var(--accent-lime-glow); }
+    }
+
+    .hero-badge-tag svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .hero-headline {
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.08;
+      margin-bottom: 1.4rem;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+    }
+
+    .headline-highlight {
+      background: linear-gradient(135deg, var(--accent-lime) 20%, #8AFF7B 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      position: relative;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto 2.2rem;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Ripple Button Base */
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.95rem 2rem;
+      border-radius: 14px;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, background-color 0.25s ease;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: var(--accent-lime);
+      color: #080D0A;
+      box-shadow: 0 8px 24px var(--accent-lime-glow);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-lime-hover);
+      box-shadow: 0 12px 30px rgba(198, 255, 61, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: var(--glass-blur);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent-lime);
+      transform: translateY(-2px);
+      color: var(--accent-lime);
+    }
+
+    /* Ripple effect container */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: rippleAnim 0.6s linear;
+      background-color: rgba(255, 255, 255, 0.4);
+      pointer-events: none;
+    }
+
+    @keyframes rippleAnim {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* Hero Stats Bar */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      max-width: 780px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    @media (min-width: 680px) {
+      .hero-stats {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .stat-val {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent-lime);
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .stat-lbl {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 2px;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       SPORT FILTERS & CATALOG SECTION
+       ========================================================================== */
+    .catalog-section {
+      padding: 4rem 0 5rem;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-tag {
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-lime);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+      font-size: 1rem;
+    }
+
+    /* Sport Filter Chips */
+    .sport-filters-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2.8rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .sport-filters {
+      display: inline-flex;
+      background: var(--bg-surface);
+      padding: 0.35rem;
+      border-radius: 16px;
+      border: 1px solid var(--border-subtle);
+      gap: 0.4rem;
+    }
+
+    .filter-chip {
+      padding: 0.65rem 1.35rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .filter-chip svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.25s ease;
+    }
+
+    .filter-chip:hover {
+      color: var(--text-main);
+    }
+
+    .filter-chip.active {
+      background: var(--primary-deep);
+      color: var(--accent-lime);
+      box-shadow: 0 4px 14px rgba(11, 110, 79, 0.4);
+    }
+
+    .filter-chip.active svg {
+      transform: scale(1.15);
+    }
+
+    /* Turf Cards Grid */
+    .turf-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 680px) {
+      .turf-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1040px) {
+      .turf-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+      }
+    }
+
+    /* Turf Card */
+    .turf-card {
+      background: var(--bg-card);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-subtle);
+      border-radius: 22px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+      will-change: transform;
+      position: relative;
+    }
+
+    .turf-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(198, 255, 61, 0.35);
+    }
+
+    /* Card Image Area */
+    .turf-img-wrap {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+      background: #101c15;
+    }
+
+    .turf-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .turf-card:hover .turf-img {
+      transform: scale(1.08);
+    }
+
+    .turf-badge-strip {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      right: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .sport-tag {
+      background: rgba(8, 13, 10, 0.85);
+      backdrop-filter: blur(8px);
+      color: var(--accent-lime);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px solid rgba(198, 255, 61, 0.25);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .rating-pill {
+      background: rgba(8, 13, 10, 0.85);
+      backdrop-filter: blur(8px);
+      color: #FFD23F;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      border: 1px solid rgba(255, 210, 63, 0.25);
+    }
+
+    /* Card Details */
+    .turf-body {
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .turf-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+    }
+
+    .turf-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+
+    .turf-size-badge {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-weight: 600;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .turf-description {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+      line-height: 1.5;
+    }
+
+    /* Amenities List */
+    .amenities-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .amenity-chip {
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.3rem 0.65rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .amenity-chip svg {
+      width: 14px;
+      height: 14px;
+      color: var(--accent-lime);
+    }
+
+    /* Card Footer & Price */
+    .turf-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .price-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .price-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .price-amount {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent-lime);
+      display: flex;
+      align-items: baseline;
+      gap: 0.2rem;
+    }
+
+    .price-unit {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .peak-indicator {
+      font-size: 0.7rem;
+      color: var(--accent-orange);
+      font-weight: 600;
+    }
+
+    .btn-book-turf {
+      background: var(--primary-deep);
+      color: var(--accent-lime);
+      border: 1px solid rgba(198, 255, 61, 0.25);
+      padding: 0.65rem 1.25rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.25s ease;
+    }
+
+    .btn-book-turf:hover {
+      background: var(--accent-lime);
+      color: #080D0A;
+      box-shadow: 0 4px 16px var(--accent-lime-glow);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       BOOKING EXPERIENCE (STEPPER / MODAL / SECTION)
+       ========================================================================== */
+    .booking-section {
+      padding: 4.5rem 0 6rem;
+      background: var(--bg-surface);
+      position: relative;
+    }
+
+    .booking-wrapper {
+      background: var(--bg-card);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-subtle);
+      border-radius: 28px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 1024px) {
+      .booking-wrapper {
+        grid-template-columns: 1fr 380px;
+      }
+    }
+
+    /* Booking Main Work Area */
+    .booking-main {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (min-width: 768px) {
+      .booking-main {
+        padding: 2.8rem;
+      }
+    }
+
+    /* Stepper Progress Bar */
+    .booking-stepper {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .stepper-track {
+      position: absolute;
+      top: 18px;
+      left: 15%;
+      right: 15%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 0;
+    }
+
+    .stepper-fill {
+      height: 100%;
+      background: var(--accent-lime);
+      width: 0%;
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 10px var(--accent-lime-glow);
+    }
+
+    .step-item {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .step-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      transition: all 0.3s ease;
+    }
+
+    .step-item.active .step-circle {
+      border-color: var(--accent-lime);
+      background: var(--primary-deep);
+      color: var(--accent-lime);
+      box-shadow: 0 0 14px var(--accent-lime-glow);
+      transform: scale(1.1);
+    }
+
+    .step-item.completed .step-circle {
+      background: var(--accent-lime);
+      border-color: var(--accent-lime);
+      color: #080D0A;
+    }
+
+    .step-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .step-item.active .step-label {
+      color: var(--accent-lime);
+    }
+
+    /* Step Sliding Panels */
+    .steps-container {
+      position: relative;
+      overflow: hidden;
+      min-height: 460px;
+    }
+
+    .step-panel {
+      display: none;
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .step-panel.active {
+      display: block;
+      opacity: 1;
+      transform: translateX(0);
+      animation: slideInRight 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .step-panel.slide-back {
+      animation: slideInLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(35px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-35px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* STEP 1: Turf Selector */
+    .turf-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.2rem;
+    }
+
+    .turf-mini-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 1.2rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .turf-mini-card:hover {
+      border-color: rgba(198, 255, 61, 0.4);
+      transform: translateY(-3px);
+    }
+
+    .turf-mini-card.selected {
+      border-color: var(--accent-lime);
+      background: rgba(11, 110, 79, 0.22);
+      box-shadow: 0 0 20px var(--accent-lime-glow);
+    }
+
+    .turf-mini-card .selected-check {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent-lime);
+      color: #080D0A;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .turf-mini-card.selected .selected-check {
+      display: flex;
+    }
+
+    /* STEP 2: Date Picker Strip */
+    .date-picker-wrap {
+      margin-bottom: 2rem;
+    }
+
+    .date-strip-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.85rem;
+    }
+
+    .date-strip-arrows {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .arrow-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .arrow-btn:hover {
+      border-color: var(--accent-lime);
+      color: var(--accent-lime);
+    }
+
+    .date-strip-scroll {
+      display: flex;
+      gap: 0.75rem;
+      overflow-x: auto;
+      padding-bottom: 0.75rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-subtle) transparent;
+    }
+
+    .date-strip-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+    .date-strip-scroll::-webkit-scrollbar-thumb {
+      background: var(--border-subtle);
+      border-radius: 10px;
+    }
+
+    .date-card {
+      scroll-snap-align: start;
+      min-width: 74px;
+      flex-shrink: 0;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 0.85rem 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .date-card:hover {
+      border-color: rgba(198, 255, 61, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .date-card.selected {
+      background: var(--primary-deep);
+      border-color: var(--accent-lime);
+      color: var(--accent-lime);
+      box-shadow: 0 4px 16px rgba(11, 110, 79, 0.45);
+      transform: translateY(-3px);
+    }
+
+    .date-day-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.8;
+    }
+
+    .date-number {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .date-month {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .today-tag {
+      position: absolute;
+      top: -8px;
+      background: var(--accent-lime);
+      color: #080D0A;
+      font-size: 0.62rem;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 10px;
+      text-transform: uppercase;
+    }
+
+    /* Duration Selector */
+    .duration-picker-wrap {
+      margin-bottom: 1.8rem;
+    }
+
+    .duration-pills {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .duration-pill {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      padding: 0.6rem 1.25rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .duration-pill:hover {
+      color: var(--text-main);
+    }
+
+    .duration-pill.active {
+      background: rgba(198, 255, 61, 0.15);
+      border-color: var(--accent-lime);
+      color: var(--accent-lime);
+    }
+
+    /* Time Slot Grid */
+    .slots-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .slot-legend {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .legend-avail { background: var(--slot-avail-bg); border: 1px solid var(--border-subtle); }
+    .legend-peak { background: var(--accent-orange); }
+    .legend-booked { background: var(--slot-booked-bg); }
+    .legend-selected { background: var(--accent-lime); }
+
+    .time-slot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.75rem;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 0.4rem;
+    }
+
+    .time-slot {
+      background: var(--slot-avail-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 0.75rem 0.6rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      user-select: none;
+    }
+
+    .time-slot:hover:not(.booked) {
+      border-color: var(--accent-lime);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 4px 12px var(--accent-lime-glow);
+    }
+
+    .time-slot.peak {
+      border-color: rgba(255, 138, 61, 0.4);
+    }
+
+    .time-slot.peak::before {
+      content: 'PEAK';
+      position: absolute;
+      top: -7px;
+      right: 8px;
+      font-size: 0.58rem;
+      font-weight: 800;
+      background: var(--accent-orange);
+      color: #080D0A;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    .time-slot.booked {
+      background: var(--slot-booked-bg);
+      border-color: transparent;
+      color: var(--slot-booked-text);
+      cursor: not-allowed;
+      opacity: 0.55;
+      text-decoration: line-through;
+    }
+
+    .time-slot.selected {
+      background: var(--primary-deep);
+      border-color: var(--accent-lime);
+      color: var(--accent-lime);
+      box-shadow: 0 0 16px var(--accent-lime-glow);
+      transform: scale(1.04);
+      animation: slotPulse 2s infinite alternate;
+    }
+
+    @keyframes slotPulse {
+      0% { box-shadow: 0 0 8px var(--accent-lime-glow); }
+      100% { box-shadow: 0 0 18px rgba(198, 255, 61, 0.6); }
+    }
+
+    .slot-time {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .slot-rate-text {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .time-slot.selected .slot-rate-text {
+      color: var(--accent-lime);
+    }
+
+    /* STEP 3: Checkout Form */
+    .checkout-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+
+    @media (min-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .form-input {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 0.85rem 1.1rem;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      transition: all 0.25s ease;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent-lime);
+      box-shadow: 0 0 12px var(--accent-lime-glow);
+    }
+
+    .player-stepper {
+      display: flex;
+      align-items: center;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .stepper-btn {
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      transition: background-color 0.2s ease;
+    }
+
+    .stepper-btn:hover {
+      background: var(--border-subtle);
+      color: var(--accent-lime);
+    }
+
+    .stepper-val {
+      flex: 1;
+      text-align: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .addons-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    .addon-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .addon-item:hover {
+      border-color: rgba(198, 255, 61, 0.3);
+    }
+
+    .addon-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .addon-checkbox {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent-lime);
+      cursor: pointer;
+    }
+
+    /* Stepper Navigation Buttons */
+    .step-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    /* Booking Summary Sidebar */
+    .booking-summary-sidebar {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (min-width: 1024px) {
+      .booking-summary-sidebar {
+        border-top: none;
+        border-left: 1px solid var(--border-subtle);
+      }
+    }
+
+    .summary-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .summary-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .summary-turf-header {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .summary-turf-thumb {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .summary-detail-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .detail-label {
+      color: var(--text-muted);
+    }
+
+    .detail-value {
+      font-weight: 700;
+      color: var(--text-main);
+      text-align: right;
+    }
+
+    /* Promo Code Input */
+    .promo-wrap {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .promo-input {
+      flex: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-apply-promo {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 0 1rem;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-lime);
+      transition: all 0.2s ease;
+    }
+
+    .btn-apply-promo:hover {
+      background: var(--accent-lime);
+      color: #080D0A;
+    }
+
+    /* Live Price Breakdown */
+    .price-breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px dashed var(--border-subtle);
+    }
+
+    .price-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .price-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.5rem;
+    }
+
+    .total-label {
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .total-amount-display {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent-lime);
+      display: flex;
+      align-items: baseline;
+      gap: 0.2rem;
+    }
+
+    /* ==========================================================================
+       CONFIRMATION SCREEN & CONFETTI
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 7, 5, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .confirmation-modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 28px;
+      max-width: 540px;
+      width: 100%;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.92) translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal-overlay.active .confirmation-modal {
+      transform: scale(1) translateY(0);
+    }
+
+    #confettiCanvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Animated Checkmark */
+    .checkmark-wrap {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      background: rgba(198, 255, 61, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .checkmark-svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .checkmark-circle {
+      stroke-dasharray: 166;
+      stroke-dashoffset: 166;
+      stroke-width: 3;
+      stroke-miterlimit: 10;
+      stroke: var(--accent-lime);
+      fill: none;
+      animation: strokeCircle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+    }
+
+    .checkmark-check {
+      transform-origin: 50% 50%;
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      stroke-width: 4;
+      stroke: var(--accent-lime);
+      fill: none;
+      animation: strokeCheck 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+    }
+
+    @keyframes strokeCircle {
+      100% { stroke-dashoffset: 0; }
+    }
+
+    @keyframes strokeCheck {
+      100% { stroke-dashoffset: 0; }
+    }
+
+    .ticket-pass {
+      background: var(--bg-surface);
+      border: 1px dashed var(--border-subtle);
+      border-radius: 18px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      text-align: left;
+      position: relative;
+    }
+
+    .ticket-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .booking-id-tag {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--accent-lime);
+      background: rgba(198, 255, 61, 0.12);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+    }
+
+    .ticket-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .ticket-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    /* ==========================================================================
+       MY BOOKINGS SECTION
+       ========================================================================== */
+    .my-bookings-section {
+      padding: 4.5rem 0;
+      background: var(--bg-base);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .bookings-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .booking-item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+    }
+
+    @media (min-width: 680px) {
+      .booking-item-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .booking-item-card:hover {
+      border-color: rgba(198, 255, 61, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .booking-item-info {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .booking-item-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-lime);
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .booking-item-details h4 {
+      font-size: 1.15rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .booking-item-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .meta-tag {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .booking-status-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .status-confirmed {
+      background: rgba(15, 169, 104, 0.2);
+      color: #38ef7d;
+      border: 1px solid rgba(15, 169, 104, 0.4);
+    }
+
+    .status-cancelled {
+      background: rgba(255, 75, 75, 0.15);
+      color: #ff5e5e;
+      border: 1px solid rgba(255, 75, 75, 0.3);
+    }
+
+    .booking-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-cancel-booking {
+      background: rgba(255, 75, 75, 0.1);
+      border: 1px solid rgba(255, 75, 75, 0.25);
+      color: #ff6e6e;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .btn-cancel-booking:hover {
+      background: #ff5e5e;
+      color: #fff;
+    }
+
+    /* Empty state */
+    .empty-bookings-box {
+      text-align: center;
+      padding: 4rem 1rem;
+      background: var(--bg-card);
+      border: 1px dashed var(--border-subtle);
+      border-radius: 24px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .empty-bookings-box svg {
+      width: 56px;
+      height: 56px;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    .site-footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      padding: 3.5rem 0 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+      max-width: 320px;
+    }
+
+    .footer-col h5 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-lime);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      align-items: center;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+
+    @media (min-width: 600px) {
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    /* ==========================================================================
+       ANIMATIONS ON SCROLL & UTILITY
+       ========================================================================== */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal-on-scroll.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Toast Notification */
+    .toast-notification {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--accent-lime);
+      color: var(--text-main);
+      padding: 0.85rem 1.4rem;
+      border-radius: 14px;
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: var(--glass-blur);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      z-index: 1200;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .toast-notification.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Accessibility: Respect Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .floating-sport-icon { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#" class="logo" aria-label="Apex Turf Arena Homepage">
+        <div class="logo-badge">
+          <!-- Stylized Turf / Ball Icon -->
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title brand-font">APEX ARENA</span>
+          <span class="logo-subtitle">Koramangala • Bengaluru</span>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <nav class="nav-links" aria-label="Main Navigation">
+          <a href="#turfs" class="nav-link">Our Turfs</a>
+          <a href="#booking" class="nav-link">Book Online</a>
+          <a href="#amenities" class="nav-link">Facilities</a>
+          <a href="#my-bookings" class="nav-link">My Bookings</a>
+        </nav>
+
+        <!-- Theme Toggle Button -->
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Dark and Light Mode" title="Toggle Theme">
+          <!-- Sun Icon (for dark mode) -->
+          <svg id="themeIconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <!-- Moon Icon (hidden initially) -->
+          <svg id="themeIconMoon" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Header My Bookings CTA -->
+        <a href="#my-bookings" class="btn-header-bookings" aria-label="View current bookings">
+          <span>My Slots</span>
+          <span class="bookings-count-pill" id="navBookingsCount">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION
+         ========================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="hero-bg-shapes">
+        <!-- Floating Sport SVGs -->
+        <svg class="floating-sport-icon icon-1" viewBox="0 0 24 24" fill="#C6FF3D">
+          <circle cx="12" cy="12" r="10" stroke="#C6FF3D" stroke-width="2" fill="none"/>
+          <path d="M12 7l3.5 2.5v4L12 16l-3.5-2.5v-4z" fill="#C6FF3D"/>
+        </svg>
+
+        <svg class="floating-sport-icon icon-2" viewBox="0 0 24 24" fill="#C6FF3D">
+          <circle cx="12" cy="12" r="9" stroke="#C6FF3D" stroke-width="1.8" fill="none"/>
+          <path d="M5.5 12c2.5 3 7 4 11 0M7 7.5c2 2 6 3 9 0M7 16.5c2-2 6-3 9 0" stroke="#C6FF3D" stroke-width="1.2"/>
+        </svg>
+
+        <svg class="floating-sport-icon icon-3" viewBox="0 0 24 24" fill="#C6FF3D">
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z" fill="#C6FF3D"/>
+          <path d="M12 6l2 4 4.5.5-3.5 3 1 4.5-4-2.5-4 2.5 1-4.5-3.5-3 4.5-.5z"/>
+        </svg>
+
+        <svg class="floating-sport-icon icon-4" viewBox="0 0 24 24" fill="#C6FF3D">
+          <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.9V18h-2v-1.1a5 5 0 0 1-3.9-3.9H8v-2h-1a5 5 0 0 1 3.9-3.9V6h2v1.1a5 5 0 0 1 3.9 3.9H16v2h1a5 5 0 0 1-3.9 3.9z" fill="#C6FF3D"/>
+        </svg>
+      </div>
+
+      <div class="hero-glow-orb"></div>
+
+      <div class="container hero-content">
+        <div class="hero-badge-tag">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L1 21h22L12 2zm0 4.2l7.5 13H4.5L12 6.2z"/>
+          </svg>
+          FIFA-Standard 50mm AstroTurf • Floodlit 24/7
+        </div>
+
+        <h1 class="hero-headline">
+          PLAY LIKE A PRO ON <br>
+          <span class="headline-highlight">BENGALURU’S FINEST</span> TURF
+        </h1>
+
+        <p class="hero-tagline">
+          Book FIFA-grade 5v5 & 7v7 football arenas, auto-bowling cricket nets, and BWF synthetic badminton courts in under 60 seconds with instant lock.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#booking" class="btn btn-primary ripple-btn" id="heroBookNowBtn">
+            <span>⚡ Book Your Slot Now</span>
+          </a>
+          <a href="#turfs" class="btn btn-secondary ripple-btn">
+            <span>Explore Turfs</span>
+          </a>
+        </div>
+
+        <!-- Trust Stats Banner -->
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-val">4</span>
+            <span class="stat-lbl">Pro Arenas</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val">500+</span>
+            <span class="stat-lbl">Lux Floodlights</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val">12,500+</span>
+            <span class="stat-lbl">Matches Hosted</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val">4.9 / 5</span>
+            <span class="stat-lbl">Google Rating</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TURF CATALOG & SPORT FILTERS
+         ========================================================================== -->
+    <section class="catalog-section" id="turfs">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag">CHOOSE YOUR BATTLEGROUND</span>
+          <h2 class="section-title">World-Class Sports Arenas</h2>
+          <p class="section-desc">Engineered for traction, joint safety, and supreme ball bounce. Pick your sport to view specs and availability.</p>
+        </div>
+
+        <!-- Sport Filter Tabs -->
+        <div class="sport-filters-wrapper reveal-on-scroll">
+          <div class="sport-filters" role="tablist" aria-label="Filter turfs by sport">
+            <button class="filter-chip active" data-sport="all" role="tab" aria-selected="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              All Turfs (4)
+            </button>
+            <button class="filter-chip" data-sport="football" role="tab" aria-selected="false">
+              <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+              Football (2)
+            </button>
+            <button class="filter-chip" data-sport="cricket" role="tab" aria-selected="false">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.5 2.5l3 3-13 13-3-3 13-13zM4 17l3 3-4 1 1-4z"/></svg>
+              Box Cricket (1)
+            </button>
+            <button class="filter-chip" data-sport="badminton" role="tab" aria-selected="false">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a5 5 0 0 0-5 5c0 2.1 1.3 3.9 3.1 4.6L7 19l2 2 7.4-3.1A5 5 0 0 0 17 7a5 5 0 0 0-5-5z"/></svg>
+              Badminton (1)
+            </button>
+          </div>
+        </div>
+
+        <!-- Turf Cards Grid -->
+        <div class="turf-grid" id="turfCardsGrid">
+          <!-- Populated dynamically via JavaScript with rich sample data -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         STEP-BY-STEP BOOKING SECTION
+         ========================================================================== -->
+    <section class="booking-section" id="booking">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag">RESERVE IN SECONDS</span>
+          <h2 class="section-title">Book Your Pitch</h2>
+          <p class="section-desc">Select your preferred arena, lock in the date, pick an open slot, and confirm instant game time.</p>
+        </div>
+
+        <div class="booking-wrapper reveal-on-scroll">
+          <!-- Main Booking Steps -->
+          <div class="booking-main">
+            <!-- Stepper Indicator -->
+            <div class="booking-stepper">
+              <div class="stepper-track">
+                <div class="stepper-fill" id="stepperFillBar"></div>
+              </div>
+
+              <div class="step-item active" id="stepIndicator1">
+                <div class="step-circle">1</div>
+                <span class="step-label">Select Turf</span>
+              </div>
+
+              <div class="step-item" id="stepIndicator2">
+                <div class="step-circle">2</div>
+                <span class="step-label">Date & Slot</span>
+              </div>
+
+              <div class="step-item" id="stepIndicator3">
+                <div class="step-circle">3</div>
+                <span class="step-label">Checkout</span>
+              </div>
+            </div>
+
+            <!-- Steps Panels Container -->
+            <div class="steps-container">
+              
+              <!-- STEP 1: Select Turf -->
+              <div class="step-panel active" id="stepPanel1">
+                <h3 class="brand-font" style="font-size: 1.35rem; margin-bottom: 0.5rem;">Step 1: Choose Your Preferred Turf</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.2rem;">Click on any of our 4 international grade sports turfs to continue:</p>
+
+                <div class="turf-mini-grid" id="step1TurfSelector">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+
+              <!-- STEP 2: Select Date & Time Slot -->
+              <div class="step-panel" id="stepPanel2">
+                <!-- Date Picker -->
+                <div class="date-picker-wrap">
+                  <div class="date-strip-header">
+                    <div>
+                      <h4 class="brand-font" style="font-size: 1.15rem;">Select Match Date</h4>
+                      <span id="selectedDateDisplay" style="font-size: 0.85rem; color: var(--accent-lime); font-weight: 700;">Today, Oct 29</span>
+                    </div>
+                    <div class="date-strip-arrows">
+                      <button class="arrow-btn" id="scrollDatesLeft" aria-label="Scroll dates left">‹</button>
+                      <button class="arrow-btn" id="scrollDatesRight" aria-label="Scroll dates right">›</button>
+                    </div>
+                  </div>
+
+                  <div class="date-strip-scroll" id="datePickerStrip">
+                    <!-- Populated by JS for 14 upcoming days -->
+                  </div>
+                </div>
+
+                <!-- Duration Picker -->
+                <div class="duration-picker-wrap">
+                  <h4 class="brand-font" style="font-size: 1.15rem; margin-bottom: 0.6rem;">Match Duration</h4>
+                  <div class="duration-pills" id="durationPillsContainer">
+                    <button class="duration-pill active" data-hours="1">1 Hour</button>
+                    <button class="duration-pill" data-hours="2">2 Hours (Popular)</button>
+                    <button class="duration-pill" data-hours="3">3 Hours (Tournament)</button>
+                  </div>
+                </div>
+
+                <!-- Time Slot Grid -->
+                <div class="slots-wrap">
+                  <div class="slots-header">
+                    <h4 class="brand-font" style="font-size: 1.15rem;">Hourly Slot (6:00 AM - 11:00 PM)</h4>
+                    <div class="slot-legend">
+                      <div class="legend-item"><span class="legend-dot legend-avail"></span> Avail</div>
+                      <div class="legend-item"><span class="legend-dot legend-peak"></span> Peak (6-10 PM)</div>
+                      <div class="legend-item"><span class="legend-dot legend-booked"></span> Booked</div>
+                    </div>
+                  </div>
+
+                  <div class="time-slot-grid" id="timeSlotGrid">
+                    <!-- Slots 6 AM to 11 PM dynamically populated -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- STEP 3: Player Details & Checkout Form -->
+              <div class="step-panel" id="stepPanel3">
+                <h3 class="brand-font" style="font-size: 1.35rem; margin-bottom: 0.5rem;">Step 3: Player Details & Confirmation</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.4rem;">Please enter your match coordinator information to receive your digital pass.</p>
+
+                <form class="checkout-form" id="checkoutForm" onsubmit="event.preventDefault();">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label" for="userName">Captain / Booker Name *</label>
+                      <input type="text" id="userName" class="form-input" placeholder="e.g. Rahul Sharma" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="userPhone">Mobile Number (WhatsApp) *</label>
+                      <input type="tel" id="userPhone" class="form-input" placeholder="e.g. 9876543210" required pattern="[0-9]{10}" autocomplete="tel">
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label" for="userEmail">Email Address (Optional)</label>
+                      <input type="email" id="userEmail" class="form-input" placeholder="rahul@example.com" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Number of Players Expected</label>
+                      <div class="player-stepper">
+                        <button type="button" class="stepper-btn" id="playerDecBtn" aria-label="Decrease player count">−</button>
+                        <span class="stepper-val" id="playerCountVal">10</span>
+                        <button type="button" class="stepper-btn" id="playerIncBtn" aria-label="Increase player count">+</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Match Equipment Add-ons -->
+                  <div class="form-group">
+                    <label class="form-label">Match Equipment & Amenities Add-ons</label>
+                    <div class="addons-group">
+                      <label class="addon-item">
+                        <div class="addon-left">
+                          <input type="checkbox" class="addon-checkbox" id="addonBibs" value="100">
+                          <div>
+                            <div style="font-weight: 700; font-size: 0.9rem;">Team Bibs Set (10 Pack)</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Freshly washed fluorescent bibs</div>
+                          </div>
+                        </div>
+                        <span style="font-weight: 800; color: var(--accent-lime); font-size: 0.88rem;">+₹100</span>
+                      </label>
+
+                      <label class="addon-item">
+                        <div class="addon-left">
+                          <input type="checkbox" class="addon-checkbox" id="addonBall" value="150">
+                          <div>
+                            <div style="font-weight: 700; font-size: 0.9rem;">Official Match Ball Rental</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">FIFA / Cosco tournament standard ball</div>
+                          </div>
+                        </div>
+                        <span style="font-weight: 800; color: var(--accent-lime); font-size: 0.88rem;">+₹150</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Payment Mode Mock -->
+                  <div class="form-group">
+                    <label class="form-label">Preferred Payment Method</label>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem;">
+                      <label class="addon-item" style="justify-content: center; text-align: center;">
+                        <input type="radio" name="paymentMethod" value="upi" checked style="accent-color: var(--accent-lime); margin-right: 6px;">
+                        <span style="font-weight: 700; font-size: 0.85rem;">⚡ UPI / QR</span>
+                      </label>
+                      <label class="addon-item" style="justify-content: center; text-align: center;">
+                        <input type="radio" name="paymentMethod" value="card" style="accent-color: var(--accent-lime); margin-right: 6px;">
+                        <span style="font-weight: 700; font-size: 0.85rem;">💳 Cards</span>
+                      </label>
+                      <label class="addon-item" style="justify-content: center; text-align: center;">
+                        <input type="radio" name="paymentMethod" value="cash" style="accent-color: var(--accent-lime); margin-right: 6px;">
+                        <span style="font-weight: 700; font-size: 0.85rem;">💵 At Turf</span>
+                      </label>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+
+            <!-- Stepper Bottom Controls -->
+            <div class="step-actions">
+              <button class="btn btn-secondary ripple-btn" id="prevStepBtn" style="visibility: hidden;">
+                ← Back
+              </button>
+              <button class="btn btn-primary ripple-btn" id="nextStepBtn">
+                <span>Continue to Date & Slot →</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Live Booking Summary Sidebar -->
+          <aside class="booking-summary-sidebar" aria-label="Booking Price and Summary">
+            <h3 class="summary-title brand-font">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="var(--accent-lime)">
+                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+              </svg>
+              Live Summary
+            </h3>
+
+            <!-- Selected Turf Card Thumbnail -->
+            <div class="summary-card">
+              <div class="summary-turf-header">
+                <img src="" alt="Selected Turf" id="summaryTurfImg" class="summary-turf-thumb">
+                <div>
+                  <h4 id="summaryTurfName" style="font-size: 1.05rem; line-height: 1.2;">Football 5v5 Arena</h4>
+                  <span id="summaryTurfSport" style="font-size: 0.75rem; color: var(--accent-lime); font-weight: 700; text-transform: uppercase;">Football</span>
+                </div>
+              </div>
+
+              <div class="summary-detail-row">
+                <span class="detail-label">Date:</span>
+                <span class="detail-value" id="summaryDateVal">Oct 29, 2026</span>
+              </div>
+              <div class="summary-detail-row">
+                <span class="detail-label">Time Slot:</span>
+                <span class="detail-value" id="summarySlotVal">07:00 PM - 08:00 PM</span>
+              </div>
+              <div class="summary-detail-row">
+                <span class="detail-label">Duration:</span>
+                <span class="detail-value" id="summaryDurationVal">1 Hour</span>
+              </div>
+              <div class="summary-detail-row">
+                <span class="detail-label">Rate Type:</span>
+                <span class="detail-value" id="summaryRateTypeVal">⚡ Peak Hours</span>
+              </div>
+            </div>
+
+            <!-- Promo Code Box -->
+            <div class="promo-wrap">
+              <input type="text" id="promoCodeInput" class="promo-input" placeholder="Promo code (TURF10)">
+              <button class="btn-apply-promo ripple-btn" id="applyPromoBtn">Apply</button>
+            </div>
+            <div id="promoFeedback" style="font-size: 0.78rem; margin-top: -1rem; margin-bottom: 1rem; display: none;"></div>
+
+            <!-- Price Breakdown Calculation -->
+            <div class="price-breakdown">
+              <div class="price-line">
+                <span>Base Slot Fee</span>
+                <span id="summaryBasePrice">₹1,200</span>
+              </div>
+              <div class="price-line" id="summaryPeakDiffRow" style="display: none;">
+                <span>Peak Hour Surcharge</span>
+                <span id="summaryPeakDiff" style="color: var(--accent-orange);">+₹400</span>
+              </div>
+              <div class="price-line" id="summaryAddonsRow" style="display: none;">
+                <span>Equipment Add-ons</span>
+                <span id="summaryAddonsPrice">+₹0</span>
+              </div>
+              <div class="price-line" id="summaryDiscountRow" style="display: none; color: #43e97b;">
+                <span>Promo Discount (10%)</span>
+                <span id="summaryDiscountPrice">-₹0</span>
+              </div>
+              <div class="price-line">
+                <span>GST (18% Sports & Rec)</span>
+                <span id="summaryGstPrice">₹288</span>
+              </div>
+            </div>
+
+            <!-- Total Price with Count-Up Animation -->
+            <div class="price-total-row">
+              <div>
+                <span class="total-label brand-font">Total Amount</span>
+                <div style="font-size: 0.72rem; color: var(--text-muted);">Includes all taxes & court fee</div>
+              </div>
+              <div class="total-amount-display">
+                <span>₹</span>
+                <span id="totalAmountAnimated">1,888</span>
+              </div>
+            </div>
+
+            <div style="font-size: 0.75rem; color: var(--text-dim); text-align: center;">
+              🔒 100% Free Cancellation up to 4 hrs before slot
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CONFIRMATION MODAL & TICKET SCREEN
+         ========================================================================== -->
+    <div class="modal-overlay" id="confirmationModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <canvas id="confettiCanvas"></canvas>
+      <div class="confirmation-modal">
+        <!-- Animated Checkmark SVG -->
+        <div class="checkmark-wrap">
+          <svg class="checkmark-svg" viewBox="0 0 52 52">
+            <circle class="checkmark-circle" cx="26" cy="26" r="24"/>
+            <path class="checkmark-check" d="M14 27l8 8 16-16"/>
+          </svg>
+        </div>
+
+        <h3 class="brand-font" id="modalTitle" style="font-size: 1.8rem; margin-bottom: 0.4rem;">BOOKING CONFIRMED!</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Get ready to hit the pitch. Your booking pass has been reserved.</p>
+
+        <!-- Digital Match Pass -->
+        <div class="ticket-pass" id="digitalTicketPass">
+          <div class="ticket-header">
+            <div>
+              <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">APEX ARENA PASS</div>
+              <div style="font-weight: 800; font-size: 1.1rem;" id="modalTicketTurfName">Emerald 5v5 Arena</div>
+            </div>
+            <div class="booking-id-tag" id="modalBookingId">#APEX-84920</div>
+          </div>
+
+          <div class="ticket-grid">
+            <div>
+              <span style="color: var(--text-muted); font-size: 0.75rem;">Date</span>
+              <div style="font-weight: 700;" id="modalTicketDate">Oct 29, 2026</div>
+            </div>
+            <div>
+              <span style="color: var(--text-muted); font-size: 0.75rem;">Slot Time</span>
+              <div style="font-weight: 700; color: var(--accent-lime);" id="modalTicketTime">07:00 PM - 08:00 PM</div>
+            </div>
+            <div>
+              <span style="color: var(--text-muted); font-size: 0.75rem;">Booked By</span>
+              <div style="font-weight: 700;" id="modalTicketName">Rahul Sharma</div>
+            </div>
+            <div>
+              <span style="color: var(--text-muted); font-size: 0.75rem;">Amount Paid</span>
+              <div style="font-weight: 700; color: var(--accent-lime);" id="modalTicketAmount">₹1,888</div>
+            </div>
+          </div>
+
+          <!-- Simulated QR Code SVG -->
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; padding-top: 0.8rem; border-top: 1px dashed var(--border-subtle);">
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Scan at Turf Entrance Gate #2</div>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" style="color: var(--text-main);">
+              <path d="M2 2h8v8H2zM4 4v4h4V4zm10-2h8v8h-8zm2 2v4h4V4zM2 14h8v8H2zm2 2v4h4v-4zm14 0h4v2h-4zm0 4h2v2h-2zm-4-4h2v6h-2zm6-2h2v2h-2zM6 6h0v0zM6 18h0v0z"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="ticket-actions">
+          <button class="btn btn-secondary ripple-btn" style="flex: 1; padding: 0.75rem;" id="modalPrintTicketBtn">
+            🖨️ Print Pass
+          </button>
+          <button class="btn btn-primary ripple-btn" style="flex: 1; padding: 0.75rem;" id="modalCloseBtn">
+            View My Bookings
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         MY BOOKINGS SECTION
+         ========================================================================== -->
+    <section class="my-bookings-section" id="my-bookings">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag">SESSION ACTIVITY</span>
+          <h2 class="section-title">My Booked Slots</h2>
+          <p class="section-desc">Manage your scheduled fixtures for this session. Cancel or download entry passes anytime.</p>
+        </div>
+
+        <div class="bookings-list" id="myBookingsList">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-badge">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            </div>
+            <div class="logo-text">
+              <span class="logo-title brand-font">APEX ARENA</span>
+              <span class="logo-subtitle">Koramangala, Bengaluru</span>
+            </div>
+          </div>
+          <p>Premier multisport facility offering shock-absorbing synthetic turf, international floodlighting, and tournament hosting services.</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Quick Navigation</h5>
+          <ul class="footer-links">
+            <li><a href="#turfs">All Turf Types</a></li>
+            <li><a href="#booking">Book a Slot</a></li>
+            <li><a href="#my-bookings">My Bookings</a></li>
+            <li><a href="#">Tournament Registration</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Turf Location & Contact</h5>
+          <ul class="footer-links">
+            <li>📍 80 Feet Road, 4th Block, Koramangala, Bengaluru</li>
+            <li>📞 +91 98860 12345 / 080 4123 9999</li>
+            <li>⏰ Open Daily: 06:00 AM – 11:30 PM</li>
+            <li>✉️ bookings@apexarena.in</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Apex Turf Arena. All rights reserved. Designed with high performance CSS & Vanilla JS.</div>
+        <div>Compliant with GST & Sports Facility Standards</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-notification" id="toastNotification" role="alert">
+    <span id="toastIcon">⚡</span>
+    <span id="toastMsg">Notification message</span>
+  </div>
+
+  <!-- ==========================================================================
+       VANILLA JAVASCRIPT LOGIC
+       ========================================================================== -->
+  <script>
+    /**
+     * APEX TURF ARENA - APPLICATION STATE & DATA
+     */
+    const TURFS_DATA = [
+      {
+        id: "turf-fb-5v5",
+        name: "Emerald 5v5 Arena",
+        sport: "football",
+        sportLabel: "Football 5v5",
+        size: "100ft × 65ft",
+        grassType: "50mm Monofilament FIFA AstroTurf",
+        basePrice: 1200,
+        peakPrice: 1600,
+        rating: "4.9",
+        reviewsCount: 382,
+        image: "https://images.unsplash.com/photo-1529900245534-47fbf82f4534?auto=format&fit=crop&w=800&q=80",
+        description: "FIFA-grade monofilament grass with high-density shock pad cushioning. Perfect for fast-paced 5-a-side matches under 500-lux floodlights.",
+        amenities: [
+          { icon: "💡", label: "Floodlights 500-Lux" },
+          { icon: "🚗", label: "Parking" },
+          { icon: "🚿", label: "Washroom & Showers" },
+          { icon: "🎽", label: "Free Bibs & Balls" },
+          { icon: "🥤", label: "RO Water" }
+        ]
+      },
+      {
+        id: "turf-fb-7v7",
+        name: "Thunder Pitch 7v7",
+        sport: "football",
+        sportLabel: "Football 7v7",
+        size: "155ft × 95ft",
+        grassType: "Pro Synthetic Turf + Corner Flags",
+        basePrice: 1800,
+        peakPrice: 2400,
+        rating: "4.95",
+        reviewsCount: 420,
+        image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80",
+        description: "Full-scale 7-a-side pitch with high rebound perimeter netting, international goal posts, and team dugouts. Ideal for corporate tournaments.",
+        amenities: [
+          { icon: "💡", label: "Full Arena Floodlights" },
+          { icon: "🚗", label: "Valet Parking" },
+          { icon: "🚿", label: "Locker Rooms" },
+          { icon: "🎽", label: "Dugout Seating" },
+          { icon: "🥤", label: "Cafe & Lounge" }
+        ]
+      },
+      {
+        id: "turf-cricket-box",
+        name: "Master Blaster Box Cricket",
+        sport: "cricket",
+        sportLabel: "Box Cricket / Nets",
+        size: "90ft × 45ft (High Roof)",
+        grassType: "Heavy-duty 35mm High Bounce Turf",
+        basePrice: 1100,
+        peakPrice: 1500,
+        rating: "4.85",
+        reviewsCount: 295,
+        image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+        description: "High-tensile roof netting with true bounce matting, calibrated bowling crease, and optional automated bowling machine.",
+        amenities: [
+          { icon: "💡", label: "Anti-Glare LED" },
+          { icon: "🏏", label: "Bats & Tennis Balls" },
+          { icon: "🚗", label: "Parking" },
+          { icon: "🚿", label: "Washroom" },
+          { icon: "🥤", label: "Refreshments" }
+        ]
+      },
+      {
+        id: "turf-badminton-court",
+        name: "Smash Pro Court (Indoor)",
+        sport: "badminton",
+        sportLabel: "Badminton Court",
+        size: "BWF Standard (44ft × 20ft)",
+        grassType: "4.5mm BWF Approved Vinyl Mat",
+        basePrice: 700,
+        peakPrice: 950,
+        rating: "4.9",
+        reviewsCount: 198,
+        image: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80",
+        description: "Air-conditioned indoor arena with Olympic standard anti-slip synthetic mat, shadowless glare-free lighting, and electronic scoreboard.",
+        amenities: [
+          { icon: "❄️", label: "Air Conditioned" },
+          { icon: "🏸", label: "Yonex Rackets Rental" },
+          { icon: "🚿", label: "Showers & Lockers" },
+          { icon: "🚗", label: "Parking" }
+        ]
+      }
+    ];
+
+    // Operating hours 6 AM to 11 PM
+    const TIME_SLOTS_DEF = [
+      { id: "06-07", label: "06:00 - 07:00 AM", isPeak: false },
+      { id: "07-08", label: "07:00 - 08:00 AM", isPeak: false },
+      { id: "08-09", label: "08:00 - 09:00 AM", isPeak: false },
+      { id: "09-10", label: "09:00 - 10:00 AM", isPeak: false },
+      { id: "10-11", label: "10:00 - 11:00 AM", isPeak: false },
+      { id: "11-12", label: "11:00 - 12:00 PM", isPeak: false },
+      { id: "12-13", label: "12:00 - 01:00 PM", isPeak: false },
+      { id: "13-14", label: "01:00 - 02:00 PM", isPeak: false },
+      { id: "14-15", label: "02:00 - 03:00 PM", isPeak: false },
+      { id: "15-16", label: "03:00 - 04:00 PM", isPeak: false },
+      { id: "16-17", label: "04:00 - 05:00 PM", isPeak: false },
+      { id: "17-18", label: "05:00 - 06:00 PM", isPeak: false },
+      { id: "18-19", label: "06:00 - 07:00 PM", isPeak: true },
+      { id: "19-20", label: "07:00 - 08:00 PM", isPeak: true },
+      { id: "20-21", label: "08:00 - 09:00 PM", isPeak: true },
+      { id: "21-22", label: "09:00 - 10:00 PM", isPeak: true },
+      { id: "22-23", label: "10:00 - 11:00 PM", isPeak: false }
+    ];
+
+    /**
+     * Application State Store
+     */
+    const AppState = {
+      selectedTurfId: "turf-fb-5v5",
+      selectedDateISO: "", // YYYY-MM-DD
+      selectedSlotId: "19-20", // Default to 7-8 PM Peak
+      durationHours: 1,
+      currentStep: 1,
+      promoDiscountPercent: 0,
+      appliedPromoCode: "",
+      playerCount: 10,
+      addons: {
+        bibs: false,
+        ball: false
+      },
+      // In-memory bookings registry to prevent double booking:
+      // Key format: `${turfId}_${dateISO}_${slotId}`
+      bookedSlotsRegistry: new Set([
+        // Mock existing bookings for realism:
+        "turf-fb-5v5_2026-10-29_20-21",
+        "turf-fb-7v7_2026-10-29_19-20",
+        "turf-cricket-box_2026-10-30_18-19"
+      ]),
+      // Session bookings list
+      myBookings: [
+        {
+          id: "APEX-29104",
+          turfId: "turf-fb-5v5",
+          turfName: "Emerald 5v5 Arena",
+          sport: "football",
+          dateISO: "2026-10-29",
+          dateFormatted: "Today, 29 Oct 2026",
+          slotId: "17-18",
+          timeSlot: "05:00 - 06:00 PM",
+          durationHours: 1,
+          bookerName: "Vikram Malhotra",
+          phone: "9845012345",
+          totalAmount: 1416,
+          status: "confirmed"
+        }
+      ]
+    };
+
+    /**
+     * DOM ELEMENTS CACHE
+     */
+    const DOM = {
+      turfCardsGrid: document.getElementById("turfCardsGrid"),
+      step1TurfSelector: document.getElementById("step1TurfSelector"),
+      datePickerStrip: document.getElementById("datePickerStrip"),
+      selectedDateDisplay: document.getElementById("selectedDateDisplay"),
+      timeSlotGrid: document.getElementById("timeSlotGrid"),
+      durationPillsContainer: document.getElementById("durationPillsContainer"),
+      scrollDatesLeft: document.getElementById("scrollDatesLeft"),
+      scrollDatesRight: document.getElementById("scrollDatesRight"),
+      
+      // Step panels & Stepper
+      stepPanel1: document.getElementById("stepPanel1"),
+      stepPanel2: document.getElementById("stepPanel2"),
+      stepPanel3: document.getElementById("stepPanel3"),
+      stepIndicator1: document.getElementById("stepIndicator1"),
+      stepIndicator2: document.getElementById("stepIndicator2"),
+      stepIndicator3: document.getElementById("stepIndicator3"),
+      stepperFillBar: document.getElementById("stepperFillBar"),
+      prevStepBtn: document.getElementById("prevStepBtn"),
+      nextStepBtn: document.getElementById("nextStepBtn"),
+
+      // Live Summary Elements
+      summaryTurfImg: document.getElementById("summaryTurfImg"),
+      summaryTurfName: document.getElementById("summaryTurfName"),
+      summaryTurfSport: document.getElementById("summaryTurfSport"),
+      summaryDateVal: document.getElementById("summaryDateVal"),
+      summarySlotVal: document.getElementById("summarySlotVal"),
+      summaryDurationVal: document.getElementById("summaryDurationVal"),
+      summaryRateTypeVal: document.getElementById("summaryRateTypeVal"),
+      summaryBasePrice: document.getElementById("summaryBasePrice"),
+      summaryPeakDiffRow: document.getElementById("summaryPeakDiffRow"),
+      summaryPeakDiff: document.getElementById("summaryPeakDiff"),
+      summaryAddonsRow: document.getElementById("summaryAddonsRow"),
+      summaryAddonsPrice: document.getElementById("summaryAddonsPrice"),
+      summaryDiscountRow: document.getElementById("summaryDiscountRow"),
+      summaryDiscountPrice: document.getElementById("summaryDiscountPrice"),
+      summaryGstPrice: document.getElementById("summaryGstPrice"),
+      totalAmountAnimated: document.getElementById("totalAmountAnimated"),
+
+      // Promo Code
+      promoCodeInput: document.getElementById("promoCodeInput"),
+      applyPromoBtn: document.getElementById("applyPromoBtn"),
+      promoFeedback: document.getElementById("promoFeedback"),
+
+      // Checkout form
+      userName: document.getElementById("userName"),
+      userPhone: document.getElementById("userPhone"),
+      userEmail: document.getElementById("userEmail"),
+      playerDecBtn: document.getElementById("playerDecBtn"),
+      playerIncBtn: document.getElementById("playerIncBtn"),
+      playerCountVal: document.getElementById("playerCountVal"),
+      addonBibs: document.getElementById("addonBibs"),
+      addonBall: document.getElementById("addonBall"),
+
+      // Confirmation Modal
+      confirmationModal: document.getElementById("confirmationModal"),
+      modalTitle: document.getElementById("modalTitle"),
+      modalBookingId: document.getElementById("modalBookingId"),
+      modalTicketTurfName: document.getElementById("modalTicketTurfName"),
+      modalTicketDate: document.getElementById("modalTicketDate"),
+      modalTicketTime: document.getElementById("modalTicketTime"),
+      modalTicketName: document.getElementById("modalTicketName"),
+      modalTicketAmount: document.getElementById("modalTicketAmount"),
+      modalPrintTicketBtn: document.getElementById("modalPrintTicketBtn"),
+      modalCloseBtn: document.getElementById("modalCloseBtn"),
+      confettiCanvas: document.getElementById("confettiCanvas"),
+
+      // My Bookings & Nav
+      myBookingsList: document.getElementById("myBookingsList"),
+      navBookingsCount: document.getElementById("navBookingsCount"),
+      themeToggleBtn: document.getElementById("themeToggleBtn"),
+      themeIconSun: document.getElementById("themeIconSun"),
+      themeIconMoon: document.getElementById("themeIconMoon"),
+      toastNotification: document.getElementById("toastNotification"),
+      toastIcon: document.getElementById("toastIcon"),
+      toastMsg: document.getElementById("toastMsg")
+    };
+
+    /**
+     * INITIALIZATION
+     */
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Set default date to today
+      const today = new Date();
+      AppState.selectedDateISO = formatISODate(today);
+
+      // 2. Render Components
+      renderTurfCatalog();
+      renderStep1TurfMiniCards();
+      renderDatePickerStrip();
+      renderTimeSlotGrid();
+      updateBookingSummary(false);
+      renderMyBookingsList();
+
+      // 3. Setup Interactive Event Listeners
+      initSportFilterTabs();
+      initStepperEvents();
+      initDurationEvents();
+      initPlayerCountStepper();
+      initPromoCode();
+      initAddons();
+      initRippleButtons();
+      initScrollReveal();
+      initThemeToggle();
+      initConfirmationModal();
+
+      // Setup Date Arrows
+      DOM.scrollDatesLeft.addEventListener("click", () => {
+        DOM.datePickerStrip.scrollBy({ left: -200, behavior: 'smooth' });
+      });
+      DOM.scrollDatesRight.addEventListener("click", () => {
+        DOM.datePickerStrip.scrollBy({ left: 200, behavior: 'smooth' });
+      });
+    });
+
+    /**
+     * HELPER: Format Date as YYYY-MM-DD
+     */
+    function formatISODate(dateObj) {
+      const year = dateObj.getFullYear();
+      const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+      const day = String(dateObj.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    /**
+     * RENDER TURF CATALOG CARDS
+     */
+    function renderTurfCatalog(filterSport = "all") {
+      DOM.turfCardsGrid.innerHTML = "";
+
+      const filteredTurfs = filterSport === "all" 
+        ? TURFS_DATA 
+        : TURFS_DATA.filter(t => t.sport === filterSport);
+
+      filteredTurfs.forEach((turf, idx) => {
+        const card = document.createElement("div");
+        card.className = "turf-card reveal-on-scroll revealed";
+        card.style.animationDelay = `${idx * 0.1}s`;
+
+        const amenitiesHTML = turf.amenities.map(a => `
+          <div class="amenity-chip">
+            <span>${a.icon}</span>
+            <span>${a.label}</span>
+          </div>
+        `).join("");
+
+        card.innerHTML = `
+          <div class="turf-img-wrap">
+            <img src="${turf.image}" alt="${turf.name}" class="turf-img" loading="lazy">
+            <div class="turf-badge-strip">
+              <span class="sport-tag">${turf.sportLabel}</span>
+              <div class="rating-pill">★ ${turf.rating} (${turf.reviewsCount})</div>
+            </div>
+          </div>
+          <div class="turf-body">
+            <div class="turf-header-row">
+              <h3 class="turf-name brand-font">${turf.name}</h3>
+              <span class="turf-size-badge">${turf.size}</span>
+            </div>
+            <p class="turf-description">${turf.description}</p>
+            <div class="amenities-list">
+              ${amenitiesHTML}
+            </div>
+            <div class="turf-footer">
+              <div class="price-box">
+                <span class="price-label">Starting From</span>
+                <div class="price-amount">₹${turf.basePrice.toLocaleString()} <span class="price-unit">/ hr</span></div>
+                <span class="peak-indicator">Peak: ₹${turf.peakPrice.toLocaleString()}/hr (6-10 PM)</span>
+              </div>
+              <button class="btn-book-turf ripple-btn" onclick="selectTurfAndGoToSlots('${turf.id}')">
+                <span>Book Slot</span>
+                <span>→</span>
+              </button>
+            </div>
+          </div>
+        `;
+        DOM.turfCardsGrid.appendChild(card);
+      });
+    }
+
+    /**
+     * RENDER STEP 1 TURF SELECTOR MINI CARDS
+     */
+    function renderStep1TurfMiniCards() {
+      DOM.step1TurfSelector.innerHTML = "";
+
+      TURFS_DATA.forEach(turf => {
+        const miniCard = document.createElement("div");
+        const isSelected = turf.id === AppState.selectedTurfId;
+        miniCard.className = `turf-mini-card ${isSelected ? 'selected' : ''}`;
+        miniCard.onclick = () => {
+          AppState.selectedTurfId = turf.id;
+          renderStep1TurfMiniCards();
+          renderTimeSlotGrid();
+          updateBookingSummary();
+        };
+
+        miniCard.innerHTML = `
+          <div class="selected-check">✓</div>
+          <div style="font-size: 0.75rem; color: var(--accent-lime); font-weight: 700; text-transform: uppercase; margin-bottom: 0.2rem;">
+            ${turf.sportLabel}
+          </div>
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.3rem;" class="brand-font">${turf.name}</h4>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.8rem;">${turf.size} • ${turf.grassType}</div>
+          <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-size: 0.75rem; color: var(--text-muted);">Standard:</span>
+            <span style="font-weight: 800; color: var(--text-main); font-size: 1.1rem;">₹${turf.basePrice}/hr</span>
+          </div>
+        `;
+        DOM.step1TurfSelector.appendChild(miniCard);
+      });
+    }
+
+    /**
+     * RENDER 14-DAY HORIZONTAL DATE STRIP
+     */
+    function renderDatePickerStrip() {
+      DOM.datePickerStrip.innerHTML = "";
+      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+      const baseDate = new Date();
+
+      for (let i = 0; i < 14; i++) {
+        const curDate = new Date(baseDate);
+        curDate.setDate(baseDate.getDate() + i);
+
+        const iso = formatISODate(curDate);
+        const dayName = days[curDate.getDay()];
+        const dayNumber = curDate.getDate();
+        const monthName = months[curDate.getMonth()];
+        const isSelected = iso === AppState.selectedDateISO;
+
+        const dateCard = document.createElement("div");
+        dateCard.className = `date-card ${isSelected ? 'selected' : ''}`;
+        dateCard.dataset.iso = iso;
+        
+        let todayBadge = "";
+        if (i === 0) {
+          todayBadge = `<span class="today-tag">Today</span>`;
+        } else if (i === 1) {
+          todayBadge = `<span class="today-tag" style="background:#0FA968; color:#fff;">Tmrw</span>`;
+        }
+
+        dateCard.innerHTML = `
+          ${todayBadge}
+          <span class="date-day-name">${dayName}</span>
+          <span class="date-number">${dayNumber}</span>
+          <span class="date-month">${monthName}</span>
+        `;
+
+        dateCard.onclick = () => {
+          AppState.selectedDateISO = iso;
+          document.querySelectorAll(".date-card").forEach(c => c.classList.remove("selected"));
+          dateCard.classList.add("selected");
+
+          // Update label
+          DOM.selectedDateDisplay.textContent = i === 0 ? `Today, ${monthName} ${dayNumber}` : `${dayName}, ${monthName} ${dayNumber}`;
+          
+          renderTimeSlotGrid();
+          updateBookingSummary();
+        };
+
+        DOM.datePickerStrip.appendChild(dateCard);
+      }
+    }
+
+    /**
+     * RENDER TIME SLOT GRID (6 AM to 11 PM)
+     */
+    function renderTimeSlotGrid() {
+      DOM.timeSlotGrid.innerHTML = "";
+
+      const currentTurf = TURFS_DATA.find(t => t.id === AppState.selectedTurfId);
+
+      TIME_SLOTS_DEF.forEach(slot => {
+        const slotKey = `${AppState.selectedTurfId}_${AppState.selectedDateISO}_${slot.id}`;
+        const isBooked = AppState.bookedSlotsRegistry.has(slotKey);
+        const isSelected = AppState.selectedSlotId === slot.id && !isBooked;
+
+        const slotElem = document.createElement("div");
+        slotElem.className = `time-slot ${slot.isPeak ? 'peak' : ''} ${isBooked ? 'booked' : ''} ${isSelected ? 'selected' : ''}`;
+        slotElem.dataset.slotId = slot.id;
+
+        const rate = slot.isPeak ? currentTurf.peakPrice : currentTurf.basePrice;
+
+        slotElem.innerHTML = `
+          <span class="slot-time">${slot.label}</span>
+          <span class="slot-rate-text">${isBooked ? 'Booked' : '₹' + rate + '/hr'}</span>
+        `;
+
+        if (!isBooked) {
+          slotElem.onclick = () => {
+            AppState.selectedSlotId = slot.id;
+            document.querySelectorAll(".time-slot").forEach(s => s.classList.remove("selected"));
+            slotElem.classList.add("selected");
+            updateBookingSummary();
+          };
+        } else {
+          slotElem.title = "This slot has been booked by another player.";
+        }
+
+        DOM.timeSlotGrid.appendChild(slotElem);
+      });
+    }
+
+    /**
+     * DURATION SELECTOR EVENTS
+     */
+    function initDurationEvents() {
+      const pills = DOM.durationPillsContainer.querySelectorAll(".duration-pill");
+      pills.forEach(pill => {
+        pill.addEventListener("click", () => {
+          pills.forEach(p => p.classList.remove("active"));
+          pill.classList.add("active");
+          AppState.durationHours = parseInt(pill.dataset.hours, 10);
+          updateBookingSummary();
+        });
+      });
+    }
+
+    /**
+     * STEPPER NAVIGATION & CONTROLS
+     */
+    function initStepperEvents() {
+      DOM.prevStepBtn.addEventListener("click", () => {
+        if (AppState.currentStep > 1) {
+          goToStep(AppState.currentStep - 1, true);
+        }
+      });
+
+      DOM.nextStepBtn.addEventListener("click", () => {
+        if (AppState.currentStep === 1) {
+          goToStep(2);
+        } else if (AppState.currentStep === 2) {
+          // Validate slot selection
+          const slotKey = `${AppState.selectedTurfId}_${AppState.selectedDateISO}_${AppState.selectedSlotId}`;
+          if (AppState.bookedSlotsRegistry.has(slotKey) || !AppState.selectedSlotId) {
+            showToast("⚠️ Please select an available time slot to continue.");
+            return;
+          }
+          goToStep(3);
+        } else if (AppState.currentStep === 3) {
+          submitBooking();
+        }
+      });
+    }
+
+    function goToStep(stepNumber, isBack = false) {
+      AppState.currentStep = stepNumber;
+
+      // Update Stepper circles & progress bar
+      [DOM.stepIndicator1, DOM.stepIndicator2, DOM.stepIndicator3].forEach((ind, i) => {
+        const stepIdx = i + 1;
+        ind.classList.remove("active", "completed");
+        if (stepIdx < stepNumber) {
+          ind.classList.add("completed");
+        } else if (stepIdx === stepNumber) {
+          ind.classList.add("active");
+        }
+      });
+
+      const fillPercentage = stepNumber === 1 ? 0 : (stepNumber === 2 ? 50 : 100);
+      DOM.stepperFillBar.style.width = `${fillPercentage}%`;
+
+      // Update Panels with slide animation
+      const panels = [DOM.stepPanel1, DOM.stepPanel2, DOM.stepPanel3];
+      panels.forEach((panel, i) => {
+        panel.classList.remove("active", "slide-back");
+        if (i + 1 === stepNumber) {
+          panel.classList.add("active");
+          if (isBack) panel.classList.add("slide-back");
+        }
+      });
+
+      // Update Navigation Buttons
+      if (stepNumber === 1) {
+        DOM.prevStepBtn.style.visibility = "hidden";
+        DOM.nextStepBtn.innerHTML = `<span>Continue to Date & Slot →</span>`;
+      } else if (stepNumber === 2) {
+        DOM.prevStepBtn.style.visibility = "visible";
+        DOM.nextStepBtn.innerHTML = `<span>Proceed to Player Details →</span>`;
+      } else if (stepNumber === 3) {
+        DOM.prevStepBtn.style.visibility = "visible";
+        DOM.nextStepBtn.innerHTML = `<span>Confirm & Lock Booking ⚡</span>`;
+      }
+    }
+
+    /**
+     * SELECT TURF SHORTCUT (From Catalog Card)
+     */
+    window.selectTurfAndGoToSlots = function(turfId) {
+      AppState.selectedTurfId = turfId;
+      renderStep1TurfMiniCards();
+      renderTimeSlotGrid();
+      updateBookingSummary();
+      goToStep(2);
+      
+      const bookingSection = document.getElementById("booking");
+      bookingSection.scrollIntoView({ behavior: "smooth" });
+    };
+
+    /**
+     * LIVE PRICE CALCULATION & ANIMATED NUMBER TICKER
+     */
+    let lastAnimatedTotal = 0;
+
+    function updateBookingSummary(animate = true) {
+      const currentTurf = TURFS_DATA.find(t => t.id === AppState.selectedTurfId) || TURFS_DATA[0];
+      const currentSlot = TIME_SLOTS_DEF.find(s => s.id === AppState.selectedSlotId) || TIME_SLOTS_DEF[0];
+
+      // Update basic fields
+      DOM.summaryTurfImg.src = currentTurf.image;
+      DOM.summaryTurfName.textContent = currentTurf.name;
+      DOM.summaryTurfSport.textContent = currentTurf.sportLabel;
+      
+      // Format Date string for summary
+      const dParts = AppState.selectedDateISO.split("-");
+      const dObj = new Date(dParts[0], dParts[1] - 1, dParts[2]);
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      DOM.summaryDateVal.textContent = `${months[dObj.getMonth()]} ${dObj.getDate()}, ${dObj.getFullYear()}`;
+      DOM.summarySlotVal.textContent = currentSlot.label;
+      DOM.summaryDurationVal.textContent = `${AppState.durationHours} Hour${AppState.durationHours > 1 ? 's' : ''}`;
+      DOM.summaryRateTypeVal.textContent = currentSlot.isPeak ? "⚡ Peak Hour" : "Standard Hour";
+      DOM.summaryRateTypeVal.style.color = currentSlot.isPeak ? "var(--accent-orange)" : "var(--text-main)";
+
+      // Math: Base + Peak + Addons - Discount + 18% GST
+      const baseHourRate = currentTurf.basePrice;
+      const peakHourRate = currentTurf.peakPrice;
+      const effectiveHourRate = currentSlot.isPeak ? peakHourRate : baseHourRate;
+
+      const turfSubtotal = effectiveHourRate * AppState.durationHours;
+      const baseSubtotal = baseHourRate * AppState.durationHours;
+      const peakDiff = (effectiveHourRate - baseHourRate) * AppState.durationHours;
+
+      // Addons
+      let addonsCost = 0;
+      if (AppState.addons.bibs) addonsCost += 100;
+      if (AppState.addons.ball) addonsCost += 150;
+
+      const subtotalBeforeDiscount = turfSubtotal + addonsCost;
+      const discountAmount = Math.round(subtotalBeforeDiscount * (AppState.promoDiscountPercent / 100));
+      const taxableAmount = subtotalBeforeDiscount - discountAmount;
+      const gstAmount = Math.round(taxableAmount * 0.18);
+      const grandTotal = taxableAmount + gstAmount;
+
+      // Update Breakdown DOM
+      DOM.summaryBasePrice.textContent = `₹${baseSubtotal.toLocaleString()}`;
+
+      if (peakDiff > 0) {
+        DOM.summaryPeakDiffRow.style.display = "flex";
+        DOM.summaryPeakDiff.textContent = `+₹${peakDiff.toLocaleString()}`;
+      } else {
+        DOM.summaryPeakDiffRow.style.display = "none";
+      }
+
+      if (addonsCost > 0) {
+        DOM.summaryAddonsRow.style.display = "flex";
+        DOM.summaryAddonsPrice.textContent = `+₹${addonsCost.toLocaleString()}`;
+      } else {
+        DOM.summaryAddonsRow.style.display = "none";
+      }
+
+      if (discountAmount > 0) {
+        DOM.summaryDiscountRow.style.display = "flex";
+        DOM.summaryDiscountPrice.textContent = `-₹${discountAmount.toLocaleString()}`;
+      } else {
+        DOM.summaryDiscountRow.style.display = "none";
+      }
+
+      DOM.summaryGstPrice.textContent = `₹${gstAmount.toLocaleString()}`;
+
+      // Animated Total Count-Up
+      if (animate && lastAnimatedTotal !== grandTotal) {
+        animateValue(DOM.totalAmountAnimated, lastAnimatedTotal || grandTotal, grandTotal, 400);
+      } else {
+        DOM.totalAmountAnimated.textContent = grandTotal.toLocaleString();
+      }
+      lastAnimatedTotal = grandTotal;
+    }
+
+    /**
+     * 60FPS NUMBER COUNT-UP ANIMATION
+     */
+    function animateValue(elem, start, end, duration) {
+      const range = end - start;
+      const minTimer = 20;
+      const stepTime = Math.max(Math.floor(duration / Math.abs(range || 1)), minTimer);
+      const startTime = new Date().getTime();
+      const endTime = startTime + duration;
+
+      function run() {
+        const now = new Date().getTime();
+        const remaining = Math.max((endTime - now) / duration, 0);
+        const value = Math.round(end - (remaining * range));
+        elem.textContent = value.toLocaleString();
+        if (value !== end) {
+          requestAnimationFrame(run);
+        }
+      }
+      requestAnimationFrame(run);
+    }
+
+    /**
+     * PLAYER COUNT STEPPER
+     */
+    function initPlayerCountStepper() {
+      DOM.playerDecBtn.addEventListener("click", () => {
+        if (AppState.playerCount > 2) {
+          AppState.playerCount--;
+          DOM.playerCountVal.textContent = AppState.playerCount;
+        }
+      });
+      DOM.playerIncBtn.addEventListener("click", () => {
+        if (AppState.playerCount < 30) {
+          AppState.playerCount++;
+          DOM.playerCountVal.textContent = AppState.playerCount;
+        }
+      });
+    }
+
+    /**
+     * ADD-ONS SELECTION
+     */
+    function initAddons() {
+      DOM.addonBibs.addEventListener("change", (e) => {
+        AppState.addons.bibs = e.target.checked;
+        updateBookingSummary();
+      });
+      DOM.addonBall.addEventListener("change", (e) => {
+        AppState.addons.ball = e.target.checked;
+        updateBookingSummary();
+      });
+    }
+
+    /**
+     * PROMO CODE LOGIC
+     */
+    function initPromoCode() {
+      DOM.applyPromoBtn.addEventListener("click", () => {
+        const code = DOM.promoCodeInput.value.trim().toUpperCase();
+        if (!code) return;
+
+        if (code === "TURF10" || code === "TURFPRO10" || code === "APEX10") {
+          AppState.promoDiscountPercent = 10;
+          AppState.appliedPromoCode = code;
+          DOM.promoFeedback.style.display = "block";
+          DOM.promoFeedback.style.color = "#43e97b";
+          DOM.promoFeedback.textContent = "🎉 Promo code applied! 10% discount on total.";
+          showToast("Promo Code applied successfully! (-10%)");
+        } else {
+          AppState.promoDiscountPercent = 0;
+          DOM.promoFeedback.style.display = "block";
+          DOM.promoFeedback.style.color = "#ff6e6e";
+          DOM.promoFeedback.textContent = "❌ Invalid promo code. Try 'TURF10'.";
+        }
+        updateBookingSummary();
+      });
+    }
+
+    /**
+     * BOOKING SUBMISSION & VALIDATION
+     */
+    function submitBooking() {
+      const name = DOM.userName.value.trim();
+      const phone = DOM.userPhone.value.trim();
+
+      // Validation
+      if (!name) {
+        showToast("⚠️ Please enter booker / captain name.");
+        DOM.userName.focus();
+        return;
+      }
+
+      const phoneRegex = /^[0-9]{10}$/;
+      if (!phoneRegex.test(phone.replace(/\D/g, ''))) {
+        showToast("⚠️ Please enter a valid 10-digit mobile number.");
+        DOM.userPhone.focus();
+        return;
+      }
+
+      // Check slot double-booking collision
+      const slotKey = `${AppState.selectedTurfId}_${AppState.selectedDateISO}_${AppState.selectedSlotId}`;
+      if (AppState.bookedSlotsRegistry.has(slotKey)) {
+        showToast("❌ Oh no! This slot was just booked. Please pick another slot.");
+        goToStep(2);
+        return;
+      }
+
+      // Register slot as booked in-memory
+      AppState.bookedSlotsRegistry.add(slotKey);
+
+      // Create new booking entity
+      const currentTurf = TURFS_DATA.find(t => t.id === AppState.selectedTurfId);
+      const currentSlot = TIME_SLOTS_DEF.find(s => s.id === AppState.selectedSlotId);
+      const bookingId = `APEX-${Math.floor(10000 + Math.random() * 90000)}`;
+
+      const newBooking = {
+        id: bookingId,
+        turfId: currentTurf.id,
+        turfName: currentTurf.name,
+        sport: currentTurf.sport,
+        dateISO: AppState.selectedDateISO,
+        dateFormatted: DOM.summaryDateVal.textContent,
+        slotId: currentSlot.id,
+        timeSlot: currentSlot.label,
+        durationHours: AppState.durationHours,
+        bookerName: name,
+        phone: phone,
+        totalAmount: lastAnimatedTotal,
+        status: "confirmed"
+      };
+
+      // Add to session bookings (at front)
+      AppState.myBookings.unshift(newBooking);
+
+      // Render updated list
+      renderMyBookingsList();
+      renderTimeSlotGrid();
+
+      // Trigger Confirmation modal & confetti
+      openConfirmationModal(newBooking);
+    }
+
+    /**
+     * CONFIRMATION MODAL & CONFETTI SYSTEM
+     */
+    function initConfirmationModal() {
+      DOM.modalCloseBtn.addEventListener("click", () => {
+        DOM.confirmationModal.classList.remove("active");
+        goToStep(1);
+        const myBookingsSection = document.getElementById("my-bookings");
+        myBookingsSection.scrollIntoView({ behavior: "smooth" });
+      });
+
+      DOM.modalPrintTicketBtn.addEventListener("click", () => {
+        window.print();
+      });
+
+      DOM.confirmationModal.addEventListener("click", (e) => {
+        if (e.target === DOM.confirmationModal) {
+          DOM.confirmationModal.classList.remove("active");
+        }
+      });
+    }
+
+    function openConfirmationModal(booking) {
+      DOM.modalBookingId.textContent = `#${booking.id}`;
+      DOM.modalTicketTurfName.textContent = booking.turfName;
+      DOM.modalTicketDate.textContent = booking.dateFormatted;
+      DOM.modalTicketTime.textContent = booking.timeSlot;
+      DOM.modalTicketName.textContent = booking.bookerName;
+      DOM.modalTicketAmount.textContent = `₹${booking.totalAmount.toLocaleString()}`;
+
+      DOM.confirmationModal.classList.add("active");
+      launchConfetti();
+    }
+
+    /**
+     * PURE CANVAS CONFETTI BURST (Zero External Dependencies)
+     */
+    function launchConfetti() {
+      const canvas = DOM.confettiCanvas;
+      const ctx = canvas.getContext("2d");
+      const dpr = window.devicePixelRatio || 1;
+
+      canvas.width = canvas.offsetWidth * dpr;
+      canvas.height = canvas.offsetHeight * dpr;
+      ctx.scale(dpr, dpr);
+
+      const colors = ["#C6FF3D", "#0B6E4F", "#0FA968", "#FF8A3D", "#FFFFFF", "#FFD23F"];
+      const particleCount = 80;
+      const particles = [];
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: canvas.offsetWidth / 2,
+          y: canvas.offsetHeight / 3,
+          vx: (Math.random() - 0.5) * 14,
+          vy: (Math.random() - 0.7) * 16,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 12,
+          gravity: 0.35,
+          opacity: 1
+        });
+      }
+
+      let animationFrameId;
+
+      function render() {
+        ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+        let activeParticles = 0;
+
+        particles.forEach(p => {
+          if (p.opacity > 0) {
+            activeParticles++;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += p.gravity;
+            p.rotation += p.rotationSpeed;
+            p.opacity -= 0.012;
+
+            ctx.save();
+            ctx.globalAlpha = Math.max(0, p.opacity);
+            ctx.translate(p.x, p.y);
+            ctx.rotate((p.rotation * Math.PI) / 180);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+            ctx.restore();
+          }
+        });
+
+        if (activeParticles > 0) {
+          animationFrameId = requestAnimationFrame(render);
+        } else {
+          cancelAnimationFrame(animationFrameId);
+          ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+        }
+      }
+
+      render();
+    }
+
+    /**
+     * RENDER MY BOOKINGS SECTION
+     */
+    function renderMyBookingsList() {
+      DOM.myBookingsList.innerHTML = "";
+      DOM.navBookingsCount.textContent = AppState.myBookings.filter(b => b.status === "confirmed").length;
+
+      if (AppState.myBookings.length === 0) {
+        DOM.myBookingsList.innerHTML = `
+          <div class="empty-bookings-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <h3 class="brand-font" style="font-size: 1.3rem; margin-bottom: 0.4rem;">No Bookings Found in This Session</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.2rem;">Ready to play? Choose an arena and reserve your preferred match slot.</p>
+            <a href="#booking" class="btn btn-primary ripple-btn">Book A Turf Now</a>
+          </div>
+        `;
+        return;
+      }
+
+      AppState.myBookings.forEach(booking => {
+        const itemCard = document.createElement("div");
+        itemCard.className = "booking-item-card reveal-on-scroll revealed";
+
+        const isCancelled = booking.status === "cancelled";
+        const sportEmoji = booking.sport === "football" ? "⚽" : (booking.sport === "cricket" ? "🏏" : "🏸");
+
+        itemCard.innerHTML = `
+          <div class="booking-item-info">
+            <div class="booking-item-icon">${sportEmoji}</div>
+            <div class="booking-item-details">
+              <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.2rem;">
+                <h4 class="brand-font">${booking.turfName}</h4>
+                <span class="booking-status-badge ${isCancelled ? 'status-cancelled' : 'status-confirmed'}">
+                  ${isCancelled ? 'Cancelled' : 'Confirmed'}
+                </span>
+              </div>
+              <div class="booking-item-meta">
+                <span class="meta-tag">📅 ${booking.dateFormatted}</span>
+                <span class="meta-tag">⏰ ${booking.timeSlot}</span>
+                <span class="meta-tag">👤 ${booking.bookerName}</span>
+                <span class="meta-tag" style="color: var(--accent-lime); font-weight: 700;">₹${booking.totalAmount.toLocaleString()}</span>
+              </div>
+            </div>
+          </div>
+          <div class="booking-item-actions">
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: monospace;">#${booking.id}</span>
+            ${!isCancelled ? `
+              <button class="btn-cancel-booking" onclick="cancelBooking('${booking.id}')">
+                Cancel Slot
+              </button>
+            ` : `
+              <span style="font-size: 0.78rem; color: #ff6e6e;">Slot Released</span>
+            `}
+          </div>
+        `;
+
+        DOM.myBookingsList.appendChild(itemCard);
+      });
+    }
+
+    /**
+     * CANCEL BOOKING & RELEASE SLOT
+     */
+    window.cancelBooking = function(bookingId) {
+      const booking = AppState.myBookings.find(b => b.id === bookingId);
+      if (!booking) return;
+
+      const confirmCancel = confirm(`Are you sure you want to cancel the booking #${bookingId} for ${booking.turfName}? Your slot will be freed immediately.`);
+      if (!confirmCancel) return;
+
+      booking.status = "cancelled";
+
+      // Release slot from in-memory set so it becomes available immediately
+      const slotKey = `${booking.turfId}_${booking.dateISO}_${booking.slotId}`;
+      AppState.bookedSlotsRegistry.delete(slotKey);
+
+      renderMyBookingsList();
+      renderTimeSlotGrid();
+      showToast(`Slot #${bookingId} has been successfully cancelled & released.`);
+    };
+
+    /**
+     * SPORT FILTER TABS
+     */
+    function initSportFilterTabs() {
+      const chips = document.querySelectorAll(".filter-chip");
+      chips.forEach(chip => {
+        chip.addEventListener("click", () => {
+          chips.forEach(c => {
+            c.classList.remove("active");
+            c.setAttribute("aria-selected", "false");
+          });
+          chip.classList.add("active");
+          chip.setAttribute("aria-selected", "true");
+
+          const sport = chip.dataset.sport;
+          renderTurfCatalog(sport);
+        });
+      });
+    }
+
+    /**
+     * THEME TOGGLE (LIGHT / DARK MODE)
+     */
+    function initThemeToggle() {
+      DOM.themeToggleBtn.addEventListener("click", () => {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", newTheme);
+
+        if (newTheme === "light") {
+          DOM.themeIconSun.style.display = "none";
+          DOM.themeIconMoon.style.display = "block";
+          showToast("☀️ Switched to Light Mode");
+        } else {
+          DOM.themeIconSun.style.display = "block";
+          DOM.themeIconMoon.style.display = "none";
+          showToast("🌙 Switched to Dark Mode");
+        }
+      });
+    }
+
+    /**
+     * MATERIAL RIPPLE EFFECT ON BUTTONS
+     */
+    function initRippleButtons() {
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".ripple-btn, .btn");
+        if (!btn) return;
+
+        const circle = document.createElement("span");
+        const diameter = Math.max(btn.clientWidth, btn.clientHeight);
+        const radius = diameter / 2;
+
+        const rect = btn.getBoundingClientRect();
+        circle.style.width = circle.style.height = `${diameter}px`;
+        circle.style.left = `${e.clientX - rect.left - radius}px`;
+        circle.style.top = `${e.clientY - rect.top - radius}px`;
+        circle.classList.add("ripple");
+
+        const existingRipple = btn.querySelector(".ripple");
+        if (existingRipple) {
+          existingRipple.remove();
+        }
+
+        btn.appendChild(circle);
+      });
+    }
+
+    /**
+     * INTERSECTION OBSERVER FOR REVEAL ON SCROLL
+     */
+    function initScrollReveal() {
+      const reveals = document.querySelectorAll(".reveal-on-scroll");
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("revealed");
+            }
+          });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(el => observer.observe(el));
+      } else {
+        reveals.forEach(el => el.classList.add("revealed"));
+      }
+    }
+
+    /**
+     * TOAST NOTIFICATION UTILITY
+     */
+    let toastTimeout;
+    function showToast(msg, icon = "⚡") {
+      clearTimeout(toastTimeout);
+      DOM.toastMsg.textContent = msg;
+      DOM.toastIcon.textContent = icon;
+      DOM.toastNotification.classList.add("active");
+
+      toastTimeout = setTimeout(() => {
+        DOM.toastNotification.classList.remove("active");
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
