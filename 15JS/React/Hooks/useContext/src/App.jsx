@@ -1,10 +1,18 @@
-
 import Home from "./Home";
+import { UserContext } from "./UserContext";
 
 function App() {
 
+  const user = "James";
+
   return (
-    <Home />
+
+    <UserContext.Provider value={user}>
+
+      <Home />
+
+    </UserContext.Provider>
+
   );
 
 }
