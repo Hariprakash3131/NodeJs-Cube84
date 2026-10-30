@@ -3,7 +3,7 @@ import { UserContext } from "./UserContext";
 
 function App() {
 
-  const user = "J  ames";
+  const user = "James";
 
   return (
 
