@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Position Relative</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f4f4;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* ==========================
+            Example 1
+        ========================== */
+
+        .box {
+            width: 180px;
+            height: 100px;
+            background: royalblue;
+            color: white;
+            text-align: center;
+            line-height: 100px;
+            font-size: 22px;
+
+            position: relative;
+            top: 20px;
+            left: 40px;
+        }
+
+        /* ==========================
+            Example 2
+        ========================== */
+
+        .container {
+            margin-top: 60px;
+        }
+
+        .red {
+            width: 150px;
+            height: 150px;
+            background: red;
+        }
+
+        .blue {
+            width: 150px;
+            height: 150px;
+            background: dodgerblue;
+
+            position: relative;
+            top: -50px;
+            left: 60px;
+        }
+
+        /* ==========================
+            Example 3
+        ========================== */
+
+        .card {
+            position: relative;
+
+            width: 300px;
+            margin-top: 60px;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .sale {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+
+            background: red;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* ==========================
+            Example 4
+        ========================== */
+
+        .notification {
+            margin-top: 60px;
+
+            width: 80px;
+            height: 80px;
+
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 45px;
+
+            position: relative;
+        }
+
+        .count {
+            position: absolute;
+
+            top: -8px;
+            right: -8px;
+
+            width: 28px;
+            height: 28px;
+
+            border-radius: 50%;
+            background: red;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>CSS Position: Relative</h1>
+
+    <!-- Example 1 -->
+    <h2>Example 1 - Move Element</h2>
+
+    <div class="box">
+        Hello
+    </div>
+
+
+    <!-- Example 2 -->
+    <h2>Example 2 - Relative Position</h2>
+
+    <div class="container">
+
+        <div class="red"></div>
+
+        <div class="blue"></div>
+
+    </div>
+
+
+    <!-- Example 3 -->
+    <h2>Example 3 - Product Card</h2>
+
+    <div class="card">
+
+        <img src="https://picsum.photos/300/200" alt="">
+
+        <span class="sale">SALE</span>
+
+    </div>
+
+
+    <!-- Example 4 -->
+    <h2>Example 4 - Notification Icon</h2>
+
+    <div class="notification">
+
+        🔔
+
+        <span class="count">5</span>
+
+    </div>
+
+</body>
+
+</html>

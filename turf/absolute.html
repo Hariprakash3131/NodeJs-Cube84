@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relative & Absolute Example</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f4f4f4;
+            padding:40px;
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:40px;
+        }
+
+        .container{
+            width:700px;
+            margin:20px;
+        }
+
+        /* Parent */
+        .card{
+            width:350px;
+            height:220px;
+            background:white;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,.2);
+
+            /* IMPORTANT */
+            position:relative;
+            left: 440px;
+            overflow:hidden;
+        }
+
+        .card img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+
+        /* SALE Badge */
+        .sale{
+            position:absolute;
+            top:10px;
+            right:10px;
+
+            background:red;
+            color:white;
+
+            padding:8px 15px;
+            border-radius:5px;
+            font-weight:bold;
+        }
+
+        /* Price */
+        .price{
+            position:absolute;
+            bottom:15px;
+            left:15px;
+
+            background:black;
+            color:white;
+
+            padding:10px 15px;
+            border-radius:5px;
+        }
+
+        /* Wishlist */
+        .wishlist{
+            position:absolute;
+            bottom:15px;
+            right:55px;
+
+            background:white;
+            width:45px;
+            height:45px;
+            border-radius:50%;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            font-size:22px;
+        }
+
+        /* Relative Box Example */
+        .box{
+            width:150px;
+            height:100px;
+            background:royalblue;
+            color:white;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            margin-top:60px;
+
+            position:relative;
+            left:50px;
+            top:20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>CSS Relative & Absolute Example</h1>
+
+<div class="container">
+
+    <h2>Example 1 : Relative</h2>
+
+    <div class="box">
+        Relative Box
+    </div>
+
+    <br><br><br>
+
+    <h2>Example 2 : Relative + Absolute</h2>
+
+    <div class="card">
+
+        <img src="https://picsum.photos/350/220" alt="Product">
+
+        <div class="sale">SALE</div>
+
+        <div class="price">₹999</div>
+
+        <div class="wishlist">❤</div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
