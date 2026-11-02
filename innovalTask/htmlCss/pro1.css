@@ -45,7 +45,6 @@ body{
     color:orange;
 }
 
-/* Hero */
 
 .hero{
     height:90vh;
@@ -86,7 +85,7 @@ body{
     background:red;
 }
 
-/* Section */
+
 
 .section-title{
     text-align:center;
@@ -94,7 +93,7 @@ body{
     font-size:40px;
 }
 
-/* Products */
+
 
 .product-container{
     width:90%;
@@ -141,14 +140,13 @@ body{
     border:none;
     cursor:pointer;
     border-radius:5px;
-    transition:.3s;
+    /* transition:.3s; */
 }
 
 .card button:hover{
     background:orange;
 }
 
-/* About */
 
 .about{
     width:80%;
@@ -190,7 +188,6 @@ form button:hover{
     background:orange;
 }
 
-/* Footer */
 
 footer{
     background:#111;
@@ -215,7 +212,6 @@ footer{
     color:orange;
 }
 
-/* Responsive */
 
 @media(max-width:768px){
 
