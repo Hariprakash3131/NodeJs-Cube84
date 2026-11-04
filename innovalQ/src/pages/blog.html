@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <!-- @include partials/meta-head.html title="Insights, Engineering & Tech Articles" description="Read deep dives on modern cloud infrastructure, systems design, software reliability, and product engineering from the Servora team." -->
+</head>
+<body class="bg-white dark:bg-[#080c14] text-slate-800 dark:text-slate-100 antialiased selection:bg-primary-500 selection:text-white relative overflow-x-hidden">
+
+  <!-- Header Navigation -->
+  <!-- @include partials/navbar.html -->
+
+  <main id="main-content" 
+        x-data="{ 
+          selectedCat: 'all',
+          searchQuery: '',
+          currentPage: 1,
+          articles: [
+            {
+              id: 1,
+              title: 'Designing High-Throughput Event Streams with Kafka and Edge Workers',
+              excerpt: 'Practical benchmarks and topological patterns for sub-10ms event distribution across multi-region server clusters.',
+              category: 'architecture',
+              categoryName: 'Architecture',
+              readTime: '6 min read',
+              date: 'Nov 4, 2026',
+              author: 'David Chen',
+              authorRole: 'CTO',
+              authorImg: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80',
+              image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+              id: 2,
+              title: 'Zero Trust in Practice: De-risking Distributed Engineering Teams',
+              excerpt: 'How modern enterprises implement least-privilege IAM and ephemeral secrets without degrading developer experience.',
+              category: 'security',
+              categoryName: 'Security',
+              readTime: '8 min read',
+              date: 'Oct 28, 2026',
+              author: 'Liam O\'Connor',
+              authorRole: 'VP Security',
+              authorImg: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80',
+              image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+              id: 3,
+              title: 'Production-Grade RAG: Eliminating Hallucinations in Financial AI',
+              excerpt: 'Lessons learned deploying hybrid vector search and re-ranking algorithms across 10M+ compliance documents.',
+              category: 'ai',
+              categoryName: 'AI & Data',
+              readTime: '5 min read',
+              date: 'Oct 21, 2026',
+              author: 'Sarah Jenkins',
+              authorRole: 'CEO',
+              authorImg: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80',
+              image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+              id: 4,
+              title: 'The Blueprint for Multi-Tenant Database Partitioning at Scale',
+              excerpt: 'Managing noisy-neighbor problems and data isolation using Postgres row-level security and schema-per-tenant designs.',
+              category: 'architecture',
+              categoryName: 'Architecture',
+              readTime: '7 min read',
+              date: 'Oct 14, 2026',
+              author: 'David Chen',
+              authorRole: 'CTO',
+              authorImg: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80',
+              image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+              id: 5,
+              title: 'Bridging Design Tokens between Figma and Tailwind CSS',
+              excerpt: 'Automating the pipeline between UI designers and front-end code with token transforms and GitHub Actions.',
+              category: 'design',
+              categoryName: 'Design Systems',
+              readTime: '4 min read',
+              date: 'Oct 07, 2026',
+              author: 'Amira Al-Mansoor',
+              authorRole: 'Head of Design',
+              authorImg: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80',
+              image: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+              id: 6,
+              title: 'How We Scaled Microservices to 4.2 Billion Requests/Month',
+              excerpt: 'A comprehensive infrastructure post-mortem: caching hierarchies, Envoy service mesh, and Kubernetes optimizations.',
+              category: 'devops',
+              categoryName: 'Cloud & DevOps',
+              readTime: '10 min read',
+              date: 'Sep 30, 2026',
+              author: 'Sarah Jenkins',
+              authorRole: 'CEO',
+              authorImg: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80',
+              image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80'
+            }
+          ],
+          filteredArticles() {
+            return this.articles.filter(a => {
+              const matchCat = this.selectedCat === 'all' || a.category === this.selectedCat;
+              const matchSearch = a.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                                  a.excerpt.toLowerCase().includes(this.searchQuery.toLowerCase());
+              return matchCat && matchSearch;
+            });
+          }
+        }">
+
+    <!-- Page Header & Featured Article Banner -->
+    <section class="pt-32 pb-16 bg-slate-50/50 dark:bg-slate-900/30 border-b border-slate-200/60 dark:border-slate-800/60 text-start">
+      <div class="container mx-auto max-w-6xl">
+        
+        <div class="max-w-2xl mb-12">
+          <span class="badge-primary mb-3">Servora Engineering Journal</span>
+          <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900 dark:text-white leading-tight">
+            Architectural Insights & Engineering Reports
+          </h1>
+          <p class="text-slate-600 dark:text-slate-300 text-base mt-3">
+            In-depth analysis, production post-mortems, and technology blueprints authored by our principal architects.
+          </p>
+        </div>
+
+        <!-- Featured Post Hero Card -->
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 overflow-hidden shadow-xl grid lg:grid-cols-12 gap-0 group">
+          <div class="lg:col-span-7 aspect-video lg:aspect-auto overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80" 
+                 alt="Featured post" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          </div>
+          <div class="lg:col-span-5 p-8 sm:p-10 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-3">
+                <span class="badge-primary text-[10px]">Lead Story</span>
+                <span class="text-xs text-slate-400">Architecture • 6 min read</span>
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-bold font-display text-slate-900 dark:text-white mb-4 group-hover:text-primary-600 transition-colors">
+                <a href="/blog-details.html">Designing High-Throughput Event Streams with Kafka and Edge Workers</a>
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                How our distributed engineering team achieved sub-10ms event distribution across 3 global regions with 99.999% message delivery guarantees.
+              </p>
+            </div>
+            
+            <div class="flex items-center justify-between pt-6 border-t border-slate-100 dark:border-slate-800">
+              <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80" alt="David Chen" class="w-9 h-9 rounded-full object-cover" />
+                <div>
+                  <p class="text-xs font-bold text-slate-900 dark:text-white">David Chen</p>
+                  <p class="text-[10px] text-slate-400">Chief Technology Officer</p>
+                </div>
+              </div>
+              <a href="/blog-details.html" class="btn-primary text-xs py-2 px-4">Read Article &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Filter Pills & Search Bar -->
+    <section class="py-8 bg-white dark:bg-[#080c14] border-b border-slate-200/60 dark:border-slate-800/60 sticky top-16 z-20 backdrop-blur-md bg-white/90 dark:bg-[#080c14]/90">
+      <div class="container mx-auto max-w-6xl flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- Category Filter Pills -->
+        <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
+          <button type="button" @click="selectedCat = 'all'" :class="selectedCat === 'all' ? 'bg-primary-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap">All Topics</button>
+          <button type="button" @click="selectedCat = 'architecture'" :class="selectedCat === 'architecture' ? 'bg-primary-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap">Architecture</button>
+          <button type="button" @click="selectedCat = 'security'" :class="selectedCat === 'security' ? 'bg-primary-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap">Security</button>
+          <button type="button" @click="selectedCat = 'ai'" :class="selectedCat === 'ai' ? 'bg-primary-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap">AI & Data</button>
+          <button type="button" @click="selectedCat = 'design'" :class="selectedCat === 'design' ? 'bg-primary-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap">Design</button>
+          <button type="button" @click="selectedCat = 'devops'" :class="selectedCat === 'devops' ? 'bg-primary-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap">DevOps</button>
+        </div>
+
+        <!-- Search Input -->
+        <div class="relative w-full md:w-72">
+          <input type="text" 
+                 x-model="searchQuery" 
+                 placeholder="Search articles by keyword..." 
+                 class="w-full ps-9 pe-3 py-2 rounded-xl text-xs bg-slate-100 dark:bg-slate-800 border-none text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:ring-2 focus:ring-primary-500 outline-none" />
+          <svg class="w-4 h-4 absolute start-3 top-1/2 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="py-16 bg-white dark:bg-[#080c14]">
+      <div class="container mx-auto max-w-6xl">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-start">
+          <template x-for="item in filteredArticles()" :key="item.id">
+            <article class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-card-hover transition-all flex flex-col group">
+              <a href="/blog-details.html" class="aspect-video overflow-hidden block">
+                <img :src="item.image" :alt="item.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              </a>
+              <div class="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center gap-2 text-xs text-slate-400 mb-2">
+                    <span class="badge-primary text-[10px]" x-text="item.categoryName"></span>
+                    <span>•</span>
+                    <span x-text="item.readTime"></span>
+                  </div>
+                  <h3 class="font-bold text-base text-slate-900 dark:text-white mb-2 group-hover:text-primary-600 transition-colors">
+                    <a href="/blog-details.html" x-text="item.title"></a>
+                  </h3>
+                  <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4" x-text="item.excerpt"></p>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
+                  <div class="flex items-center gap-2">
+                    <img :src="item.authorImg" :alt="item.author" class="w-6 h-6 rounded-full object-cover" />
+                    <span class="font-semibold text-slate-700 dark:text-slate-300" x-text="item.author"></span>
+                  </div>
+                  <span class="text-slate-400" x-text="item.date"></span>
+                </div>
+              </div>
+            </article>
+          </template>
+        </div>
+
+        <!-- Pagination UI -->
+        <nav class="flex items-center justify-center gap-2 mt-16" aria-label="Pagination">
+          <button type="button" class="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">&larr; Previous</button>
+          <button type="button" class="w-9 h-9 rounded-xl bg-primary-600 text-white text-xs font-bold shadow-sm">1</button>
+          <button type="button" class="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">2</button>
+          <button type="button" class="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">3</button>
+          <button type="button" class="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">Next &rarr;</button>
+        </nav>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Main Footer -->
+  <!-- @include partials/footer.html -->
+
+  <!-- Floating Customizer Demo Panel -->
+  <!-- @include partials/demo-panel.html -->
+
+    <script defer src="{{root}}js/animations.bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.initAnimations) window.initAnimations();
+    });
+  </script>
+
+</body>
+</html>
+

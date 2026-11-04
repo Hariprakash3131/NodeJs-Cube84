@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <!-- @include partials/meta-head.html title="Component Library & Kitchen Sink — Servora" description="Explore the complete UI component library for Servora: buttons, form inputs, modals, tabs, accordions, and cards." -->
+</head>
+<body class="bg-white dark:bg-[#080c14] text-slate-800 dark:text-slate-100 antialiased selection:bg-primary-500 selection:text-white">
+
+  <!-- Header Navigation -->
+  <!-- @include partials/navbar.html -->
+
+  <main id="main-content" class="pt-28 pb-20">
+    <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-start space-y-16">
+      
+      <!-- Component Header -->
+      <div class="pt-4 border-b border-slate-200 dark:border-slate-800 pb-8">
+        <span class="badge-primary mb-3">Design System Components</span>
+        <h1 class="text-3xl sm:text-5xl font-extrabold font-display text-slate-900 dark:text-white mb-3">
+          Component Library & Kitchen Sink
+        </h1>
+        <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base">
+          Interactive showcase of all design tokens, form controls, cards, modals, and typography components.
+        </p>
+      </div>
+
+      <!-- 1. Buttons -->
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold font-display text-slate-900 dark:text-white">1. Buttons & Interactive Triggers</h2>
+        <div class="p-6 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-wrap items-center gap-3">
+          <button type="button" class="btn-primary">Primary Button</button>
+          <button type="button" class="btn-secondary">Secondary Button</button>
+          <button type="button" class="btn-outline">Outline Button</button>
+          <button type="button" class="btn-ghost">Ghost Button</button>
+          <button type="button" class="btn-primary" disabled style="opacity: 0.5; pointer-events: none;">Disabled</button>
+        </div>
+      </section>
+
+      <!-- 2. Badges -->
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold font-display text-slate-900 dark:text-white">2. Badges & Status Indicators</h2>
+        <div class="p-6 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-wrap items-center gap-3">
+          <span class="badge-primary">Primary Badge</span>
+          <span class="badge-success">Success Verified</span>
+          <span class="badge-warning">Pending Review</span>
+          <span class="badge-danger">High Priority</span>
+        </div>
+      </section>
+
+      <!-- 3. Form Inputs -->
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold font-display text-slate-900 dark:text-white">3. Form Controls & Inputs</h2>
+        <div class="p-6 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 max-w-xl space-y-4">
+          <div>
+            <label class="form-label text-xs">Standard Text Input</label>
+            <input type="text" placeholder="Enter placeholder text..." class="form-input text-xs" />
+          </div>
+          <div>
+            <label class="form-label text-xs">Dropdown Select</label>
+            <select class="form-input text-xs">
+              <option>Option 1: AWS Architecture</option>
+              <option>Option 2: Kubernetes DevOps</option>
+              <option>Option 3: Zero-Trust Security</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label text-xs">Textarea</label>
+            <textarea rows="3" placeholder="Enter multi-line text..." class="form-input text-xs"></textarea>
+          </div>
+          <div class="flex items-center gap-4 text-xs">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" checked aria-label="Demo active checkbox" class="rounded text-primary-600 focus:ring-primary-500" />
+              <span>Checkbox Active</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="demo-radio" checked aria-label="Demo radio option 1" class="text-primary-600 focus:ring-primary-500" />
+              <span>Radio 1</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="demo-radio" aria-label="Demo radio option 2" class="text-primary-600 focus:ring-primary-500" />
+              <span>Radio 2</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Alerts & Callouts -->
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold font-display text-slate-900 dark:text-white">4. Alerts & System Messages</h2>
+        <div class="space-y-3 max-w-2xl">
+          <div class="p-4 rounded-2xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900 text-blue-800 dark:text-blue-300 text-xs flex items-center justify-between">
+            <span><strong>Informational:</strong> Automated backup snapshot completed at 04:00 UTC.</span>
+            <span class="cursor-pointer">&times;</span>
+          </div>
+          <div class="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900 text-emerald-800 dark:text-emerald-300 text-xs flex items-center justify-between">
+            <span><strong>Success:</strong> Milestone 3 payment cleared. Production deployment scheduled.</span>
+            <span class="cursor-pointer">&times;</span>
+          </div>
+          <div class="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900 text-amber-800 dark:text-amber-300 text-xs flex items-center justify-between">
+            <span><strong>Warning:</strong> Cluster CPU utilization reached 78% in us-east-1.</span>
+            <span class="cursor-pointer">&times;</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Cards & Surface Elevation -->
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold font-display text-slate-900 dark:text-white">5. Card Styles</h2>
+        <div class="grid sm:grid-cols-3 gap-6">
+          <div class="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white mb-2">Standard Card</h3>
+            <p class="text-xs text-slate-500">Subtle border, clean surface contrast, optimized for high-density dashboards.</p>
+          </div>
+          <div class="p-6 rounded-3xl glass-card shadow-lg">
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white mb-2">Glassmorphism Card</h3>
+            <p class="text-xs text-slate-500">Backdrop blur effect with translucent border highlights.</p>
+          </div>
+          <div class="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl hover:scale-105 transition-all">
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white mb-2">Interactive Hover Card</h3>
+            <p class="text-xs text-slate-500">Card elevation scales smoothly with micro-animations on cursor enter.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Interactive Modal Trigger -->
+      <section class="space-y-4" x-data="{ modalOpen: false }">
+        <h2 class="text-xl font-bold font-display text-slate-900 dark:text-white">6. Modal Dialog</h2>
+        <button type="button" @click="modalOpen = true" class="btn-primary text-xs py-2 px-5">Open Interactive Demo Modal</button>
+
+        <div x-show="modalOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" style="display: none;">
+          <div @click.away="modalOpen = false" class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 max-w-md w-full border border-slate-200 dark:border-slate-800 shadow-2xl">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Accessible Modal Component</h3>
+            <p class="text-xs text-slate-500 leading-relaxed mb-6">
+              Traps focus, respects escape key dismissal, and features animated enter/leave states powered by Alpine.js.
+            </p>
+            <div class="flex justify-end gap-2">
+              <button type="button" @click="modalOpen = false" class="btn-secondary text-xs py-2 px-4">Dismiss</button>
+              <button type="button" @click="modalOpen = false; alert('Confirmed!');" class="btn-primary text-xs py-2 px-5">Confirm</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. Accordion -->
+      <section class="space-y-4" x-data="{ acc: 1 }">
+        <h2 class="text-xl font-bold font-display text-slate-900 dark:text-white">7. Collapsible Accordions</h2>
+        <div class="space-y-2 max-w-2xl">
+          <div class="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden">
+            <button @click="acc = (acc === 1 ? null : 1)" class="w-full p-4 text-xs font-bold flex justify-between">
+              <span>How does Servora ensure accessibility compliance?</span>
+              <span x-text="acc === 1 ? '−' : '+'"></span>
+            </button>
+            <div x-show="acc === 1" class="p-4 pt-0 text-xs text-slate-500">
+              All interactive components include semantic ARIA attributes, visible focus rings, and high contrast compliant with WCAG 2.2 AA.
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Main Footer -->
+  <!-- @include partials/footer.html -->
+
+  <!-- Floating Customizer Demo Panel -->
+  <!-- @include partials/demo-panel.html -->
+
+    <script defer src="{{root}}js/animations.bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.initAnimations) window.initAnimations();
+    });
+  </script>
+
+</body>
+</html>

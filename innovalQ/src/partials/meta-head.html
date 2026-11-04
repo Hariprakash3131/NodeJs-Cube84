@@ -1,0 +1,55 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{{title}} — Servora Multipurpose HTML5 Template</title>
+<meta name="description" content="{{description}}" />
+<meta name="author" content="Servora Agency & SaaS Solutions" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{title}} — Servora" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:image" content="/images/og-preview.jpg" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{title}} — Servora" />
+<meta name="twitter:description" content="{{description}}" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg>" />
+
+<!-- Preload & Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+<!-- Main Stylesheet (Compiled Standalone CSS) -->
+<link rel="stylesheet" href="{{root}}css/servora.min.css" />
+
+<!-- Core Servora Bundle (Alpine.js, Lenis, Theme & RTL Engine) -->
+<script defer src="{{root}}js/servora.bundle.js"></script>
+
+<!-- Immediate FOUC Prevention Script -->
+<script>
+  (function() {
+    try {
+      const theme = localStorage.getItem('servora_theme') || 
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      if (theme === 'dark') document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+
+      const color = localStorage.getItem('servora_color_theme');
+      if (color && color !== 'default') {
+        document.documentElement.setAttribute('data-theme', color);
+      }
+
+      const dir = localStorage.getItem('servora_dir') || 'ltr';
+      document.documentElement.setAttribute('dir', dir);
+      document.documentElement.setAttribute('lang', dir === 'rtl' ? 'ar' : 'en');
+    } catch (e) {}
+  })();
+</script>
+

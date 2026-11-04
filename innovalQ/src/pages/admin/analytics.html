@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <!-- @include partials/meta-head.html title="Analytics & Funnel Performance — Servora Admin" description="Deep performance telemetry, visitor-to-client conversion funnels, and traffic telemetry." -->
+</head>
+<body class="bg-slate-50 dark:bg-[#080c14] text-slate-800 dark:text-slate-100 antialiased selection:bg-primary-500 selection:text-white"
+      x-data="{ sidebarOpen: false, dateRange: '30days' }">
+
+  <!-- Sidebar -->
+  <!-- @include partials/admin-sidebar.html active_analytics="bg-primary-50 dark:bg-primary-950 text-primary-600 dark:text-primary-400 font-bold" -->
+
+  <div class="lg:ps-64 flex flex-col min-h-screen">
+    
+    <!-- Top Header -->
+    <!-- @include partials/admin-header.html -->
+
+    <main class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 text-start">
+      
+      <!-- Page Title & Date Range Picker -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold font-display text-slate-900 dark:text-white">
+            Telemetry & Funnel Analytics
+          </h1>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+            Conversion stages, traffic velocity, and high-yield service package metrics.
+          </p>
+        </div>
+
+        <!-- Date Range Filter -->
+        <div class="flex items-center gap-2">
+          <select x-model="dateRange" class="form-input text-xs py-2 w-40">
+            <option value="today">Today</option>
+            <option value="7days">Last 7 Days</option>
+            <option value="30days">Last 30 Days</option>
+            <option value="year">Year to Date (2026)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Conversion Funnel Chart Card -->
+      <div class="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-base font-bold text-slate-900 dark:text-white">Enterprise Conversion Funnel</h2>
+            <p class="text-xs text-slate-400">Step-by-step visitor qualification & contract close rate</p>
+          </div>
+          <span class="badge-success text-xs">Overall Conversion: 3.87%</span>
+        </div>
+        <div class="h-64 w-full relative">
+          <canvas id="funnelChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Top Pages & Geographic Performance -->
+      <div class="grid lg:grid-cols-12 gap-6">
+        
+        <!-- Top Pages Table (Spans 7) -->
+        <div class="lg:col-span-7 p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm">
+          <h2 class="text-base font-bold text-slate-900 dark:text-white mb-4">Top Converting Pages</h2>
+          <table class="w-full text-xs text-start border-collapse">
+            <thead>
+              <tr class="border-b border-slate-100 dark:border-slate-800 text-slate-400 font-bold uppercase text-[10px]">
+                <th class="py-2.5 px-3">Path</th>
+                <th class="py-2.5 px-3 text-end">Visitors</th>
+                <th class="py-2.5 px-3 text-end">Inquiries</th>
+                <th class="py-2.5 px-3 text-end">Rate</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+              <tr>
+                <td class="py-3 px-3 font-mono font-bold text-slate-900 dark:text-white">/service-details.html</td>
+                <td class="py-3 px-3 text-end">48,200</td>
+                <td class="py-3 px-3 text-end font-bold text-emerald-500">1,940</td>
+                <td class="py-3 px-3 text-end font-bold">4.02%</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-mono font-bold text-slate-900 dark:text-white">/pricing.html</td>
+                <td class="py-3 px-3 text-end">34,120</td>
+                <td class="py-3 px-3 text-end font-bold text-emerald-500">1,480</td>
+                <td class="py-3 px-3 text-end font-bold">4.33%</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-mono font-bold text-slate-900 dark:text-white">/home-saas.html</td>
+                <td class="py-3 px-3 text-end">28,900</td>
+                <td class="py-3 px-3 text-end font-bold text-emerald-500">920</td>
+                <td class="py-3 px-3 text-end font-bold">3.18%</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-mono font-bold text-slate-900 dark:text-white">/blog-details.html</td>
+                <td class="py-3 px-3 text-end">21,450</td>
+                <td class="py-3 px-3 text-end font-bold text-emerald-500">410</td>
+                <td class="py-3 px-3 text-end font-bold">1.91%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Regional Breakdown (Spans 5) -->
+        <div class="lg:col-span-5 p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm">
+          <h2 class="text-base font-bold text-slate-900 dark:text-white mb-4">Traffic by Geography</h2>
+          <div class="space-y-3 text-xs">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-bold text-slate-900 dark:text-white">North America (US & CA)</span>
+                <span class="text-slate-400">54%</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                <div class="h-full bg-primary-600 rounded-full w-[54%]"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-bold text-slate-900 dark:text-white">Europe (UK, DE, NL)</span>
+                <span class="text-slate-400">28%</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                <div class="h-full bg-secondary-500 rounded-full w-[28%]"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-bold text-slate-900 dark:text-white">Asia-Pacific (SG, JP, AU)</span>
+                <span class="text-slate-400">14%</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                <div class="h-full bg-emerald-500 rounded-full w-[14%]"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-bold text-slate-900 dark:text-white">Middle East & Others</span>
+                <span class="text-slate-400">4%</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                <div class="h-full bg-amber-500 rounded-full w-[4%]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <footer class="p-6 text-center text-xs text-slate-400 border-t border-slate-200 dark:border-slate-800">
+      &copy; 2026 Servora Enterprise Control Plane.
+    </footer>
+
+  </div>
+
+  <!-- Floating Customizer Demo Panel -->
+  <!-- @include partials/demo-panel.html -->
+
+  <!-- Scripts -->
+  <script defer src="{{root}}js/charts.bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.ChartsManager?.initFunnelChart) {
+        window.ChartsManager.initFunnelChart();
+      }
+    });
+  </script>
+
+</body>
+</html>
+

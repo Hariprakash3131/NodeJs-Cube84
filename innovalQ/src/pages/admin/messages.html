@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <!-- @include partials/meta-head.html title="Communications & Inbox — Servora Admin" description="Enterprise communications hub for direct client messaging, architectural inquiries, and project notifications." -->
+</head>
+<body class="bg-slate-50 dark:bg-[#080c14] text-slate-800 dark:text-slate-100 antialiased selection:bg-primary-500 selection:text-white"
+      x-data="{ 
+        sidebarOpen: false,
+        activeFolder: 'inbox',
+        composeOpen: false,
+        selectedMsgId: 1,
+        messages: [
+          {
+            id: 1,
+            sender: 'Elena Rostova',
+            company: 'Veloce Pay',
+            email: 'elena@velocepay.com',
+            avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=80&q=80',
+            subject: 'Canary Deployment 2 Verification & Staging Metrics',
+            date: '10:42 AM',
+            unread: true,
+            label: 'Sprint Review',
+            body: 'Hi David and Sarah,\n\nWe reviewed the latest Canary benchmarks from the staging cluster in us-east-1. The p99 latency dropped from 48ms down to 11.2ms after the eBPF routing update. Our security team signed off on the mTLS configuration.\n\nCould we proceed with migrating 25% of live traffic tomorrow at 09:00 UTC?\n\nBest regards,\nElena'
+          },
+          {
+            id: 2,
+            sender: 'Marcus Vance',
+            company: 'Aether Systems',
+            email: 'marcus@aether.io',
+            avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80',
+            subject: 'GraphQL Schema Federation Review',
+            date: 'Yesterday',
+            unread: false,
+            label: 'Architecture',
+            body: 'Hey team,\n\nI pushed the updated schema definitions for the billing subgraphs to the staging repo. Let us know when the automated contract test suite passes so we can merge.\n\nThanks,\nMarcus'
+          },
+          {
+            id: 3,
+            sender: 'Dr. Sophia Patel',
+            company: 'OmniHealth Labs',
+            email: 'spatel@omnihealth.org',
+            avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=80&q=80',
+            subject: 'Quarterly SOC 2 Compliance Report Sign-Off',
+            date: 'Nov 01',
+            unread: false,
+            label: 'Compliance',
+            body: 'Dear Servora Team,\n\nOur compliance auditor has approved the Terraform immutable audit trail setup. Thank you for the expedited turnaround on the HIPAA encryption keys.'
+          }
+        ],
+        get activeMessage() {
+          return this.messages.find(m => m.id === this.selectedMsgId) || this.messages[0];
+        }
+      }">
+
+  <!-- Sidebar -->
+  <!-- @include partials/admin-sidebar.html active_messages="bg-primary-50 dark:bg-primary-950 text-primary-600 dark:text-primary-400 font-bold" -->
+
+  <div class="lg:ps-64 flex flex-col min-h-screen">
+    
+    <!-- Top Header -->
+    <!-- @include partials/admin-header.html -->
+
+    <main class="flex-1 p-4 sm:p-6 lg:p-8 flex flex-col space-y-4 text-start">
+      
+      <!-- Top Title & Compose -->
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-2xl font-bold font-display text-slate-900 dark:text-white">Communication Center</h1>
+          <p class="text-xs text-slate-500">Direct client messaging channels and architectural thread history.</p>
+        </div>
+        <button type="button" @click="composeOpen = true" class="btn-primary text-xs py-2 px-4 flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          <span>Compose Message</span>
+        </button>
+      </div>
+
+      <!-- Split-Pane Inbox Grid -->
+      <div class="flex-1 grid lg:grid-cols-12 gap-4 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden min-h-[580px]">
+        
+        <!-- Column 1: Folders & Tags (Spans 2 on lg) -->
+        <div class="lg:col-span-3 border-e border-slate-100 dark:border-slate-800 p-4 space-y-6 hidden lg:block">
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-2 px-2">Folders</span>
+            <div class="space-y-1 text-xs">
+              <button @click="activeFolder = 'inbox'" class="w-full flex items-center justify-between p-2 rounded-xl font-bold" :class="activeFolder === 'inbox' ? 'bg-primary-50 dark:bg-primary-950/60 text-primary-600' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50'">
+                <span>Inbox</span>
+                <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-700">1</span>
+              </button>
+              <button @click="activeFolder = 'starred'" class="w-full flex items-center justify-between p-2 rounded-xl font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-50">
+                <span>Starred</span>
+              </button>
+              <button @click="activeFolder = 'sent'" class="w-full flex items-center justify-between p-2 rounded-xl font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-50">
+                <span>Sent</span>
+              </button>
+              <button @click="activeFolder = 'archive'" class="w-full flex items-center justify-between p-2 rounded-xl font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-50">
+                <span>Archive</span>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-2 px-2">Client Tags</span>
+            <div class="space-y-1 text-xs">
+              <span class="flex items-center gap-2 p-1.5 text-slate-600 dark:text-slate-400"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Sprint Review</span>
+              <span class="flex items-center gap-2 p-1.5 text-slate-600 dark:text-slate-400"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Architecture</span>
+              <span class="flex items-center gap-2 p-1.5 text-slate-600 dark:text-slate-400"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Compliance</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: Message List (Spans 4 on lg) -->
+        <div class="lg:col-span-4 border-e border-slate-100 dark:border-slate-800 flex flex-col">
+          <div class="p-3 border-b border-slate-100 dark:border-slate-800">
+            <input type="text" placeholder="Search conversations..." class="form-input text-xs py-1.5" />
+          </div>
+          <div class="flex-1 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800">
+            <template x-for="msg in messages" :key="msg.id">
+              <div @click="selectedMsgId = msg.id; msg.unread = false" 
+                   class="p-4 cursor-pointer transition-colors text-start"
+                   :class="selectedMsgId === msg.id ? 'bg-primary-50/50 dark:bg-primary-950/30' : 'hover:bg-slate-50 dark:hover:bg-slate-800/40'">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="font-bold text-xs text-slate-900 dark:text-white" x-text="msg.sender"></span>
+                  <span class="text-[10px] text-slate-400" x-text="msg.date"></span>
+                </div>
+                <p class="text-xs font-semibold text-slate-800 dark:text-slate-200 truncate mb-1" x-text="msg.subject"></p>
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] text-slate-400" x-text="msg.company"></span>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded font-bold bg-slate-100 dark:bg-slate-800 text-slate-500" x-text="msg.label"></span>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+
+        <!-- Column 3: Active Message Thread Pane (Spans 5 on lg) -->
+        <div class="lg:col-span-5 flex flex-col justify-between p-6">
+          <div>
+            <!-- Header -->
+            <div class="flex items-start justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-6">
+              <div class="flex items-center gap-3">
+                <img :src="activeMessage.avatar" :alt="activeMessage.sender" class="w-10 h-10 rounded-full object-cover ring-2 ring-primary-500/20" />
+                <div>
+                  <h3 class="font-bold text-sm text-slate-900 dark:text-white" x-text="activeMessage.sender"></h3>
+                  <p class="text-xs text-slate-400" x-text="activeMessage.email + ' • ' + activeMessage.company"></p>
+                </div>
+              </div>
+              <span class="badge-primary text-[10px]" x-text="activeMessage.label"></span>
+            </div>
+
+            <h2 class="text-base font-bold text-slate-900 dark:text-white mb-4" x-text="activeMessage.subject"></h2>
+
+            <div class="text-xs text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed mb-6" x-text="activeMessage.body"></div>
+          </div>
+
+          <!-- Quick Reply Area -->
+          <div class="pt-4 border-t border-slate-100 dark:border-slate-800">
+            <form onsubmit="event.preventDefault(); alert('Reply dispatched to ' + activeMessage.sender);">
+              <textarea rows="3" required placeholder="Write a response..." class="form-input text-xs mb-3"></textarea>
+              <div class="flex justify-between items-center">
+                <span class="text-[11px] text-slate-400">Ctrl + Enter to send</span>
+                <button type="submit" class="btn-primary text-xs py-2 px-4">Send Reply</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+    <footer class="p-6 text-center text-xs text-slate-400 border-t border-slate-200 dark:border-slate-800">
+      &copy; 2026 Servora Enterprise Control Plane.
+    </footer>
+
+  </div>
+
+  <!-- Compose Modal -->
+  <div x-show="composeOpen" 
+       x-transition:enter="transition ease-out duration-200"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-150"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm"
+       style="display: none;">
+    <div @click.away="composeOpen = false" class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 max-w-lg w-full border border-slate-200 dark:border-slate-800 shadow-2xl text-start">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-base font-bold text-slate-900 dark:text-white">New Communication</h3>
+        <button @click="composeOpen = false" class="text-slate-400 hover:text-slate-600" aria-label="Close compose modal">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <form class="space-y-3" onsubmit="event.preventDefault(); alert('Message dispatched!'); composeOpen = false;">
+        <div>
+          <label class="form-label text-xs">Recipient Email</label>
+          <input type="email" required placeholder="client@company.com" class="form-input text-xs" />
+        </div>
+        <div>
+          <label class="form-label text-xs">Subject</label>
+          <input type="text" required placeholder="Sprint Milestone Architecture Review" class="form-input text-xs" />
+        </div>
+        <div>
+          <label class="form-label text-xs">Message</label>
+          <textarea rows="5" required placeholder="Type your message..." class="form-input text-xs"></textarea>
+        </div>
+        <div class="pt-2 flex justify-end gap-2">
+          <button type="button" @click="composeOpen = false" class="btn-secondary text-xs py-2 px-4">Cancel</button>
+          <button type="submit" class="btn-primary text-xs py-2 px-5">Send Message</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Floating Customizer Demo Panel -->
+  <!-- @include partials/demo-panel.html -->
+
+    <script defer src="{{root}}js/animations.bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.initAnimations) window.initAnimations();
+    });
+  </script>
+
+</body>
+</html>

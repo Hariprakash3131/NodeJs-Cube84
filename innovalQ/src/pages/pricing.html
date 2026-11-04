@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <!-- @include partials/meta-head.html title="Transparent Pricing & Plans" description="Transparent engineering sprint packages, dedicated team pods, and enterprise SLA plans from Servora." -->
+</head>
+<body class="bg-white dark:bg-[#080c14] text-slate-800 dark:text-slate-100 antialiased selection:bg-primary-500 selection:text-white relative overflow-x-hidden">
+
+  <!-- Header Navigation -->
+  <!-- @include partials/navbar.html -->
+
+  <main id="main-content" x-data="{ annual: true }">
+    
+    <!-- Hero Header & Billing Switch -->
+    <section class="pt-32 pb-16 bg-slate-50/50 dark:bg-slate-900/30 border-b border-slate-200/60 dark:border-slate-800/60 text-center">
+      <div class="container mx-auto max-w-3xl">
+        <span class="badge-primary mb-3">Predictable Retainers</span>
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900 dark:text-white mb-4">
+          Transparent, ROI-driven <span class="gradient-text">pricing</span>.
+        </h1>
+        <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg mb-8">
+          No hidden hourly overhead. Senior talent, clear sprint milestones, and code ownership from day one.
+        </p>
+
+        <!-- Monthly / Annual Switcher -->
+        <div class="flex items-center justify-center gap-3">
+          <span class="text-xs font-semibold" :class="!annual ? 'text-slate-900 dark:text-white' : 'text-slate-400'">Monthly Billing</span>
+          <button type="button" 
+                  @click="annual = !annual" 
+                  class="w-13 h-7 rounded-full bg-slate-200 dark:bg-slate-800 p-1 relative transition-colors focus:outline-none"
+                  :class="annual ? 'bg-primary-600' : ''"
+                  aria-label="Toggle annual discount">
+            <div class="w-5 h-5 rounded-full bg-white shadow-md transform transition-transform"
+                 :class="annual ? 'translate-x-6' : 'translate-x-0'"></div>
+          </button>
+          <span class="text-xs font-semibold" :class="annual ? 'text-slate-900 dark:text-white' : 'text-slate-400'">
+            Annual Commitment <span class="text-emerald-500 font-bold">(Save 20%)</span>
+          </span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Pricing Tiers Grid (4 Tiers) -->
+    <section class="py-20 bg-white dark:bg-[#080c14]">
+      <div class="container mx-auto max-w-6xl">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-start">
+          
+          <!-- Tier 1: Starter -->
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 flex flex-col">
+            <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1">Starter Sprint</h3>
+            <p class="text-[11px] text-slate-400 mb-6">For initial code audits, prototypes, and targeted refactoring.</p>
+            <div class="flex items-baseline gap-1 mb-6">
+              <span class="text-3xl font-extrabold font-display text-slate-900 dark:text-white" x-text="annual ? '$2,900' : '$3,600'">$2,900</span>
+              <span class="text-xs text-slate-400">/ sprint</span>
+            </div>
+            <ul class="space-y-2.5 text-xs text-slate-600 dark:text-slate-400 flex-1 mb-6">
+              <li class="flex items-center gap-2"><span class="text-emerald-500">✓</span> 1 Senior Specialist Lead</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-500">✓</span> 1-Week Scope & Delivery</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-500">✓</span> Architectural Review Report</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-500">✓</span> Async Slack Channel</li>
+            </ul>
+            <a href="/contact.html" class="btn-secondary w-full text-center text-xs py-2">Get Started</a>
+          </div>
+
+          <!-- Tier 2: Growth -->
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 flex flex-col">
+            <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1">Growth Pod</h3>
+            <p class="text-[11px] text-slate-400 mb-6">For venture-backed startups scaling from MVP to Series A/B.</p>
+            <div class="flex items-baseline gap-1 mb-6">
+              <span class="text-3xl font-extrabold font-display text-slate-900 dark:text-white" x-text="annual ? '$5,900' : '$7,200'">$5,900</span>
+              <span class="text-xs text-slate-400">/ sprint</span>
+            </div>
+            <ul class="space-y-2.5 text-xs text-slate-600 dark:text-slate-400 flex-1 mb-6">
+              <li class="flex items-center gap-2"><span class="text-emerald-500">✓</span> 2 Senior Full-Stack Engineers</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-500">✓</span> 2-Week Sprint Deliveries</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-500">✓</span> Daily Standups & CI Staging</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-500">✓</span> Uptime SLA Monitoring</li>
+            </ul>
+            <a href="/contact.html" class="btn-secondary w-full text-center text-xs py-2">Select Growth</a>
+          </div>
+
+          <!-- Tier 3: Dedicated Pod (Featured) -->
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border-2 border-primary-500 shadow-xl shadow-primary-500/10 flex flex-col relative">
+            <div class="absolute -top-3 end-4">
+              <span class="badge-primary text-[10px]">Recommended</span>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1">Dedicated Squad</h3>
+            <p class="text-[11px] text-slate-400 mb-6">Multidisciplinary team delivering complete product roadmaps.</p>
+            <div class="flex items-baseline gap-1 mb-6">
+              <span class="text-3xl font-extrabold font-display text-primary-600 dark:text-primary-400" x-text="annual ? '$11,900' : '$14,500'">$11,900</span>
+              <span class="text-xs text-slate-400">/ month</span>
+            </div>
+            <ul class="space-y-2.5 text-xs text-slate-600 dark:text-slate-400 flex-1 mb-6">
+              <li class="flex items-center gap-2"><span class="text-emerald-500 font-bold">✓</span> 3 Senior Devs + 1 UI/UX Designer</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-500 font-bold">✓</span> Cloud & Kubernetes Architecture</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-500 font-bold">✓</span> SOC 2 Compliance Blueprints</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-500 font-bold">✓</span> 99.99% Production Guarantee</li>
+            </ul>
+            <a href="/contact.html" class="btn-primary w-full text-center text-xs py-2 shadow-sm">Choose Dedicated</a>
+          </div>
+
+          <!-- Tier 4: Enterprise -->
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 flex flex-col">
+            <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1">Enterprise Custom</h3>
+            <p class="text-[11px] text-slate-400 mb-6">Tailored org-wide digital transformation and modernization.</p>
+            <div class="flex items-baseline gap-1 mb-6">
+              <span class="text-3xl font-extrabold font-display text-slate-900 dark:text-white">Custom</span>
+              <span class="text-xs text-slate-400">/ RFP</span>
+            </div>
+            <ul class="space-y-2.5 text-xs text-slate-600 dark:text-slate-400 flex-1 mb-6">
+              <li class="flex items-center gap-2"><span class="text-emerald-500">✓</span> Multi-Pod Scalable Roster</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-500">✓</span> Fractional Executive Leadership</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-500">✓</span> Custom Enterprise SLA & BAA</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-500">✓</span> 24/7/365 Incident Hotline</li>
+            </ul>
+            <a href="/contact.html" class="btn-secondary w-full text-center text-xs py-2">Request RFP</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Comprehensive Feature Matrix Comparison Table -->
+    <section class="py-20 bg-slate-50/70 dark:bg-slate-900/40 border-y border-slate-200/60 dark:border-slate-800/60">
+      <div class="container mx-auto max-w-5xl">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl sm:text-3xl font-bold font-display text-slate-900 dark:text-white">
+            Feature & Capability Comparison
+          </h2>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-start text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 dark:border-slate-800 text-slate-400">
+                <th class="py-3 px-4 text-start font-bold uppercase tracking-wider">Features</th>
+                <th class="py-3 px-4 text-center font-bold">Starter</th>
+                <th class="py-3 px-4 text-center font-bold">Growth</th>
+                <th class="py-3 px-4 text-center font-bold text-primary-600 dark:text-primary-400">Dedicated Squad</th>
+                <th class="py-3 px-4 text-center font-bold">Enterprise</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+              <tr>
+                <td class="py-3 px-4 font-semibold">Engineering Lead</td>
+                <td class="py-3 px-4 text-center">1</td>
+                <td class="py-3 px-4 text-center">2</td>
+                <td class="py-3 px-4 text-center font-bold text-primary-600">3 + Designer</td>
+                <td class="py-3 px-4 text-center">Custom Pods</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-semibold">Automated CI/CD Staging</td>
+                <td class="py-3 px-4 text-center text-slate-400">—</td>
+                <td class="py-3 px-4 text-center text-emerald-500">✓</td>
+                <td class="py-3 px-4 text-center text-emerald-500">✓</td>
+                <td class="py-3 px-4 text-center text-emerald-500">✓</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-semibold">Kubernetes / Cloud IaC</td>
+                <td class="py-3 px-4 text-center text-slate-400">—</td>
+                <td class="py-3 px-4 text-center text-slate-400">—</td>
+                <td class="py-3 px-4 text-center text-emerald-500">✓</td>
+                <td class="py-3 px-4 text-center text-emerald-500">✓</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-semibold">SOC 2 / HIPAA Framework</td>
+                <td class="py-3 px-4 text-center text-slate-400">—</td>
+                <td class="py-3 px-4 text-center text-slate-400">—</td>
+                <td class="py-3 px-4 text-center text-emerald-500">✓</td>
+                <td class="py-3 px-4 text-center text-emerald-500">✓</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-semibold">Support Channel</td>
+                <td class="py-3 px-4 text-center">Async Slack</td>
+                <td class="py-3 px-4 text-center">Direct Slack</td>
+                <td class="py-3 px-4 text-center font-bold">Daily Standup</td>
+                <td class="py-3 px-4 text-center">24/7 Hotline</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-semibold">Uptime SLA Guarantee</td>
+                <td class="py-3 px-4 text-center text-slate-400">—</td>
+                <td class="py-3 px-4 text-center">99.9%</td>
+                <td class="py-3 px-4 text-center font-bold text-primary-600">99.99%</td>
+                <td class="py-3 px-4 text-center">99.999%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Main Footer -->
+  <!-- @include partials/footer.html -->
+
+  <!-- Floating Customizer Demo Panel -->
+  <!-- @include partials/demo-panel.html -->
+
+    <script defer src="{{root}}js/animations.bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.initAnimations) window.initAnimations();
+    });
+  </script>
+
+</body>
+</html>
+

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Client Portal Sign In — Servora Multipurpose HTML5 Template</title>
+<meta name="description" content="Sign in to your Servora client dashboard and project pipeline." />
+<meta name="author" content="Servora Agency & SaaS Solutions" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Client Portal Sign In — Servora" />
+<meta property="og:description" content="Sign in to your Servora client dashboard and project pipeline." />
+<meta property="og:image" content="/images/og-preview.jpg" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Client Portal Sign In — Servora" />
+<meta name="twitter:description" content="Sign in to your Servora client dashboard and project pipeline." />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg>" />
+
+<!-- Preload & Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+<!-- Main Stylesheet (Compiled Standalone CSS) -->
+<link rel="stylesheet" href="css/servora.min.css" />
+
+<!-- Core Servora Bundle (Alpine.js, Lenis, Theme & RTL Engine) -->
+<script defer src="js/servora.bundle.js"></script>
+
+<!-- Immediate FOUC Prevention Script -->
+<script>
+  (function() {
+    try {
+      const theme = localStorage.getItem('servora_theme') || 
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      if (theme === 'dark') document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+
+      const color = localStorage.getItem('servora_color_theme');
+      if (color && color !== 'default') {
+        document.documentElement.setAttribute('data-theme', color);
+      }
+
+      const dir = localStorage.getItem('servora_dir') || 'ltr';
+      document.documentElement.setAttribute('dir', dir);
+      document.documentElement.setAttribute('lang', dir === 'rtl' ? 'ar' : 'en');
+    } catch (e) {}
+  })();
+</script>
+
+
+</head>
+<body class="bg-white dark:bg-[#080c14] text-slate-800 dark:text-slate-100 antialiased selection:bg-primary-500 selection:text-white">
+
+  <main id="main-content" class="min-h-screen grid lg:grid-cols-12">
+    
+    <!-- Left Column: Visual Showcase (Hidden on small screens) -->
+    <div class="hidden lg:flex lg:col-span-5 bg-gradient-to-br from-slate-900 via-primary-950 to-slate-950 p-12 text-white flex-col justify-between relative overflow-hidden">
+      <div class="glow-orb w-80 h-80 bg-primary-500/20 top-1/4 start-1/4"></div>
+
+      <div class="relative z-10">
+        <a href="/index.html" class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary-600 to-secondary-500 flex items-center justify-center text-white shadow-md">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2" stroke-width="2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <span class="text-2xl font-extrabold tracking-tight font-display">Servora<span class="text-primary-500">.</span></span>
+        </a>
+      </div>
+
+      <div class="relative z-10 my-auto py-12 text-start">
+        <div class="badge-primary bg-white/10 text-white border-white/20 mb-4">Client Portal</div>
+        <h2 class="text-3xl font-extrabold font-display leading-tight mb-4">
+          Real-time visibility into your engineering sprints.
+        </h2>
+        <p class="text-slate-300 text-sm leading-relaxed mb-8">
+          Track sprint velocity, review staging deployments, access invoices, and communicate directly with your dedicated lead architect.
+        </p>
+
+        <!-- Testimonial snippet -->
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+          <p class="text-xs text-slate-200 italic mb-4">
+            "The Servora portal gives our executive team instantaneous oversight into our multi-region cloud rollout."
+          </p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=80&q=80" alt="Elena Rostova" class="w-8 h-8 rounded-full object-cover" />
+            <div>
+              <p class="text-xs font-bold text-white">Elena Rostova</p>
+              <p class="text-[10px] text-slate-400">CTO, Veloce Pay</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative z-10 text-xs text-slate-500 flex items-center justify-between">
+        <span>&copy; 2026 Servora Inc.</span>
+        <span>SOC 2 Type II Certified</span>
+      </div>
+    </div>
+
+    <!-- Right Column: Login Form -->
+    <div class="lg:col-span-7 flex flex-col justify-between p-6 sm:p-12 lg:p-16 text-start">
+      
+      <!-- Top Bar Mobile Logo & Back Link -->
+      <div class="flex items-center justify-between">
+        <a href="/index.html" class="flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-slate-900 dark:hover:text-white">
+          <svg class="w-4 h-4 rtl-mirror" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+          <span>Back to Home</span>
+        </a>
+        <div class="text-xs text-slate-500">
+          New to Servora? <a href="/register.html" class="font-bold text-primary-600 dark:text-primary-400 hover:underline">Create account</a>
+        </div>
+      </div>
+
+      <!-- Centered Form Container -->
+      <div class="max-w-md w-full mx-auto my-auto py-8" x-data="{ showPass: false }">
+        <h1 class="text-3xl font-extrabold font-display text-slate-900 dark:text-white mb-2">Sign in to Servora</h1>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-8">Enter your corporate credentials to access your dashboard.</p>
+
+        <!-- Social OAuth UI -->
+        <div class="grid grid-cols-2 gap-3 mb-6">
+          <button type="button" class="btn-secondary py-2.5 text-xs flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" viewBox="0 0 24 24"><path fill="currentColor" d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+            <span>Google Workspace</span>
+          </button>
+          <button type="button" class="btn-secondary py-2.5 text-xs flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            <span>GitHub Enterprise</span>
+          </button>
+        </div>
+
+        <div class="relative flex items-center justify-center mb-6">
+          <div class="border-t border-slate-200 dark:border-slate-800 w-full"></div>
+          <span class="bg-white dark:bg-[#080c14] px-3 text-[11px] text-slate-400 font-semibold absolute">or email credentials</span>
+        </div>
+
+        <!-- Form -->
+        <form class="space-y-4" onsubmit="event.preventDefault(); window.location.href = '/admin/dashboard.html';">
+          <div>
+            <label class="form-label text-xs">Work Email</label>
+            <input type="email" required placeholder="alex@company.com" class="form-input text-xs" />
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="form-label text-xs mb-0">Password</label>
+              <a href="/forgot-password.html" class="text-[11px] text-primary-600 dark:text-primary-400 font-semibold hover:underline">Forgot?</a>
+            </div>
+            <div class="relative">
+              <input :type="showPass ? 'text' : 'password'" required placeholder="••••••••••••" class="form-input text-xs pe-10" />
+              <button type="button" @click="showPass = !showPass" class="absolute end-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200" aria-label="Toggle password visibility">
+                <svg x-show="!showPass" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <svg x-show="showPass" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between text-xs text-slate-500 pt-1">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" aria-label="Remember this device for 30 days" class="rounded border-slate-300 text-primary-600 focus:ring-primary-500" />
+              <span>Remember this device for 30 days</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn-primary w-full text-xs py-3 mt-4">
+            Sign In to Dashboard &rarr;
+          </button>
+        </form>
+
+      </div>
+
+      <!-- Bottom Security Notice -->
+      <div class="text-center text-[11px] text-slate-400">
+        Protected with 256-bit TLS encryption. By logging in, you agree to our <a href="/about.html" class="underline hover:text-slate-600">Terms</a>.
+      </div>
+
+    </div>
+
+  </main>
+
+    <script defer src="js/animations.bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.initAnimations) window.initAnimations();
+    });
+  </script>
+
+</body>
+</html>

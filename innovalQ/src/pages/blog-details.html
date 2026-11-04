@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <!-- @include partials/meta-head.html title="Designing High-Throughput Event Streams — Servora Journal" description="Practical benchmarks and architectural patterns for sub-10ms event distribution across multi-region server clusters using Kafka and edge computing." -->
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Designing High-Throughput Event Streams with Kafka and Edge Workers",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+    "datePublished": "2026-11-04T08:00:00+00:00",
+    "dateModified": "2026-11-04T08:00:00+00:00",
+    "author": {
+      "@type": "Person",
+      "name": "David Chen"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Servora",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://servora.io/images/logo.png"
+      }
+    },
+    "description": "Practical benchmarks and architectural patterns for sub-10ms event distribution across multi-region server clusters."
+  }
+  </script>
+</head>
+<body class="bg-white dark:bg-[#080c14] text-slate-800 dark:text-slate-100 antialiased selection:bg-primary-500 selection:text-white relative overflow-x-hidden">
+
+  <!-- Header Navigation -->
+  <!-- @include partials/navbar.html -->
+
+  <main id="main-content">
+    
+    <!-- Article Header -->
+    <header class="pt-32 pb-16 bg-slate-50/50 dark:bg-slate-900/30 border-b border-slate-200/60 dark:border-slate-800/60 text-start">
+      <div class="container mx-auto max-w-4xl">
+        <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6">
+          <a href="/index.html" class="hover:text-primary-600">Home</a>
+          <span>/</span>
+          <a href="/blog.html" class="hover:text-primary-600">Blog</a>
+          <span>/</span>
+          <span class="text-slate-900 dark:text-white font-semibold">Event Streams</span>
+        </nav>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="badge-primary">Architecture Deep Dive</span>
+          <span class="text-xs text-slate-400">Published Nov 4, 2026 • 6 min read</span>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900 dark:text-white mb-6 leading-tight">
+          Designing High-Throughput Event Streams with Kafka and Edge Workers
+        </h1>
+
+        <!-- Author & Social Share Row -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-200/80 dark:border-slate-800">
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="David Chen" class="w-11 h-11 rounded-full object-cover ring-2 ring-primary-500/30" />
+            <div>
+              <p class="text-sm font-bold text-slate-900 dark:text-white">David Chen</p>
+              <p class="text-xs text-slate-500">Chief Technology Officer at Servora</p>
+            </div>
+          </div>
+
+          <!-- Share buttons -->
+          <div class="flex items-center gap-2" x-data="{ copied: false }">
+            <span class="text-xs text-slate-400 font-semibold me-2">Share:</span>
+            <button type="button" @click="navigator.clipboard.writeText(window.location.href); copied = true; setTimeout(() => copied = false, 2000)" class="p-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 flex items-center gap-1.5" aria-label="Copy link">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              <span x-text="copied ? 'Copied!' : 'Copy Link'"></span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Main Content & Sidebar Grid -->
+    <div class="py-16 bg-white dark:bg-[#080c14]">
+      <div class="container mx-auto max-w-6xl">
+        <div class="grid lg:grid-cols-12 gap-12 text-start">
+          
+          <!-- Sticky Table of Contents (Desktop Left) -->
+          <aside class="hidden lg:block lg:col-span-3">
+            <div class="sticky top-28 space-y-4">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Table of Contents</h3>
+              <nav class="space-y-2 text-xs font-semibold text-slate-600 dark:text-slate-400 border-s-2 border-slate-200 dark:border-slate-800 ps-4">
+                <a href="#challenge" class="block hover:text-primary-600 transition-colors">1. The Throughput Bottleneck</a>
+                <a href="#architecture" class="block hover:text-primary-600 transition-colors">2. Topological Architecture</a>
+                <a href="#code" class="block hover:text-primary-600 transition-colors">3. Edge Worker Pipeline</a>
+                <a href="#benchmarks" class="block hover:text-primary-600 transition-colors">4. Production Benchmarks</a>
+                <a href="#conclusion" class="block hover:text-primary-600 transition-colors">5. Final Takeaways</a>
+              </nav>
+            </div>
+          </aside>
+
+          <!-- Editorial Body -->
+          <article class="lg:col-span-6 space-y-8 text-slate-700 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
+            
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80" alt="Server clusters" class="rounded-3xl border border-slate-200 dark:border-slate-800 w-full mb-8 shadow-md" />
+
+            <section id="challenge">
+              <h2 class="text-2xl font-bold font-display text-slate-900 dark:text-white mb-4">1. The Throughput Bottleneck</h2>
+              <p class="mb-4">
+                When financial systems process over 500,000 discrete webhook mutations per minute, traditional monolithic request-response models fail under network backpressure. Database locking cascades, thread starvation occurs, and p99 latency skyrockets into seconds.
+              </p>
+              <p>
+                To achieve sub-10ms delivery guarantees, engineering teams must invert the paradigm: uncouple the client ingestion boundary entirely from database persistence by shifting ingestion to the absolute edge.
+              </p>
+            </section>
+
+            <!-- Blockquote Highlight -->
+            <blockquote class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border-s-4 border-primary-500 font-medium text-slate-900 dark:text-white my-6 italic">
+              "Ingestion latency at the edge is the single most critical predictor of conversion and client satisfaction in high-frequency trading and fintech."
+            </blockquote>
+
+            <section id="architecture">
+              <h2 class="text-2xl font-bold font-display text-slate-900 dark:text-white mb-4">2. Topological Architecture</h2>
+              <p class="mb-4">
+                We designed a 3-tier pipeline consisting of:
+              </p>
+              <ul class="space-y-2 list-disc ps-5 mb-4 text-xs sm:text-sm">
+                <li><strong>Cloudflare / Fastly Edge Workers:</strong> Validating HMAC signatures in &lt; 2ms and publishing to nearest Kafka regional broker.</li>
+                <li><strong>Apache Kafka / Redpanda Cluster:</strong> Partitioned by customer tenant ID with snappy compression.</li>
+                <li><strong>Golang Consumer Squads:</strong> Auto-scaling batch workers writing bulk inserts directly to ClickHouse.</li>
+              </ul>
+            </section>
+
+            <!-- Code Snippet -->
+            <section id="code">
+              <h2 class="text-2xl font-bold font-display text-slate-900 dark:text-white mb-4">3. Edge Worker Pipeline</h2>
+              <p class="mb-4">Here is the minimal TypeScript worker executing at Cloudflare Edge locations:</p>
+              <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 overflow-x-auto shadow-inner">
+<pre><code>export default {
+  async fetch(request: Request, env: Env): Promise&lt;Response&gt; {
+    const signature = request.headers.get("x-signature-sha256");
+    if (!verifyHmac(request, signature)) {
+      return new Response("Unauthorized", { status: 401 });
+    }
+
+    const payload = await request.json();
+    await env.EVENT_PRODUCER.send({
+      topic: "financial.events.v1",
+      key: payload.tenantId,
+      value: JSON.stringify(payload)
+    });
+
+    return new Response(JSON.stringify({ status: "queued", latencyMs: 3.2 }), {
+      headers: { "Content-Type": "application/json" }
+    });
+  }
+};</code></pre>
+              </div>
+            </section>
+
+            <section id="benchmarks">
+              <h2 class="text-2xl font-bold font-display text-slate-900 dark:text-white mb-4">4. Production Benchmarks</h2>
+              <p class="mb-4">
+                During 72 hours of continuous simulated stress testing with 200,000 concurrent RPS, the edge ingestion pipeline recorded:
+              </p>
+              <div class="grid grid-cols-3 gap-4 my-6 text-center">
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                  <span class="text-xl font-bold text-emerald-500 font-display">8.4 ms</span>
+                  <p class="text-[11px] text-slate-400 mt-1">p99 Ingestion Latency</p>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                  <span class="text-xl font-bold text-primary-500 font-display">0.000%</span>
+                  <p class="text-[11px] text-slate-400 mt-1">Packet Drop Rate</p>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                  <span class="text-xl font-bold text-secondary-500 font-display">68%</span>
+                  <p class="text-[11px] text-slate-400 mt-1">Compute Cost Savings</p>
+                </div>
+              </div>
+            </section>
+
+            <section id="conclusion">
+              <h2 class="text-2xl font-bold font-display text-slate-900 dark:text-white mb-4">5. Final Takeaways</h2>
+              <p>
+                By moving validation and queue ingestion directly to the network edge, your core database instances are protected from traffic thundering herds, ensuring uninterrupted customer experiences even during flash spikes.
+              </p>
+            </section>
+
+            <!-- Comments Form -->
+            <div class="pt-10 border-t border-slate-200 dark:border-slate-800 mt-12">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Join the Discussion</h3>
+              <form class="space-y-4" onsubmit="event.preventDefault(); alert('Comment submitted for moderation!');">
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <input type="text" required placeholder="Your Name" class="form-input text-xs" />
+                  <input type="email" required placeholder="Your Email" class="form-input text-xs" />
+                </div>
+                <textarea rows="3" required placeholder="Add your perspective or ask a question..." class="form-input text-xs"></textarea>
+                <button type="submit" class="btn-primary text-xs py-2 px-5">Submit Comment</button>
+              </form>
+            </div>
+
+          </article>
+
+          <!-- Right Sidebar (Search, Categories, Newsletter) -->
+          <aside class="lg:col-span-3 space-y-6">
+            
+            <!-- Author Card -->
+            <div class="p-6 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-center">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="David Chen" class="w-16 h-16 rounded-full object-cover mx-auto mb-3 ring-2 ring-primary-500/30" />
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white">David Chen</h4>
+              <p class="text-xs text-primary-600 dark:text-primary-400 font-semibold mb-2">CTO & Principal Architect</p>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Specialized in multi-region Kafka stream topologies and low-latency cloud systems.
+              </p>
+            </div>
+
+            <!-- Categories -->
+            <div class="p-6 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800">
+              <h4 class="font-bold text-xs uppercase tracking-wider text-slate-400 mb-3">Explore Categories</h4>
+              <div class="space-y-2 text-xs">
+                <a href="/blog.html" class="flex justify-between text-slate-600 dark:text-slate-300 hover:text-primary-600"><span>Architecture</span><span class="text-slate-400">18</span></a>
+                <a href="/blog.html" class="flex justify-between text-slate-600 dark:text-slate-300 hover:text-primary-600"><span>Security & Zero Trust</span><span class="text-slate-400">12</span></a>
+                <a href="/blog.html" class="flex justify-between text-slate-600 dark:text-slate-300 hover:text-primary-600"><span>Artificial Intelligence</span><span class="text-slate-400">9</span></a>
+                <a href="/blog.html" class="flex justify-between text-slate-600 dark:text-slate-300 hover:text-primary-600"><span>DevOps & SRE</span><span class="text-slate-400">15</span></a>
+              </div>
+            </div>
+
+          </aside>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Main Footer -->
+  <!-- @include partials/footer.html -->
+
+  <!-- Floating Customizer Demo Panel -->
+  <!-- @include partials/demo-panel.html -->
+
+    <script defer src="{{root}}js/animations.bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.initAnimations) window.initAnimations();
+    });
+  </script>
+
+</body>
+</html>
+

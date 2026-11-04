@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!-- @include partials/meta-head.html title="Coming Soon — Servora 2.0" description="Servora next-generation autonomous telemetry engine launching soon." -->
+</head>
+<body class="bg-white dark:bg-[#080c14] text-slate-800 dark:text-slate-100 antialiased selection:bg-primary-500 selection:text-white">
+
+  <main id="main-content" class="min-h-screen flex items-center justify-center p-6 relative overflow-hidden text-center"
+       x-data="{
+         days: 24,
+         hours: 18,
+         minutes: 42,
+         seconds: 15,
+         init() {
+           setInterval(() => {
+             if (this.seconds > 0) this.seconds--;
+             else {
+               this.seconds = 59;
+               if (this.minutes > 0) this.minutes--;
+               else {
+                 this.minutes = 59;
+                 if (this.hours > 0) this.hours--;
+                 else {
+                   this.hours = 23;
+                   if (this.days > 0) this.days--;
+                 }
+               }
+             }
+           }, 1000);
+         }
+       }">
+    
+    <div class="glow-orb w-[500px] h-[500px] bg-primary-500/15 top-1/4 start-1/2 -translate-x-1/2"></div>
+
+    <div class="max-w-2xl mx-auto relative z-10">
+      
+      <!-- Brand Logo -->
+      <a href="/index.html" class="inline-flex items-center gap-2 mb-8 focus-visible:ring-2 focus-visible:ring-primary-500 rounded-lg">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary-600 to-secondary-500 flex items-center justify-center text-white shadow-md">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2" stroke-width="2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        </div>
+        <span class="text-2xl font-extrabold text-slate-900 dark:text-white font-display">Servora<span class="text-primary-500">.</span></span>
+      </a>
+
+      <span class="badge-primary mb-4 block w-fit mx-auto">Launching Worldwide</span>
+
+      <h1 class="text-4xl sm:text-6xl font-extrabold font-display text-slate-900 dark:text-white tracking-tight mb-4">
+        Something <span class="gradient-text">extraordinary</span> is compiling.
+      </h1>
+
+      <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-lg mx-auto mb-10">
+        We are finalizing the release of our autonomous Kubernetes control plane. Sign up to receive private beta credentials and early founder pricing.
+      </p>
+
+      <!-- 4-Box Countdown Timer -->
+      <div class="grid grid-cols-4 gap-3 sm:gap-4 max-w-md mx-auto mb-10">
+        <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-md">
+          <span class="text-2xl sm:text-4xl font-extrabold font-display text-primary-600 dark:text-primary-400" x-text="days">24</span>
+          <p class="text-[10px] uppercase font-bold text-slate-400 mt-1">Days</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-md">
+          <span class="text-2xl sm:text-4xl font-extrabold font-display text-primary-600 dark:text-primary-400" x-text="hours">18</span>
+          <p class="text-[10px] uppercase font-bold text-slate-400 mt-1">Hours</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-md">
+          <span class="text-2xl sm:text-4xl font-extrabold font-display text-primary-600 dark:text-primary-400" x-text="minutes">42</span>
+          <p class="text-[10px] uppercase font-bold text-slate-400 mt-1">Minutes</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-md">
+          <span class="text-2xl sm:text-4xl font-extrabold font-display text-primary-600 dark:text-primary-400" x-text="seconds">15</span>
+          <p class="text-[10px] uppercase font-bold text-slate-400 mt-1">Seconds</p>
+        </div>
+      </div>
+
+      <!-- Lead Capture Form -->
+      <form class="max-w-md mx-auto flex gap-2 mb-8" onsubmit="event.preventDefault(); alert('You are on the VIP Early Access list!');">
+        <input type="email" required placeholder="Enter work email for beta invite" class="form-input text-xs" />
+        <button type="submit" class="btn-primary text-xs py-2.5 px-6 shrink-0">
+          Get VIP Invite
+        </button>
+      </form>
+
+      <!-- Return link -->
+      <a href="/index.html" class="text-xs text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 underline">
+        Return to public homepage
+      </a>
+
+    </div>
+
+  </main>
+
+    <script defer src="{{root}}js/animations.bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.initAnimations) window.initAnimations();
+    });
+  </script>
+
+</body>
+</html>

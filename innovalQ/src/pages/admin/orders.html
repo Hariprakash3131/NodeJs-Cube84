@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <!-- @include partials/meta-head.html title="Orders & Sprint Pipeline — Servora Admin" description="Track client sprint orders, milestone deliverables, approval pipelines, and invoice statuses." -->
+</head>
+<body class="bg-slate-50 dark:bg-[#080c14] text-slate-800 dark:text-slate-100 antialiased selection:bg-primary-500 selection:text-white"
+      x-data="{ 
+        sidebarOpen: false,
+        statusTab: 'all',
+        drawerOpen: false,
+        invoiceModal: false,
+        selectedOrder: null,
+        orders: [
+          { id: 'SRV-9041', client: 'Veloce Pay', project: 'Multi-Region Kubernetes Migration', amount: '$14,500', status: 'In Progress', date: 'Nov 02, 2026', milestone: 'Canary Deployment 2 of 4' },
+          { id: 'SRV-8994', client: 'Aether Systems', project: 'Full-Stack Modernization Sprint', amount: '$22,000', status: 'Reviewing', date: 'Oct 28, 2026', milestone: 'GraphQL Federation Schema' },
+          { id: 'SRV-8820', client: 'OmniHealth Labs', project: 'HIPAA Cloud Security Hardening', amount: '$18,200', status: 'Completed', date: 'Oct 15, 2026', milestone: 'BAA Attestation Complete' },
+          { id: 'SRV-8750', client: 'Cortex Dynamics', project: 'Enterprise RAG Vector DB Setup', amount: '$11,900', status: 'In Progress', date: 'Oct 10, 2026', milestone: 'Embedding Benchmark' },
+          { id: 'SRV-8610', client: 'Starlight Financial', project: 'Zero-Trust Network Mesh Audit', amount: '$9,500', status: 'Completed', date: 'Sep 29, 2026', milestone: 'Final Audit Signed' }
+        ],
+        viewOrder(ord) {
+          this.selectedOrder = ord;
+          this.drawerOpen = true;
+        },
+        openInvoice(ord) {
+          this.selectedOrder = ord;
+          this.invoiceModal = true;
+        },
+        filteredOrders() {
+          if (this.statusTab === 'all') return this.orders;
+          return this.orders.filter(o => o.status.toLowerCase() === this.statusTab.toLowerCase());
+        }
+      }">
+
+  <!-- Sidebar -->
+  <!-- @include partials/admin-sidebar.html active_orders="bg-primary-50 dark:bg-primary-950 text-primary-600 dark:text-primary-400 font-bold" -->
+
+  <div class="lg:ps-64 flex flex-col min-h-screen">
+    
+    <!-- Top Header -->
+    <!-- @include partials/admin-header.html -->
+
+    <main class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 text-start">
+      
+      <!-- Page Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold font-display text-slate-900 dark:text-white">
+            Sprint Orders & Pipeline
+          </h1>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+            Track active client engagements, sprint approval milestones, and financial invoices.
+          </p>
+        </div>
+
+        <button type="button" @click="alert('Exporting CSV order ledger...')" class="btn-secondary text-xs py-2 px-4 flex items-center gap-1.5 self-start sm:self-auto">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span>Export Order Ledger</span>
+        </button>
+      </div>
+
+      <!-- Status Tabs -->
+      <div class="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3 text-xs font-bold">
+        <button @click="statusTab = 'all'" :class="statusTab === 'all' ? 'text-primary-600 dark:text-primary-400 border-b-2 border-primary-500 pb-2' : 'text-slate-500 hover:text-slate-800 dark:hover:text-white pb-2'">All Engagements (5)</button>
+        <button @click="statusTab = 'In Progress'" :class="statusTab === 'In Progress' ? 'text-primary-600 dark:text-primary-400 border-b-2 border-primary-500 pb-2' : 'text-slate-500 hover:text-slate-800 dark:hover:text-white pb-2'">In Progress (2)</button>
+        <button @click="statusTab = 'Reviewing'" :class="statusTab === 'Reviewing' ? 'text-primary-600 dark:text-primary-400 border-b-2 border-primary-500 pb-2' : 'text-slate-500 hover:text-slate-800 dark:hover:text-white pb-2'">Reviewing (1)</button>
+        <button @click="statusTab = 'Completed'" :class="statusTab === 'Completed' ? 'text-primary-600 dark:text-primary-400 border-b-2 border-primary-500 pb-2' : 'text-slate-500 hover:text-slate-800 dark:hover:text-white pb-2'">Completed (2)</button>
+      </div>
+
+      <!-- Orders Data Table -->
+      <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs text-start border-collapse">
+            <thead>
+              <tr class="bg-slate-50/70 dark:bg-slate-800/40 border-b border-slate-200/80 dark:border-slate-800 text-slate-400 font-bold uppercase tracking-wider text-[10px]">
+                <th class="py-3 px-4 text-start">Order ID</th>
+                <th class="py-3 px-4 text-start">Client</th>
+                <th class="py-3 px-4 text-start">Project & Milestone</th>
+                <th class="py-3 px-4 text-start">Status</th>
+                <th class="py-3 px-4 text-end">Amount</th>
+                <th class="py-3 px-4 text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+              <template x-for="ord in filteredOrders()" :key="ord.id">
+                <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                  <td class="py-3.5 px-4 font-mono font-bold text-primary-600 dark:text-primary-400" x-text="ord.id"></td>
+                  <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white" x-text="ord.client"></td>
+                  <td class="py-3.5 px-4">
+                    <p class="font-semibold text-slate-800 dark:text-slate-200" x-text="ord.project"></p>
+                    <p class="text-[11px] text-slate-400" x-text="ord.milestone"></p>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span :class="{
+                      'badge-success': ord.status === 'Completed',
+                      'badge-primary': ord.status === 'In Progress',
+                      'badge-warning': ord.status === 'Reviewing'
+                    }" x-text="ord.status"></span>
+                  </td>
+                  <td class="py-3.5 px-4 text-end font-bold text-slate-900 dark:text-white" x-text="ord.amount"></td>
+                  <td class="py-3.5 px-4 text-end space-x-1">
+                    <button type="button" @click="viewOrder(ord)" class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 text-[11px] font-semibold">
+                      Details
+                    </button>
+                    <button type="button" @click="openInvoice(ord)" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-primary-600 text-[11px] font-semibold">
+                      Invoice
+                    </button>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="p-6 text-center text-xs text-slate-400 border-t border-slate-200 dark:border-slate-800">
+      &copy; 2026 Servora Enterprise Control Plane.
+    </footer>
+
+  </div>
+
+  <!-- Slide-Over Drawer for Order Details -->
+  <div x-show="drawerOpen" 
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       class="fixed inset-0 z-50 flex justify-end bg-slate-900/60 backdrop-blur-sm"
+       style="display: none;">
+    <div @click.away="drawerOpen = false" class="w-full max-w-lg bg-white dark:bg-slate-900 h-full p-6 sm:p-8 flex flex-col justify-between shadow-2xl overflow-y-auto text-start">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-6">
+          <div>
+            <span class="text-xs text-slate-400 font-mono" x-text="selectedOrder?.id"></span>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white" x-text="selectedOrder?.client"></h3>
+          </div>
+          <button @click="drawerOpen = false" class="p-1 rounded-lg text-slate-400 hover:text-slate-600" aria-label="Close order detail drawer">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <div class="space-y-6 text-xs">
+          <div>
+            <span class="font-bold text-slate-400 uppercase tracking-wider block mb-1">Project Name</span>
+            <p class="text-sm font-semibold text-slate-800 dark:text-slate-200" x-text="selectedOrder?.project"></p>
+          </div>
+
+          <div>
+            <span class="font-bold text-slate-400 uppercase tracking-wider block mb-1">Active Milestone</span>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed" x-text="selectedOrder?.milestone"></p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
+            <div>
+              <span class="text-slate-400 block">Total Scope</span>
+              <span class="text-base font-bold text-slate-900 dark:text-white" x-text="selectedOrder?.amount"></span>
+            </div>
+            <div>
+              <span class="text-slate-400 block">Current Status</span>
+              <span class="badge-primary mt-1" x-text="selectedOrder?.status"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex gap-2">
+        <button type="button" @click="openInvoice(selectedOrder)" class="btn-secondary text-xs flex-1 py-2.5">
+          View Printable Invoice
+        </button>
+        <button type="button" @click="alert('Milestone approved!'); drawerOpen = false;" class="btn-primary text-xs flex-1 py-2.5">
+          Approve Milestone
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Printable Invoice Preview Modal -->
+  <div x-show="invoiceModal" 
+       x-transition:enter="transition ease-out duration-200"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-150"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm"
+       style="display: none;">
+    <div @click.away="invoiceModal = false" class="bg-white dark:bg-slate-900 rounded-3xl p-8 max-w-2xl w-full border border-slate-200 dark:border-slate-800 shadow-2xl text-start">
+      
+      <!-- Invoice Header -->
+      <div class="flex items-center justify-between pb-6 border-b border-slate-200 dark:border-slate-800 mb-6">
+        <div>
+          <span class="text-2xl font-extrabold text-slate-900 dark:text-white font-display">Servora Inc.</span>
+          <p class="text-xs text-slate-400 mt-0.5">548 Market St, Suite 402 • San Francisco, CA</p>
+        </div>
+        <div class="text-end">
+          <span class="badge-success text-xs">PAID IN FULL</span>
+          <p class="text-xs font-mono text-slate-400 mt-1" x-text="'INV-' + selectedOrder?.id"></p>
+        </div>
+      </div>
+
+      <!-- Bill To Details -->
+      <div class="grid grid-cols-2 gap-4 text-xs mb-6">
+        <div>
+          <span class="text-slate-400 uppercase font-bold tracking-wider block mb-1">Billed To:</span>
+          <p class="font-bold text-slate-900 dark:text-white text-sm" x-text="selectedOrder?.client"></p>
+          <p class="text-slate-500">Corporate Enterprise Account</p>
+        </div>
+        <div class="text-end">
+          <span class="text-slate-400 uppercase font-bold tracking-wider block mb-1">Invoice Date:</span>
+          <p class="font-semibold text-slate-800 dark:text-slate-200" x-text="selectedOrder?.date"></p>
+          <p class="text-slate-400">Payment: Stripe Electronic Transfer</p>
+        </div>
+      </div>
+
+      <!-- Line Items -->
+      <div class="border rounded-2xl border-slate-200 dark:border-slate-800 overflow-hidden mb-6">
+        <table class="w-full text-xs text-start">
+          <thead class="bg-slate-50 dark:bg-slate-800 text-slate-400 font-bold uppercase text-[10px]">
+            <tr>
+              <th class="p-3">Description</th>
+              <th class="p-3 text-end">Amount</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+            <tr>
+              <td class="p-3">
+                <span class="font-bold text-slate-900 dark:text-white block" x-text="selectedOrder?.project"></span>
+                <span class="text-[11px] text-slate-400" x-text="selectedOrder?.milestone"></span>
+              </td>
+              <td class="p-3 text-end font-bold" x-text="selectedOrder?.amount"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
+        <span class="text-xs text-slate-400">Thank you for partnering with Servora.</span>
+        <div class="flex gap-2">
+          <button type="button" @click="invoiceModal = false" class="btn-secondary text-xs py-2 px-4">Close</button>
+          <button type="button" onclick="window.print()" class="btn-primary text-xs py-2 px-5">Print / PDF</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Floating Customizer Demo Panel -->
+  <!-- @include partials/demo-panel.html -->
+
+    <script defer src="{{root}}js/animations.bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.initAnimations) window.initAnimations();
+    });
+  </script>
+
+</body>
+</html>

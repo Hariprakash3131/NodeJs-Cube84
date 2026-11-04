@@ -1,0 +1,114 @@
+<!-- Admin Top Header Bar -->
+<header class="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 lg:px-8">
+  
+  <div class="flex items-center gap-4">
+    <!-- Mobile Sidebar Toggle -->
+    <button type="button" 
+            @click="sidebarOpen = !sidebarOpen" 
+            class="lg:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+            aria-label="Toggle Navigation Sidebar">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+
+    <!-- Global Search -->
+    <div class="relative hidden sm:block w-72 md:w-96">
+      <span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-slate-400">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      </span>
+      <input type="text" 
+             placeholder="Search clients, invoices, orders..." 
+             class="w-full ps-9 pe-12 py-1.5 rounded-xl text-xs bg-slate-100 dark:bg-slate-800 border-none text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:ring-2 focus:ring-primary-500 outline-none" />
+      <span class="absolute inset-y-0 end-0 flex items-center pe-2.5">
+        <kbd class="px-1.5 py-0.5 text-[10px] font-semibold text-slate-400 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded">⌘K</kbd>
+      </span>
+    </div>
+  </div>
+
+  <!-- Header Right Actions -->
+  <div class="flex items-center gap-2 sm:gap-3">
+    
+    <!-- Theme Toggle -->
+    <button type="button" 
+            onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('servora_theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); window.dispatchEvent(new CustomEvent('servora:theme-changed'))"
+            class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            aria-label="Toggle Theme Mode">
+      <svg class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      <svg class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+    </button>
+
+    <!-- RTL / LTR Toggle -->
+    <button type="button" 
+            onclick="const next = document.documentElement.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl'; document.documentElement.setAttribute('dir', next); document.documentElement.setAttribute('lang', next === 'rtl' ? 'ar' : 'en'); localStorage.setItem('servora_dir', next); window.dispatchEvent(new CustomEvent('servora:dir-changed'))"
+            class="px-2 py-1 text-xs font-semibold rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700"
+            aria-label="Toggle RTL Mode">
+      RTL
+    </button>
+
+    <!-- Notifications Center -->
+    <div class="relative" x-data="{ notifOpen: false }">
+      <button type="button" 
+              @click="notifOpen = !notifOpen"
+              class="relative w-9 h-9 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              aria-label="Notifications Center">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+        <span class="absolute top-2 end-2 w-2 h-2 rounded-full bg-primary-500"></span>
+      </button>
+
+      <!-- Dropdown -->
+      <div x-show="notifOpen" 
+           @click.away="notifOpen = false"
+           x-transition:enter="transition ease-out duration-150"
+           x-transition:enter-start="opacity-0 translate-y-2"
+           x-transition:enter-end="opacity-100 translate-y-0"
+           x-transition:leave="transition ease-in duration-100"
+           x-transition:leave-start="opacity-100 translate-y-0"
+           x-transition:leave-end="opacity-0 translate-y-2"
+           class="absolute end-0 top-full mt-2 w-80 p-3 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 z-50">
+        <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100 dark:border-slate-800">
+          <span class="text-xs font-bold text-slate-900 dark:text-white">Notifications</span>
+          <span class="text-[10px] text-primary-600 dark:text-primary-400 font-semibold cursor-pointer">Mark all as read</span>
+        </div>
+        <div class="space-y-2 text-xs">
+          <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-800/60 flex items-start gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 mt-1 shrink-0"></span>
+            <div>
+              <p class="font-semibold text-slate-900 dark:text-white">New order received #SRV-9041</p>
+              <p class="text-slate-400 text-[10px]">From Acme Corp • 5 min ago</p>
+            </div>
+          </div>
+          <div class="p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 flex items-start gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-primary-500 mt-1 shrink-0"></span>
+            <div>
+              <p class="font-semibold text-slate-900 dark:text-white">Milestone approved: Architecture Sprint</p>
+              <p class="text-slate-400 text-[10px]">Client: Nexus Health • 1 hr ago</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Profile Dropdown -->
+    <div class="relative" x-data="{ profileOpen: false }">
+      <button type="button" 
+              @click="profileOpen = !profileOpen"
+              class="flex items-center gap-2 p-1 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&h=80&q=80" 
+             alt="Sarah Jenkins" 
+             class="w-8 h-8 rounded-full object-cover ring-2 ring-primary-500/20" />
+        <span class="hidden md:block text-xs font-bold text-slate-700 dark:text-slate-200">Sarah J.</span>
+      </button>
+
+      <div x-show="profileOpen" 
+           @click.away="profileOpen = false"
+           class="absolute end-0 top-full mt-2 w-48 p-2 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 z-50 text-xs">
+        <a href="/admin/settings.html" class="block px-3 py-2 rounded-lg font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Profile Settings</a>
+        <a href="/admin/orders.html" class="block px-3 py-2 rounded-lg font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">My Projects</a>
+        <div class="my-1 border-t border-slate-100 dark:border-slate-800"></div>
+        <a href="/login.html" class="block px-3 py-2 rounded-lg font-medium text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40">Log Out</a>
+      </div>
+    </div>
+
+  </div>
+
+</header>
+

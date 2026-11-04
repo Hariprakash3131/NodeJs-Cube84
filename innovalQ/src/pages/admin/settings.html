@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <!-- @include partials/meta-head.html title="System & Workspace Settings — Servora Admin" description="Configure organization profile, appearance, notifications, security 2FA, and billing." -->
+</head>
+<body class="bg-slate-50 dark:bg-[#080c14] text-slate-800 dark:text-slate-100 antialiased selection:bg-primary-500 selection:text-white"
+      x-data="{ 
+        sidebarOpen: false,
+        settingsTab: 'profile',
+        emailNotifs: true,
+        slackNotifs: true,
+        twoFactor: true
+      }">
+
+  <!-- Sidebar -->
+  <!-- @include partials/admin-sidebar.html active_settings="bg-primary-50 dark:bg-primary-950 text-primary-600 dark:text-primary-400 font-bold" -->
+
+  <div class="lg:ps-64 flex flex-col min-h-screen">
+    
+    <!-- Top Header -->
+    <!-- @include partials/admin-header.html -->
+
+    <main class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 text-start max-w-5xl">
+      
+      <!-- Page Title -->
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold font-display text-slate-900 dark:text-white">
+          System & Account Settings
+        </h1>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+          Manage your executive profile, brand customizations, webhooks, and security protocols.
+        </p>
+      </div>
+
+      <!-- Settings Navigation Tabs -->
+      <div class="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3 text-xs font-bold overflow-x-auto">
+        <button @click="settingsTab = 'profile'" :class="settingsTab === 'profile' ? 'text-primary-600 dark:text-primary-400 border-b-2 border-primary-500 pb-2' : 'text-slate-500 hover:text-slate-900 pb-2'">Profile & Bio</button>
+        <button @click="settingsTab = 'branding'" :class="settingsTab === 'branding' ? 'text-primary-600 dark:text-primary-400 border-b-2 border-primary-500 pb-2' : 'text-slate-500 hover:text-slate-900 pb-2'">Appearance & Theme</button>
+        <button @click="settingsTab = 'notifications'" :class="settingsTab === 'notifications' ? 'text-primary-600 dark:text-primary-400 border-b-2 border-primary-500 pb-2' : 'text-slate-500 hover:text-slate-900 pb-2'">Notifications</button>
+        <button @click="settingsTab = 'security'" :class="settingsTab === 'security' ? 'text-primary-600 dark:text-primary-400 border-b-2 border-primary-500 pb-2' : 'text-slate-500 hover:text-slate-900 pb-2'">Security & 2FA</button>
+        <button @click="settingsTab = 'billing'" :class="settingsTab === 'billing' ? 'text-primary-600 dark:text-primary-400 border-b-2 border-primary-500 pb-2' : 'text-slate-500 hover:text-slate-900 pb-2'">Billing & Plan</button>
+      </div>
+
+      <!-- Tab 1: Profile -->
+      <div x-show="settingsTab === 'profile'" class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-6">
+        <h2 class="text-base font-bold text-slate-900 dark:text-white">Profile Information</h2>
+        
+        <!-- Avatar Section -->
+        <div class="flex items-center gap-5">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80" alt="Sarah Jenkins" class="w-16 h-16 rounded-full object-cover ring-4 ring-primary-500/20" />
+          <div>
+            <button type="button" @click="alert('Upload image trigger')" class="btn-secondary text-xs py-1.5 px-3">Change Avatar</button>
+            <p class="text-[11px] text-slate-400 mt-1">JPG, GIF or PNG. Max size 2MB.</p>
+          </div>
+        </div>
+
+        <form class="space-y-4 max-w-xl" onsubmit="event.preventDefault(); alert('Profile settings saved!');">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="form-label text-xs">First Name</label>
+              <input type="text" value="Sarah" aria-label="First Name" class="form-input text-xs" />
+            </div>
+            <div>
+              <label class="form-label text-xs">Last Name</label>
+              <input type="text" value="Jenkins" aria-label="Last Name" class="form-input text-xs" />
+            </div>
+          </div>
+
+          <div>
+            <label class="form-label text-xs">Email Address</label>
+            <input type="email" value="sarah@servora.io" aria-label="Email Address" class="form-input text-xs" />
+          </div>
+
+          <div>
+            <label class="form-label text-xs">Role Title</label>
+            <input type="text" value="VP Operations & Co-Founder" aria-label="Role Title" class="form-input text-xs" />
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" class="btn-primary text-xs py-2 px-5">Save Changes</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Tab 2: Appearance & Brand Customization -->
+      <div x-show="settingsTab === 'branding'" class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-6">
+        <div>
+          <h2 class="text-base font-bold text-slate-900 dark:text-white">Appearance & Branding</h2>
+          <p class="text-xs text-slate-400 mt-0.5">Select your primary brand color scheme and interface mode.</p>
+        </div>
+
+        <!-- Palettes -->
+        <div class="space-y-3">
+          <label class="form-label text-xs">Active Brand Palette</label>
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 max-w-lg">
+            <button type="button" onclick="document.documentElement.removeAttribute('data-theme'); localStorage.setItem('servora_color_theme', 'default'); alert('Applied Indigo palette!');" class="p-3 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center gap-2 hover:border-indigo-500">
+              <span class="w-4 h-4 rounded-full bg-indigo-600"></span>
+              <span class="text-xs font-semibold">Indigo</span>
+            </button>
+            <button type="button" onclick="document.documentElement.setAttribute('data-theme', 'emerald'); localStorage.setItem('servora_color_theme', 'emerald'); alert('Applied Emerald palette!');" class="p-3 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center gap-2 hover:border-emerald-500">
+              <span class="w-4 h-4 rounded-full bg-emerald-500"></span>
+              <span class="text-xs font-semibold">Emerald</span>
+            </button>
+            <button type="button" onclick="document.documentElement.setAttribute('data-theme', 'ocean'); localStorage.setItem('servora_color_theme', 'ocean'); alert('Applied Ocean palette!');" class="p-3 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center gap-2 hover:border-sky-500">
+              <span class="w-4 h-4 rounded-full bg-sky-500"></span>
+              <span class="text-xs font-semibold">Ocean</span>
+            </button>
+            <button type="button" onclick="document.documentElement.setAttribute('data-theme', 'rose'); localStorage.setItem('servora_color_theme', 'rose'); alert('Applied Rose palette!');" class="p-3 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center gap-2 hover:border-rose-500">
+              <span class="w-4 h-4 rounded-full bg-rose-500"></span>
+              <span class="text-xs font-semibold">Rose</span>
+            </button>
+            <button type="button" onclick="document.documentElement.setAttribute('data-theme', 'amber'); localStorage.setItem('servora_color_theme', 'amber'); alert('Applied Amber palette!');" class="p-3 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center gap-2 hover:border-amber-500">
+              <span class="w-4 h-4 rounded-full bg-amber-500"></span>
+              <span class="text-xs font-semibold">Amber</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Dark Mode & RTL Quick Switches -->
+        <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-4 max-w-lg">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-xs font-bold">Dark Mode</p>
+              <p class="text-[11px] text-slate-400">Class-based dark theme</p>
+            </div>
+            <button type="button" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('servora_theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')" class="btn-secondary text-xs py-1.5 px-3">Toggle Dark Mode</button>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-xs font-bold">Right-to-Left (RTL) Layout</p>
+              <p class="text-[11px] text-slate-400">Arabic & Hebrew interface direction</p>
+            </div>
+            <button type="button" onclick="const next = document.documentElement.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl'; document.documentElement.setAttribute('dir', next); localStorage.setItem('servora_dir', next);" class="btn-secondary text-xs py-1.5 px-3">Toggle RTL</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tab 3: Notifications -->
+      <div x-show="settingsTab === 'notifications'" class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 max-w-lg">
+        <h2 class="text-base font-bold text-slate-900 dark:text-white mb-2">Notification Preferences</h2>
+        
+        <div class="flex items-center justify-between py-2 border-b border-slate-100 dark:border-slate-800">
+          <div>
+            <p class="text-xs font-bold">Email Sprint Milestones</p>
+            <p class="text-[11px] text-slate-400">Receive summaries when deliverables are completed</p>
+          </div>
+          <input type="checkbox" x-model="emailNotifs" aria-label="Toggle Email Sprint Milestones" class="rounded text-primary-600 focus:ring-primary-500" />
+        </div>
+
+        <div class="flex items-center justify-between py-2 border-b border-slate-100 dark:border-slate-800">
+          <div>
+            <p class="text-xs font-bold">Slack Bot Real-Time Alerts</p>
+            <p class="text-[11px] text-slate-400">Instant notifications for staging cluster updates</p>
+          </div>
+          <input type="checkbox" x-model="slackNotifs" aria-label="Toggle Slack Bot Alerts" class="rounded text-primary-600 focus:ring-primary-500" />
+        </div>
+      </div>
+
+      <!-- Tab 4: Security & 2FA -->
+      <div x-show="settingsTab === 'security'" class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-6 max-w-xl">
+        <h2 class="text-base font-bold text-slate-900 dark:text-white">Security & Multi-Factor Auth</h2>
+        
+        <div class="p-5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 flex items-center justify-between">
+          <div>
+            <p class="text-xs font-bold text-emerald-800 dark:text-emerald-300">Two-Factor Authentication (2FA) is Active</p>
+            <p class="text-[11px] text-emerald-600 dark:text-emerald-400">Protected with Google Authenticator / TOTP</p>
+          </div>
+          <span class="badge-success text-xs">Enabled</span>
+        </div>
+
+        <div class="space-y-4">
+          <h3 class="text-xs font-bold uppercase text-slate-400">Active Authorized Sessions</h3>
+          <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs">
+            <div>
+              <p class="font-bold text-slate-900 dark:text-white">Chrome on macOS (San Francisco, US)</p>
+              <p class="text-[11px] text-slate-400">Current Session • IP: 198.51.100.42</p>
+            </div>
+            <span class="text-emerald-500 font-bold">Active Now</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 5: Billing & Plan -->
+      <div x-show="settingsTab === 'billing'" class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-6 max-w-xl">
+        <h2 class="text-base font-bold text-slate-900 dark:text-white">Subscription & Invoicing</h2>
+        
+        <div class="p-6 rounded-2xl bg-slate-900 text-white flex items-center justify-between">
+          <div>
+            <span class="badge-primary text-[10px] mb-2">Active Plan</span>
+            <h3 class="text-xl font-bold font-display">Dedicated Squad Tier</h3>
+            <p class="text-xs text-slate-400 mt-1">Renews on Dec 01, 2026</p>
+          </div>
+          <div class="text-end">
+            <span class="text-2xl font-extrabold font-display">$11,900</span>
+            <span class="text-xs text-slate-400 block">/ month</span>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-6 rounded bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-bold text-[10px]">VISA</div>
+            <div>
+              <p class="font-bold text-slate-900 dark:text-white">Visa ending in •••• 4242</p>
+              <p class="text-[11px] text-slate-400">Expires 08/29</p>
+            </div>
+          </div>
+          <button type="button" @click="alert('Update payment method')" class="btn-secondary text-[11px] py-1 px-3">Update</button>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="p-6 text-center text-xs text-slate-400 border-t border-slate-200 dark:border-slate-800">
+      &copy; 2026 Servora Enterprise Control Plane.
+    </footer>
+
+  </div>
+
+  <!-- Floating Customizer Demo Panel -->
+  <!-- @include partials/demo-panel.html -->
+
+    <script defer src="{{root}}js/animations.bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.initAnimations) window.initAnimations();
+    });
+  </script>
+
+</body>
+</html>

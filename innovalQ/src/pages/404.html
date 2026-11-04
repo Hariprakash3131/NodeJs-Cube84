@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!-- @include partials/meta-head.html title="Page Not Found (404)" description="The requested page could not be located in the Servora ecosystem." -->
+</head>
+<body class="bg-white dark:bg-[#080c14] text-slate-800 dark:text-slate-100 antialiased selection:bg-primary-500 selection:text-white">
+
+  <!-- Header Navigation -->
+  <!-- @include partials/navbar.html -->
+
+  <main id="main-content" class="min-h-screen flex items-center justify-center pt-28 pb-16 relative overflow-hidden">
+    
+    <div class="glow-orb w-96 h-96 bg-primary-500/10 top-1/4 start-1/4"></div>
+
+    <div class="container mx-auto max-w-2xl text-center relative z-10 px-4">
+      
+      <!-- 3D Interactive Zero-Gravity Space Element -->
+      <div id="canvas-404-wrap" class="w-64 h-64 mx-auto relative cursor-grab active:cursor-grabbing mb-6">
+        <!-- Canvas mounts here -->
+      </div>
+
+      <span class="badge-primary mb-3">Error 404 • Resource Drift</span>
+      
+      <h1 class="text-4xl sm:text-6xl font-extrabold font-display text-slate-900 dark:text-white tracking-tight mb-4">
+        Lost in digital space.
+      </h1>
+
+      <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-md mx-auto mb-8">
+        The URL you requested may have migrated, been decommissioned, or drifted into an unmapped coordinate.
+      </p>
+
+      <!-- Instant Search Form -->
+      <form class="max-w-md mx-auto mb-8 flex gap-2" action="/services.html" method="get">
+        <input type="text" 
+               name="q" 
+               placeholder="Search capabilities or articles..." 
+               class="form-input text-xs" />
+        <button type="submit" class="btn-primary text-xs py-2 px-5 shrink-0">
+          Search
+        </button>
+      </form>
+
+      <!-- Useful Jump Links -->
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <a href="/index.html" class="btn-primary text-xs py-2.5 px-6 shadow-sm">
+          <span>&larr; Return Home</span>
+        </a>
+        <a href="/services.html" class="btn-secondary text-xs py-2.5 px-5">
+          <span>Services Catalog</span>
+        </a>
+        <a href="/contact.html" class="btn-secondary text-xs py-2.5 px-5">
+          <span>Contact Desk</span>
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Main Footer -->
+  <!-- @include partials/footer.html -->
+
+  <!-- Floating Customizer Demo Panel -->
+  <!-- @include partials/demo-panel.html -->
+
+  <!-- 3D 404 Script -->
+  <script defer src="{{root}}js/three-404.bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.init404ThreeScene) window.init404ThreeScene('canvas-404-wrap');
+    });
+  </script>
+
+</body>
+</html>
+

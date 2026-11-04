@@ -1,0 +1,19 @@
+/* RTL specific adaptations */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .font-display {
+  font-family: 'Cairo', 'Noto Sans Arabic', sans-serif !important;
+}
+
+/* Mirror icons that indicate direction */
+[dir="rtl"] .rtl-mirror {
+  transform: scaleX(-1);
+}
+
+/* Invert slider and marquee animations for natural right-to-left perception if desired */
+[dir="rtl"] .rtl-flip-x {
+  transform: scaleX(-1);
+}
+

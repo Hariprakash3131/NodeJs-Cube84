@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <!-- @include partials/meta-head.html title="Documentation & Developer Guide — Servora" description="Complete technical documentation, installation instructions, customization guide, and deployment manual for Servora." -->
+</head>
+<body class="bg-white dark:bg-[#080c14] text-slate-800 dark:text-slate-100 antialiased selection:bg-primary-500 selection:text-white">
+
+  <!-- Header Navigation -->
+  <!-- @include partials/navbar.html -->
+
+  <main id="main-content" class="pt-28 pb-20">
+    <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid lg:grid-cols-12 gap-10 text-start">
+        
+        <!-- Documentation Sidebar / Index -->
+        <aside class="hidden lg:block lg:col-span-3">
+          <div class="sticky top-28 space-y-6 text-xs">
+            <div>
+              <span class="font-bold uppercase tracking-wider text-slate-400 block mb-2">Getting Started</span>
+              <nav class="space-y-1.5 font-semibold text-slate-600 dark:text-slate-400 border-s-2 border-slate-200 dark:border-slate-800 ps-3">
+                <a href="#overview" class="block hover:text-primary-600">Overview & Features</a>
+                <a href="#quickstart" class="block hover:text-primary-600">Quick Start & Install</a>
+                <a href="#structure" class="block hover:text-primary-600">File & Folder Map</a>
+              </nav>
+            </div>
+
+            <div>
+              <span class="font-bold uppercase tracking-wider text-slate-400 block mb-2">Customization</span>
+              <nav class="space-y-1.5 font-semibold text-slate-600 dark:text-slate-400 border-s-2 border-slate-200 dark:border-slate-800 ps-3">
+                <a href="#colors" class="block hover:text-primary-600">Brand Color Palettes</a>
+                <a href="#darkmode" class="block hover:text-primary-600">Dark / Light Mode</a>
+                <a href="#rtl" class="block hover:text-primary-600">RTL & Arabic Setup</a>
+                <a href="#threejs" class="block hover:text-primary-600">3D WebGL Hero Scenes</a>
+                <a href="#partials" class="block hover:text-primary-600">HTML Partials Engine</a>
+              </nav>
+            </div>
+
+            <div>
+              <span class="font-bold uppercase tracking-wider text-slate-400 block mb-2">Resources</span>
+              <nav class="space-y-1.5 font-semibold text-slate-600 dark:text-slate-400 border-s-2 border-slate-200 dark:border-slate-800 ps-3">
+                <a href="/docs/components.html" class="block text-primary-600 font-bold">Component Library ↗</a>
+                <a href="#deployment" class="block hover:text-primary-600">Production Deployment</a>
+                <a href="#support" class="block hover:text-primary-600">Help & Support</a>
+              </nav>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main Documentation Body -->
+        <article class="lg:col-span-9 space-y-16 text-slate-700 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
+          
+          <!-- Section: Overview -->
+          <section id="overview" class="pt-4">
+            <span class="badge-primary mb-3">Documentation v1.0.0</span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900 dark:text-white mb-6">
+              Servora Documentation & Buyer Guide
+            </h1>
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+              Welcome to the official developer and buyer documentation for <strong>Servora</strong>, a premium, ThemeForest-grade multipurpose HTML5 template crafted for digital agencies, SaaS enterprises, and technology consultancies.
+            </p>
+
+            <div class="grid sm:grid-cols-3 gap-4 my-8">
+              <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <h2 class="font-bold text-slate-900 dark:text-white text-sm">21+ Pages</h2>
+                <p class="text-xs text-slate-500 mt-1">15 public marketing pages + 6 full admin dashboard templates.</p>
+              </div>
+              <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <h2 class="font-bold text-slate-900 dark:text-white text-sm">Tailwind CSS 3.4</h2>
+                <p class="text-xs text-slate-500 mt-1">Design tokens, 5 preset palettes, zero bloated CSS.</p>
+              </div>
+              <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <h2 class="font-bold text-slate-900 dark:text-white text-sm">Interactive 3D</h2>
+                <p class="text-xs text-slate-500 mt-1">Three.js glassmorphism hero with full performance safeguards.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section: Quickstart -->
+          <section id="quickstart">
+            <h2 class="text-2xl font-bold font-display text-slate-900 dark:text-white mb-4">Quick Start & Installation</h2>
+            <p class="mb-4">
+              Servora utilizes Node.js and Vite for ultra-fast local development and minified production builds.
+            </p>
+
+            <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 space-y-3">
+              <p class="text-slate-500"># 1. Clone or extract the project directory</p>
+              <p><span class="text-emerald-400">cd</span> servora</p>
+              <p class="text-slate-500"># 2. Install dependencies</p>
+              <p><span class="text-emerald-400">npm</span> install</p>
+              <p class="text-slate-500"># 3. Start local development server (with HMR & live reload)</p>
+              <p><span class="text-emerald-400">npm</span> run dev</p>
+              <p class="text-slate-500"># 4. Compile minified production bundle into /dist</p>
+              <p><span class="text-emerald-400">npm</span> run build</p>
+            </div>
+          </section>
+
+          <!-- Section: File Map -->
+          <section id="structure">
+            <h2 class="text-2xl font-bold font-display text-slate-900 dark:text-white mb-4">File & Folder Organization</h2>
+            <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">
+<pre>servora/
+├── index.html               # Home 1: General Services & 3D Hero
+├── home-saas.html           # Home 2: SaaS Product & Telemetry
+├── about.html               # Leadership, Mission, Values & Timeline
+├── services.html            # Searchable Catalog with Grid/List Toggle
+├── service-details.html     # Single Practice Deep Dive
+├── blog.html                # Insights & Filterable Magazine
+├── blog-details.html        # Editorial Article with Sticky TOC
+├── contact.html             # Leaflet OpenStreetMap & Validated Form
+├── pricing.html             # Monthly/Yearly Matrix Comparison
+├── login.html               # Split-Screen Authentication
+├── register.html            # Registration with Password Strength Meter
+├── forgot-password.html     # Recovery Token Dispatch Flow
+├── 404.html                 # 3D Zero-Gravity Lost Beacon Scene
+├── coming-soon.html         # Live Countdown Timer & Lead Capture
+├── maintenance.html         # Scheduled Maintenance Status
+├── admin/                   # Complete Admin Control Plane
+│   ├── dashboard.html       # KPI Cards & Dual Chart.js Graphs
+│   ├── users.html           # Data Table with Add Member Modal
+│   ├── orders.html          # Sprint Pipeline & Invoice Preview
+│   ├── messages.html        # Split-Pane Communications Hub
+│   ├── analytics.html       # Multi-Stage Funnel Telemetry
+│   └── settings.html        # Tabs: Profile, Theme, 2FA & Billing
+├── src/
+│   ├── css/                 # main.css, components.css, rtl.css
+│   ├── js/                  # main.js, three-hero.js, three-saas.js, charts.js, map.js
+│   └── partials/            # meta-head, navbar, footer, demo-panel, admin-sidebar, admin-header
+└── dist/                    # Compiled Production-Ready HTML & Assets</pre>
+            </div>
+          </section>
+
+          <!-- Section: Brand Colors -->
+          <section id="colors">
+            <h2 class="text-2xl font-bold font-display text-slate-900 dark:text-white mb-4">Customizing Brand Colors</h2>
+            <p class="mb-4">
+              All theme colors are declared as CSS variable RGB triplets in <code>src/css/main.css</code>. This allows full Tailwind alpha opacity support (e.g. <code>bg-primary-500/20</code>).
+            </p>
+            <p class="mb-4">
+              To change your primary brand color, update the <code>:root</code> variables in <code>src/css/main.css</code>:
+            </p>
+            <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300">
+<pre>:root {
+  /* Default Primary: Indigo RGB values */
+  --primary-500: 99 102 241;
+  --primary-600: 79 70 229;
+  /* Secondary: Cyan RGB values */
+  --secondary-500: 6 182 212;
+}</pre>
+            </div>
+          </section>
+
+          <!-- Section: Dark Mode -->
+          <section id="darkmode">
+            <h2 class="text-2xl font-bold font-display text-slate-900 dark:text-white mb-4">Dark Mode Architecture</h2>
+            <p class="mb-4">
+              Servora uses class-based dark mode (<code>class="dark"</code> on the root <code>&lt;html&gt;</code> element).
+            </p>
+            <p class="mb-4">
+              To prevent any Flash of Unstyled Content (FOUC), an inline script in <code>src/partials/meta-head.html</code> evaluates user preference from <code>localStorage</code> and <code>window.matchMedia</code> prior to DOM rendering.
+            </p>
+          </section>
+
+          <!-- Section: RTL Support -->
+          <section id="rtl">
+            <h2 class="text-2xl font-bold font-display text-slate-900 dark:text-white mb-4">RTL (Right-to-Left) & Arabic Support</h2>
+            <p class="mb-4">
+              Servora is engineered exclusively with Tailwind CSS logical utilities:
+            </p>
+            <ul class="list-disc ps-5 space-y-1 mb-4 text-xs sm:text-sm">
+              <li><code>ms-*</code> and <code>me-*</code> (margin-inline-start / margin-inline-end) instead of <code>ml-*</code> / <code>mr-*</code></li>
+              <li><code>ps-*</code> and <code>pe-*</code> (padding-inline-start / padding-inline-end) instead of <code>pl-*</code> / <code>pr-*</code></li>
+              <li><code>start-*</code> and <code>end-*</code> instead of <code>left-*</code> / <code>right-*</code></li>
+              <li><code>text-start</code> and <code>text-end</code> instead of <code>text-left</code> / <code>text-right</code></li>
+            </ul>
+            <p>
+              When <code>dir="rtl"</code> is set on <code>&lt;html&gt;</code>, the layout automatically mirrors and loads the <strong>Cairo</strong> Arabic font stack.
+            </p>
+          </section>
+
+          <!-- Section: Three.js -->
+          <section id="threejs">
+            <h2 class="text-2xl font-bold font-display text-slate-900 dark:text-white mb-4">3D WebGL Engine & Performance Rules</h2>
+            <p class="mb-4">
+              The Three.js hero scene in <code>src/js/three-hero.js</code> follows strict enterprise performance standards:
+            </p>
+            <div class="space-y-3 text-xs sm:text-sm">
+              <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <strong>1. IntersectionObserver Pause:</strong> WebGL renders only when the canvas container is in the active viewport; it cancels requestAnimationFrame immediately when scrolled out of view.
+              </div>
+              <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <strong>2. Page Visibility API:</strong> Pauses rendering when the user switches browser tabs.
+              </div>
+              <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <strong>3. Capped DPR:</strong> Clamped at <code>Math.min(window.devicePixelRatio, 2)</code> to protect mobile GPUs.
+              </div>
+              <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <strong>4. Reduced Motion:</strong> Respects <code>prefers-reduced-motion</code> by rendering a static fallback.
+              </div>
+              <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <strong>5. Full Teardown:</strong> Disposes of geometries, materials, and renderer contexts on page exit.
+              </div>
+            </div>
+          </section>
+
+          <!-- Section: Production Deployment -->
+          <section id="deployment">
+            <h2 class="text-2xl font-bold font-display text-slate-900 dark:text-white mb-4">Production Deployment</h2>
+            <p class="mb-4">
+              Running <code>npm run build</code> outputs optimized, static production HTML files into <code>dist/</code>.
+            </p>
+            <p class="mb-4">
+              You can deploy the <code>dist/</code> directory directly to any static web hosting provider:
+            </p>
+            <ul class="list-disc ps-5 space-y-1 text-xs sm:text-sm">
+              <li><strong>Vercel:</strong> <code>vercel deploy --prod</code></li>
+              <li><strong>Netlify:</strong> Drag and drop the <code>dist/</code> folder into Netlify Drop.</li>
+              <li><strong>Cloudflare Pages:</strong> Set build directory to <code>dist</code> and build command to <code>npm run build</code>.</li>
+              <li><strong>Apache / Nginx / CPanel:</strong> Upload the contents of <code>dist/</code> to <code>public_html</code>.</li>
+            </ul>
+          </section>
+
+        </article>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Main Footer -->
+  <!-- @include partials/footer.html -->
+
+  <!-- Floating Customizer Demo Panel -->
+  <!-- @include partials/demo-panel.html -->
+
+    <script defer src="{{root}}js/animations.bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.initAnimations) window.initAnimations();
+    });
+  </script>
+
+</body>
+</html>
+

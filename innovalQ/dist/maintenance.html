@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scheduled System Maintenance — Servora Multipurpose HTML5 Template</title>
+<meta name="description" content="Servora core control plane is currently undergoing scheduled infrastructure upgrades." />
+<meta name="author" content="Servora Agency & SaaS Solutions" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Scheduled System Maintenance — Servora" />
+<meta property="og:description" content="Servora core control plane is currently undergoing scheduled infrastructure upgrades." />
+<meta property="og:image" content="/images/og-preview.jpg" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Scheduled System Maintenance — Servora" />
+<meta name="twitter:description" content="Servora core control plane is currently undergoing scheduled infrastructure upgrades." />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg>" />
+
+<!-- Preload & Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+<!-- Main Stylesheet (Compiled Standalone CSS) -->
+<link rel="stylesheet" href="css/servora.min.css" />
+
+<!-- Core Servora Bundle (Alpine.js, Lenis, Theme & RTL Engine) -->
+<script defer src="js/servora.bundle.js"></script>
+
+<!-- Immediate FOUC Prevention Script -->
+<script>
+  (function() {
+    try {
+      const theme = localStorage.getItem('servora_theme') || 
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      if (theme === 'dark') document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+
+      const color = localStorage.getItem('servora_color_theme');
+      if (color && color !== 'default') {
+        document.documentElement.setAttribute('data-theme', color);
+      }
+
+      const dir = localStorage.getItem('servora_dir') || 'ltr';
+      document.documentElement.setAttribute('dir', dir);
+      document.documentElement.setAttribute('lang', dir === 'rtl' ? 'ar' : 'en');
+    } catch (e) {}
+  })();
+</script>
+
+
+</head>
+<body class="bg-white dark:bg-[#080c14] text-slate-800 dark:text-slate-100 antialiased selection:bg-primary-500 selection:text-white">
+
+  <main id="main-content" class="min-h-screen flex items-center justify-center p-6 relative overflow-hidden text-center">
+    <div class="glow-orb w-96 h-96 bg-amber-500/10 top-1/4 start-1/2 -translate-x-1/2"></div>
+
+    <div class="max-w-md mx-auto relative z-10 p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-2xl">
+      
+      <!-- Live Indicator -->
+      <div class="w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center mx-auto mb-6">
+        <svg class="w-7 h-7 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+      </div>
+
+      <span class="badge-warning mb-3">Scheduled Maintenance Window</span>
+
+      <h1 class="text-2xl sm:text-3xl font-bold font-display text-slate-900 dark:text-white mb-3">
+        Systems are updating.
+      </h1>
+
+      <p class="text-xs text-slate-500 leading-relaxed mb-6">
+        Our core database clusters are currently receiving a zero-loss storage partition upgrade. All public APIs and live customer environments remain unaffected.
+      </p>
+
+      <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-start text-xs space-y-2 mb-6 border border-slate-200/60 dark:border-slate-700/60">
+        <div class="flex justify-between">
+          <span class="text-slate-400">Estimated Duration:</span>
+          <span class="font-bold text-slate-800 dark:text-slate-200">~ 45 Minutes</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Progress:</span>
+          <span class="font-bold text-emerald-500">72% Completed</span>
+        </div>
+      </div>
+
+      <a href="mailto:support@servora.io" class="btn-secondary w-full text-xs py-2.5 mb-3">
+        Contact Emergency SRE Desk
+      </a>
+
+      <a href="/index.html" class="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 underline">
+        Return to Home
+      </a>
+
+    </div>
+
+  </main>
+
+    <script defer src="js/animations.bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.initAnimations) window.initAnimations();
+    });
+  </script>
+
+</body>
+</html>
