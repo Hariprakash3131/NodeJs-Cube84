@@ -1,0 +1,183 @@
+/**
+ * Nexora Design System - Design Tokens
+ * Premium Indian E-Commerce Design System
+ * Theme: White background with Blue and Yellow accent colors
+ * Spacing: 8px grid system
+ * Border Radius: 12px base
+ * Font: Inter
+ */
+
+:root {
+  /* ==========================================================================
+     Color Palette
+     ========================================================================== */
+  
+  /* Primary Blues (Trust, Authority & Technology) */
+  --color-blue-50:  #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-300: #93c5fd;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb; /* Primary Brand Blue */
+  --color-blue-700: #1d4ed8;
+  --color-blue-800: #1e40af; /* Primary Dark Blue */
+  --color-blue-900: #1e3a8a; /* Deep Navy */
+  --color-blue-950: #172554;
+
+  /* Accent Yellows & Ambers (Energy, Value & Urgency) */
+  --color-yellow-50:  #fffbeb;
+  --color-yellow-100: #fef3c7; /* Light Yellow Highlight */
+  --color-yellow-200: #fde68a;
+  --color-yellow-300: #fcd34d;
+  --color-yellow-400: #fbbf24;
+  --color-yellow-500: #f59e0b; /* Primary Accent Yellow / Amber */
+  --color-yellow-600: #d97706; /* Darker Gold for text contrast */
+  --color-yellow-700: #b45309;
+  --color-yellow-800: #92400e;
+  --color-yellow-900: #78350f;
+
+  /* Semantic Feedback Colors */
+  --color-success-bg: #ecfdf5;
+  --color-success-border: #a7f3d0;
+  --color-success-text: #065f46;
+  --color-success: #059669; /* Green for discount & in-stock */
+  --color-success-dark: #047857;
+
+  --color-danger-bg: #fef2f2;
+  --color-danger-border: #fecaca;
+  --color-danger-text: #991b1b;
+  --color-danger: #dc2626; /* Flash deals urgency, alert */
+
+  --color-warning-bg: #fffbeb;
+  --color-warning-text: #92400e;
+
+  /* Neutrals (Greys & Surfaces) */
+  --color-white: #ffffff;
+  --color-gray-50: #f8fafc; /* Main Page Background */
+  --color-gray-100: #f1f5f9; /* Surface Secondary */
+  --color-gray-200: #e2e8f0; /* Default Border */
+  --color-gray-300: #cbd5e1; /* Subtle Divider */
+  --color-gray-400: #94a3b8; /* Muted Icon */
+  --color-gray-500: #64748b; /* Secondary Text */
+  --color-gray-600: #475569; /* Body Text Secondary */
+  --color-gray-700: #334155; /* Body Text High Contrast */
+  --color-gray-800: #1e293b; /* Headings */
+  --color-gray-900: #0f172a; /* Deep Text Primary */
+  --color-black: #020617;
+
+  /* High-Converting E-Commerce Specific Brand Badges */
+  --color-badge-assured-bg: #eff6ff;
+  --color-badge-assured-border: #bfdbfe;
+  --color-badge-assured-text: #1d4ed8;
+
+  --color-badge-deal-bg: #fef2f2;
+  --color-badge-deal-text: #b91c1c;
+
+  --color-badge-bestseller-bg: #fffbeb;
+  --color-badge-bestseller-text: #92400e;
+
+  /* ==========================================================================
+     Typography System (Inter)
+     ========================================================================== */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Type Scale */
+  --text-2xs: 0.6875rem; /* 11px */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 1.875rem;  /* 30px */
+  --text-4xl: 2.25rem;   /* 36px */
+  --text-5xl: 3rem;      /* 48px */
+
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+
+  /* Font Weights */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+
+  /* ==========================================================================
+     8px Spacing Grid System
+     ========================================================================== */
+  --space-0: 0px;
+  --space-0-5: 2px;
+  --space-1: 4px;   /* 0.5 unit */
+  --space-2: 8px;   /* 1 unit */
+  --space-3: 12px;  /* 1.5 units */
+  --space-4: 16px;  /* 2 units */
+  --space-5: 20px;  /* 2.5 units */
+  --space-6: 24px;  /* 3 units */
+  --space-7: 28px;  /* 3.5 units */
+  --space-8: 32px;  /* 4 units */
+  --space-10: 40px; /* 5 units */
+  --space-12: 48px; /* 6 units */
+  --space-16: 64px; /* 8 units */
+  --space-20: 80px; /* 10 units */
+  --space-24: 96px; /* 12 units */
+
+  /* ==========================================================================
+     Border Radius Tokens (12px core)
+     ========================================================================== */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;  /* User Requirement: 12px */
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+     Elevation & Soft Shadows
+     ========================================================================== */
+  --shadow-none: none;
+  --shadow-xs: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 12px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 10px 24px -3px rgba(15, 23, 42, 0.08), 0 4px 8px -4px rgba(15, 23, 42, 0.03);
+  --shadow-xl: 0 20px 30px -5px rgba(15, 23, 42, 0.10), 0 8px 12px -6px rgba(15, 23, 42, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(15, 23, 42, 0.18);
+  --shadow-card-hover: 0 12px 28px -4px rgba(30, 64, 175, 0.10), 0 4px 10px -2px rgba(15, 23, 42, 0.05);
+  --shadow-inner: inset 0 2px 4px 0 rgba(15, 23, 42, 0.04);
+  --shadow-focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.35);
+
+  /* ==========================================================================
+     Layout & Dimensions
+     ========================================================================== */
+  --container-max-width: 1440px; /* User Requirement: 1440px */
+  --header-height-desktop: 76px;
+  --header-category-bar: 48px;
+  --bottom-nav-mobile: 64px;
+
+  /* ==========================================================================
+     Transitions & Timing
+     ========================================================================== */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ==========================================================================
+     Z-Index Hierarchy
+     ========================================================================== */
+  --z-base: 1;
+  --z-sticky: 100;
+  --z-dropdown: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-tooltip: 600;
+}
